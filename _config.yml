@@ -64,7 +64,10 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: hexo-theme-alex
-
+sitemap: 
+   path: sitemap.xml
+baidusitemap:
+   path: baidusitemap.xml
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
