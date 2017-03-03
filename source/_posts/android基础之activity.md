@@ -5,6 +5,7 @@ categories: android
 tags:
 - java
 - android
+- activity
 ---
 
 ### 一 Activity简介   
@@ -99,15 +100,15 @@ Note:表1中标明的技术上不“可杀”的activity仍然有可能会被系
 
 ### 六 Activity的启动方式   
 antivity的启动方式可以通过两种方式定义：     
-  
+
 ##### Androidmanifest文件       
 Androidmanifest文件是android的清单文件，android的四大组件与相应权限皆需在这里设置。在这里你可以利用 <activity> 元素的 launchMode 属性来设定 activity 与 task 的关系。       
 可通过Androidmanifest文件设置的启动模式有：      
 - standard
 - singleTop
 - singleTask
-- singleInstance     
-  
+- singleInstance       
+
 ##### Intent标志     
 Intent标志中有以下几种Activity的启动方式:       
 - FLAG_ACTIVITY_NEW_TASK
@@ -115,9 +116,85 @@ Intent标志中有以下几种Activity的启动方式:
 - FLAG_ACTIVITY_CLEAR_TOP       
 通过Intent标志的方式来启动Activity，优先级比manifest的高。    
 
+> **警告**： 大多数应用不应该改变 activity 和 task 默认的工作方式。 如果你确定有必要修改默认方式，请保持
+谨慎，并确保 activity 在启动和从其它 activity 用回退键返回时的可用性。 请确保对可能与用户预期的导航方式
+相冲突的地方进行测试。      
+
 ### 七 启动Activity  
+要启动一个activity需要使用Intent，实际上android中组件之前的通信皆由Intent完成（如果你不了解Intent，请看我之后的博客[android基础之Intents与Intent-Filters.md](android基础之Intents与Intent-Filters.md "android基础之Intents与Intent-Filters")），而使用Intent启动activity有显示和隐式两种方式。   
 
-### 八 Task和back stack  
 
-### 九 Androidmanifest中<Activity>元素的属性   
+##### 显示启动      
+
+     
+```java
+Intent intent = new Intent(this, SignInActivity.class);
+startActivity(intent);//显示启动一个叫SignInActivity的Activity    
+
+```   
+
+
+
+#####  隐式启动    
+要想隐式启动一个activity，你需要使用intent-filter来暴露你的activity。使用filter有java代码和xml文件两种方式，推荐使用第二种方式，你只需在Androidmanifest.xml文件中的activit元素中加入intent-filter属性，并声明一个action即可。但是如果你想使你的activity更独立，那么就不要为你的activity设置filter。那么什么时候使用这种方式呢？    
+如果，你的程序可能想要展示某些动作，例如发邮件，短信，微博，或者使用你activity中的数据。 这时候，你就不应该使用自己的activity来做这些工作。你应该调用系统中其他程序提供的响应功能。 这是intent真正体现其价值的地方。你可以创建一个描述了响应动作的intent,然后系统来为你挑选完成任务的程序。 如果有多个选择，系统会提示用户进行选择。例如你想让用户发邮件，你可以创建下面的intent：        
+
+
+```java
+Intent intent = new Intent(Intent.ACTION_SEND);
+intent.putExtra(Intent.EXTRA_EMAIL, recipientArray);//recipientArray即你想发送过去的联系人信息
+startActivity(intent);    
+
+```       
+
+##### 启动一个带返回结果的Activity    
+有时候，你想要启动一个activity,并从这个activty获得一个结果。 这时，要通过 startActivityForResult() (取代startActivity()) 来启动activity。 然后通过实现onActivityResult()回调方法来获得返回后的结果。 当这个后续的activity被关闭，它将发送一个 Intent 给 onActivityResult() 方法。     
+  
+例如，你可能想要取一个联系人的信息。下面介绍怎么创建intent并处理结果:         
+
+
+```java
+private void pickContact() {
+    // Create an intent to "pick" a contact, as defined by the content provider URI
+    Intent intent = new Intent(Intent.ACTION_PICK, Contacts.CONTENT_URI);
+    startActivityForResult(intent, PICK_CONTACT_REQUEST);
+}
+
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    // If the request went well (OK) and the request was PICK_CONTACT_REQUEST
+    if (resultCode == Activity.RESULT_OK && requestCode == PICK_CONTACT_REQUEST) {
+        // Perform a query to the contact's content provider for the contact's name
+        Cursor cursor = getContentResolver().query(data.getData(),
+        new String[] {Contacts.DISPLAY_NAME}, null, null, null);
+        if (cursor.moveToFirst()) { // True if the cursor is not empty
+            int columnIndex = cursor.getColumnIndex(Contacts.DISPLAY_NAME);
+            String name = cursor.getString(columnIndex);
+            // Do something with the selected contact's name...
+        }
+    }
+}       
+
+```      
+
+
+这个例子展示了使用onActivityResult() 来获取结果的基本方法。 第一步要判断请求是否被成功响应，通过判断resultCode 是不是RESULT_OK—， 然后判断这个响应是不是针对相应的请求— ，此时只要判断requestCode 和发送时提供的第二个参数 startActivityForResult() 是否相匹配。 最后，查询 Intent中的data信息。 (data 参数)。
+
+这个过程中，ContentResolver 开启了一个查询而不是content provider, 它返回一个 Cursor ，这将允许数据被读取。更多content provider相关信息，请阅读我之后的博客[android基础之Content-Providers.md](android基础之Content-Providers.md "android基础之Content-Providers")。     
+
+##### 关闭activity    
+你可以通过调用finish() 来终止activity。 你也可以调用finishActivity() 来终止你之前启动了的一个独立activity。    
+
+> **注意**: 多数情况下，你不应该明确地通过这些方式来关闭acitivity。 就像下面要讨论的activity的生命周期。系统会为你管理。所以你不必关闭他们。 调用这些方法将有悖于用户体验。它们仅用于你绝对不想让用户再返回这个activity的实例。   
+
+
+### 八 Task和back stack    
+一个app通常包含多个activity，android使用task来管理这些activity。当你在手机上没点开一个app，android即为这个app创建一个task，task中有一个back stack，你多点开的activity将依次入栈或者出栈，若你的activity调用别的应用的activity，它也会被压入本activity中。（activity与back stack的关系可阅读上文的activity的启动方式，它定义了activity在back stack中的存在方式）。    
+一个app即对应一个task，若你点开一个新的app，则该新app会进入前台，而之前的会被调入后台。当android的内存不足时，后台的task则可能被销毁。    
+
+其实，activity所处的task可以通过<activity>元素的taskAffinity属性指定，taskAffinity 属性是一个字符串值，必须与<manifest> 元素定义的包名称保证唯一性，因为系统把这个包名称用于标识应用的默认 task affinity值。但是，注意，一般情况下如无必要，不要去修改taskAffinity的值。    
+### 九 总结    
+到这里，android的activity相关的知识已经介绍的差不多了，但是这其中还有很多细节需要读者自己去发现。我所说的并不全面，有些地方可能还有谬误，万不可全信，这些仅仅是我个人的理解。其实博客的功能也只是让你对一个陌生的事物知道个大概，要想最终精通还需要多写多做。这些东西你只有自己经历了，研究了它才能成为你自己的东西，否则不过是镜花水月。   
+作为一个程序员最重要的是勤劳，最后以一句话与大家共勉：慈不掌兵，义不行贾，懒不撸码。
+   
 
