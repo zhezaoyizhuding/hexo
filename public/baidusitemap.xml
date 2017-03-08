@@ -4,8 +4,130 @@
 
     
   <url>
+    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BIntents%E4%B8%8EIntent-Filters/</loc>
+    <lastmod>2017-03-08T04:03:37.360Z</lastmod>
+    <data>
+        <display>
+        <title>android基础之Intents与Intent Filters</title>
+        <pubTime>2017-02-27T06:32:09.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>java</tag>
+         
+        <tag>Intent</tag>
+         
+        <tag>IntentFilter</tag>
+         
+         
+           
+             
+              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BContent-Providers/</loc>
+    <lastmod>2017-03-07T10:26:50.614Z</lastmod>
+    <data>
+        <display>
+        <title>android基础之Content Provider</title>
+        <pubTime>2017-02-27T06:32:42.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>java</tag>
+         
+        <tag>Content Provider</tag>
+         
+         
+           
+             
+              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BBroadcastReceiver/</loc>
+    <lastmod>2017-03-07T10:25:28.582Z</lastmod>
+    <data>
+        <display>
+        <title>android基础之BroadcastReceiver</title>
+        <pubTime>2017-02-27T06:48:31.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>java</tag>
+         
+        <tag>BroadcastReceiver</tag>
+         
+         
+           
+             
+              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BFragments/</loc>
+    <lastmod>2017-03-07T04:00:35.804Z</lastmod>
+    <data>
+        <display>
+        <title>android基础之Fragments</title>
+        <pubTime>2017-02-27T06:31:31.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>java</tag>
+         
+        <tag>Fragment</tag>
+         
+         
+           
+             
+              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BService/</loc>
+    <lastmod>2017-03-06T09:17:22.399Z</lastmod>
+    <data>
+        <display>
+        <title>android基础之Service</title>
+        <pubTime>2017-02-27T06:06:22.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>java</tag>
+         
+        <tag>service</tag>
+         
+         
+           
+             
+              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8Bactivity/</loc>
-    <lastmod>2017-03-03T07:00:33.843Z</lastmod>
+    <lastmod>2017-03-03T07:09:28.373Z</lastmod>
     <data>
         <display>
         <title>android基础之activity</title>
@@ -14,6 +136,8 @@
         <tag>android</tag>
          
         <tag>java</tag>
+         
+        <tag>activity</tag>
          
          
            
@@ -131,43 +255,6 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BService/</loc>
-    <lastmod>2017-02-27T08:35:08.324Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之Service</title>
-        <pubTime>2017-02-27T06:06:22.000Z</pubTime>
-        
-        <tag>android</tag>
-         
-        <tag>java</tag>
-         
-         
-           
-             
-              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BBroadcastReceiver/</loc>
-    <lastmod>2017-02-27T06:48:31.795Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之BroadcastReceiver</title>
-        <pubTime>2017-02-27T06:48:31.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BHandler%E4%B8%8EAsycTask/</loc>
     <lastmod>2017-02-27T06:47:53.910Z</lastmod>
     <data>
@@ -189,51 +276,6 @@
         <display>
         <title>android基础之loaders</title>
         <pubTime>2017-02-27T06:39:21.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BContent-Providers/</loc>
-    <lastmod>2017-02-27T06:32:42.736Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之Content Providers</title>
-        <pubTime>2017-02-27T06:32:42.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BIntents%E4%B8%8EIntent-Filters/</loc>
-    <lastmod>2017-02-27T06:32:09.628Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之Intents与Intent Filters</title>
-        <pubTime>2017-02-27T06:32:09.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BFragments/</loc>
-    <lastmod>2017-02-27T06:31:31.514Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之Fragments</title>
-        <pubTime>2017-02-27T06:31:31.000Z</pubTime>
         
          
            

@@ -71,7 +71,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">2</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -120,7 +120,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BroadcastReceiver/">BroadcastReceiver</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Content-Provider/">Content Provider</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fragment/">Fragment</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Intent/">Intent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IntentFilter/">IntentFilter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/activity/">activity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/service/">service</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -129,7 +129,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a>
+      <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/Content-Provider/" style="font-size: 10px;">Content Provider</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/IntentFilter/" style="font-size: 10px;">IntentFilter</a> <a href="/tags/activity/" style="font-size: 10px;">activity</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/service/" style="font-size: 10px;">service</a>
     </div>
   </div>
 
@@ -159,6 +159,10 @@
   <time datetime="2017-02-27T06:32:42.000Z" itemprop="datePublished">2017-02-27</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">android</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -167,7 +171,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/27/android基础之Content-Providers/">android基础之Content Providers</a>
+      <a class="article-title" href="/2017/02/27/android基础之Content-Providers/">android基础之Content Provider</a>
     </h1>
   
 
@@ -175,13 +179,65 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="一-概述"><a href="#一-概述" class="headerlink" title="一 概述"></a>一 概述</h3><p>ContentProvider（内容提供者）是Android的四大组件之一，通过它可以向其他的应用程序共享其数据。虽然使用其他方法也可以对外共享数据，但数据访问方式会因数据存储的方式而不同，如：采用文件方式对外共享数据，需要进行文件操作读写数据；采用sharedpreferences共享数据，需要使用sharedpreferences API读写数据。而使用ContentProvider共享数据的好处是统一了数据访问方式。而且Android为常见的一些数据提供了默认的ContentProvider（包括音频、视频、图片和通讯录等）。</p>
+<p>但注意ContentProvider它也只是一个中间人，真正操作的数据源可能是数据库，也可以是文件、xml或网络等其他存储方式。</p>
+<h3 id="Uri类简介"><a href="#Uri类简介" class="headerlink" title="Uri类简介"></a>Uri类简介</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Uri uri = Uri.parse(<span class="string">"content://com.changcheng.provider.contactprovider/contact"</span>)</div></pre></td></tr></table></figure>
+<p>在Content Provider中使用的查询字符串有别于标准的SQL查询。很多诸如select, add, delete, modify等操作我们都使用一种特殊的URI来进行，这种URI由3个部分组成， “content://”, 代表数据的路径，和一个可选的标识数据的ID。以下是一些示例URI:    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">content:<span class="comment">//media/internal/images  //这个URI将返回设备上存储的所有图片</span></div><div class="line">content:<span class="comment">//contacts/people/  //这个URI将返回设备上的所有联系人信息</span></div><div class="line">content:<span class="comment">//contacts/people/45  //这个URI返回单个结果（联系人信息中ID为45的联系人记录）</span></div></pre></td></tr></table></figure>
+<p>尽管这种查询字符串格式很常见，但是它看起来还是有点令人迷惑。为此，Android提供一系列的帮助类（在android.provider包下），里面包含了很多以类变量形式给出的查询字符串，这种方式更容易让我们理解一点，因此，如上面content://contacts/people/45这个URI就可以写成如下形式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Uri person = ContentUris.withAppendedId(People.CONTENT_URI,  <span class="number">45</span>);</div></pre></td></tr></table></figure>
+<p>然后执行数据查询:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Cursor cur = managedQuery(person, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div></pre></td></tr></table></figure>
+<p>这个查询返回一个包含所有数据字段的游标，我们可以通过迭代这个游标来获取所有的数据.</p>
+<h3 id="三-ContentProvider类简介"><a href="#三-ContentProvider类简介" class="headerlink" title="三 ContentProvider类简介"></a>三 ContentProvider类简介</h3><h5 id="1-主要方法"><a href="#1-主要方法" class="headerlink" title="1.主要方法"></a>1.主要方法</h5><ul>
+<li>public boolean onCreate()<br>ContentProvider创建后　或　打开系统后其它应用第一次访问该ContentProvider时调用。      </li>
+<li>public Uri insert(Uri uri, ContentValues values)<br>外部应用向ContentProvider中添加数据。    </li>
+<li>public int delete(Uri uri, String selection, String[] selectionArgs)<br>外部应用从ContentProvider删除数据。    </li>
+<li>public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs)<br>外部应用更新ContentProvider中的数据。    </li>
+<li>public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder)　<br>供外部应用从ContentProvider中获取数据。 　    </li>
+<li>public String getType(Uri uri)<br>该方法用于返回当前Url所代表数据的MIME类型  </li>
+</ul>
+<h5 id="2-创建步骤"><a href="#2-创建步骤" class="headerlink" title="2.创建步骤"></a>2.创建步骤</h5><p>要创建我们自己的Content Provider的话，我们需要遵循以下几步：</p>
+<p>1.创建一个继承了ContentProvider父类的类<br>2.定义一个名为CONTENT_URI，并且是public static final的Uri类型的类变量，你必须为其指定一个唯一的字符串值，最好的方案是以类的全名称， 如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Uri CONTENT_URI = Uri.parse( “content:<span class="comment">//com.google.android.MyContentProvider”);</span></div></pre></td></tr></table></figure>
+<p>3.定义你要返回给客户端的数据列名。如果你正在使用Android数据库，必须为其定义一个叫_id的列，它用来表示每条记录的唯一性。<br>4.创建你的数据存储系统。大多数Content Provider使用Android文件系统或SQLite数据库来保持数据，但是你也可以以任何你想要的方式来存储。<br>5.如果你要存储字节型数据，比如位图文件等，数据列其实是一个表示实际保存文件的URI字符串，通过它来读取对应的文件数据。处理这种数据类型的Content Provider需要实现一个名为_data的字段，_data字段列出了该文件在Android文件系统上的精确路径。这个字段不仅是供客户端使用，而且也可以供ContentResolver使用。客户端可以调用ContentResolver.openOutputStream()方法来处理该URI指向的文件资源；如果是ContentResolver本身的话，由于其持有的权限比客户端要高，所以它能直接访问该数据文件。<br>6.声明public static String型的变量，用于指定要从游标处返回的数据列。<br>7.查询返回一个Cursor类型的对象。所有执行写操作的方法如insert(), update() 以及delete()都将被监听。我们可以通过使用ContentResover().notifyChange()方法来通知监听器关于数据更新的信息。<br>8.在AndroidMenifest.xml中使用<provider>标签来设置Content Provider。<br>9.如果你要处理的数据类型是一种比较新的类型，你就必须先定义一个新的MIME类型，以供ContentProvider.geType(url)来返回。MIME类型有两种形式:一种是为指定的单个记录的，还有一种是为多条记录的。这里给出一种常用的格式：   </provider></p>
+<ul>
+<li>vnd.android.cursor.item/vnd.yourcompanyname.contenttype （单个记录的MIME类型）<br>比如, 一个请求列车信息的URI如content://com.example.transportationprovider/trains/122 可能就会返回typevnd.android.cursor.item/vnd.example.rail这样一个MIME类型。   </li>
+<li>vnd.android.cursor.dir/vnd.yourcompanyname.contenttype （多个记录的MIME类型）<br>比如, 一个请求所有列车信息的URI如content://com.example.transportationprovider/trains 可能就会返回vnd.android.cursor.dir/vnd.example.rail这样一个MIME 类型。</li>
+</ul>
+<p>下面是一个Content Provider代码示例：</p>
+<blockquote>
+<p>代码</p>
+</blockquote>
+<p>一个名为MyContentProvider的Content Provider创建完成了，它用于从Sqlite数据库中添加和读取记录。</p>
+<h3 id="四-ContentResolver"><a href="#四-ContentResolver" class="headerlink" title="四 ContentResolver"></a>四 ContentResolver</h3><p>一个ContentProvider新建好了之后，我们需要一个ContentResolver类来获取其共享出的数据。</p>
+<h5 id="1-ContentResolver的主要方法"><a href="#1-ContentResolver的主要方法" class="headerlink" title="1.ContentResolver的主要方法"></a>1.ContentResolver的主要方法</h5><ul>
+<li>public Uri insert(Uri uri, ContentValues values)　//添加</li>
+<li>public int delete(Uri uri, String selection, String[] selectionArgs)　//删除</li>
+<li>public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs)　//更新</li>
+<li>public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder)//获取</li>
+</ul>
+<p>示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">ContentResolver resolver =  getContentResolver();</div><div class="line">Uri uri = Uri.parse(<span class="string">"content://cn.scu.myprovider/user"</span>);</div><div class="line"></div><div class="line"><span class="comment">//插入</span></div><div class="line">ContentValues values = <span class="keyword">new</span> ContentValues();</div><div class="line">values.put(<span class="string">"name"</span>, <span class="string">"fanrunqi"</span>);</div><div class="line">values.put(<span class="string">"age"</span>, <span class="number">24</span>);</div><div class="line">resolver.insert(uri, values);  </div><div class="line"></div><div class="line"><span class="comment">//查询</span></div><div class="line">Cursor cursor = resolver.query(uri, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="string">"userid desc"</span>);</div><div class="line"><span class="keyword">while</span>(cursor.moveToNext())&#123;</div><div class="line">   <span class="comment">//操作</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//更新</span></div><div class="line">ContentValues updateValues = <span class="keyword">new</span> ContentValues();</div><div class="line">updateValues.put(<span class="string">"name"</span>, <span class="string">"finch"</span>);</div><div class="line">Uri updateIdUri = ContentUris.withAppendedId(uri, <span class="number">1</span>);</div><div class="line">resolver.update(updateIdUri, updateValues, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line"></div><div class="line"><span class="comment">//删除</span></div><div class="line">Uri deleteIdUri = ContentUris.withAppendedId(uri, <span class="number">2</span>);</div><div class="line">resolver.delete(deleteIdUri, <span class="keyword">null</span>, <span class="keyword">null</span>);</div></pre></td></tr></table></figure>
+<h5 id="使用ContentResolver获取数据的步骤"><a href="#使用ContentResolver获取数据的步骤" class="headerlink" title="使用ContentResolver获取数据的步骤"></a>使用ContentResolver获取数据的步骤</h5><ol>
+<li>通过getContentResolver()方法得到ContentResol1.ver对象。</li>
+<li>调用ContentResolver类的query()方法查询数据，该方法会返回一个Cursor对象。</li>
+<li>对得到的Cursor对象进行分析，得到需要的数据。</li>
+<li>调用Cursor类的close()方法将Cursor对象关闭。</li>
+</ol>
+<p>示例代码（与上面ContentProvider处的代码相连）：</p>
+<blockquote>
+<p>代码</p>
+</blockquote>
+<h3 id="五-总结"><a href="#五-总结" class="headerlink" title="五 总结"></a>五 总结</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/27/android基础之Content-Providers/" data-id="cizs8mlyx000280nzflcxsu9q" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/27/android基础之Content-Providers/" data-id="cizz09fta0001aonz46fftrf2" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Content-Provider/">Content Provider</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
     </footer>
   </div>
   
@@ -195,6 +251,10 @@
   <time datetime="2017-02-27T06:32:09.000Z" itemprop="datePublished">2017-02-27</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">android</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -211,13 +271,90 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="一-概述"><a href="#一-概述" class="headerlink" title="一 概述"></a>一 概述</h3><p>Intent是Android中组件之间传递消息的一种机制，这个组件可以是同一个应用程序的，也可以是不同的应用程序。Android四大组件中除了ContentProvider，其余三者皆可通过Intent来传递数据。而且Intent是一种运行时绑定机制。</p>
+<p>Intent在Android的三个组件中传递的机制是不同的：</p>
+<ul>
+<li>使用Context.startActivity() 或 Activity.startActivityForResult()，传入一个intent来启动一个activity。使用 Activity.setResult()，传入一个intent来从activity中返回结果。</li>
+<li>将intent对象传给Context.startService()来启动一个service或者传消息给一个运行的service。将intent对象传给 Context.bindService()来绑定一个service。</li>
+<li>将intent对象传给 Context.sendBroadcast()，Context.sendOrderedBroadcast()，或者Context.sendStickyBroadcast()等广播方法，则它们被传给 broadcast receiver。</li>
+</ul>
+<h3 id="二-Intent的结构"><a href="#二-Intent的结构" class="headerlink" title="二 Intent的结构"></a>二 Intent的结构</h3><p>Intent主要包含以下属性：</p>
+<ul>
+<li><p>component(组件)：目的组件<br>Component属性明确指定Intent的目标组件的类名称。（属于直接Intent）。组件的名字通过函数setComponent()、setClass()、setClassName()设置，通过函数读取getComponent()。   </p>
+</li>
+<li><p>action（动作）：用来表现意图的行动<br>Action主要用来描述应用程序的组件，一个组件可以用于多个action，也可以多个组件拥有同一个action。</p>
+</li>
+</ul>
+<ul>
+<li>category（类别）：用来表现动作的类别<br>category通常和Action放在一起用的，用于描述这个action。一个action可以包含多个categoty，必须所有的categoty都匹配成功才算是与这个action匹配成功。如果一个action只有一个默认的categoty DEFAULT，则不需向Intent中添加categoty，系统会自动添加。addCategory() 放置一个intent里的类别，removeCategory()删除之前添加的，getCategories()获取当前所有的类别。<br>类别越多，动作越具体，意图越明确    </li>
+</ul>
+<ul>
+<li>data（数据）：表示与动作要操纵的数据<br>Data属性是Android要访问的数据，和action和Category声明方式相同，也是在<intent-filter>中。多个组件匹配成功显示优先级高的； 相同显示列表。Data是用一个uri对象来表示的，uri代表数据的地址，属于一种标识符。通常情况下，我们使用action+data属性的组合来描述一个意图：做什么    </intent-filter></li>
+</ul>
+<ul>
+<li>type（数据类型）：对于data范例的描写<br>如果Intent对象中既包含Uri又包含Type，那么，在<intent-filter>中也必须二者都包含才能通过测试。Type属性用于明确指定Data属性的数据类型或MIME类型，但是通常来说，当Intent不指定Data属性时，Type属性才会起作用，否则Android系统将会根据Data属性值来分析数据的类型，所以无需指定Type属性。data和type属性一般只需要一个，通过setData方法会把type属性设置为null，相反设置setType方法会把data设置为null，如果想要两个属性同时设置，要使用Intent.setDataAndType()方法    </intent-filter></li>
+</ul>
+<ul>
+<li>extras（扩展信息）：扩展信息<br>是其它所有附加信息的集合。以键值对的形式放入Intent中    </li>
+</ul>
+<ul>
+<li>Flags（标志位）：期望这个意图的运行模式<br>用于指定Activity与task之间的关系。</li>
+</ul>
+<h3 id="三-Intent发现组件的两种方式"><a href="#三-Intent发现组件的两种方式" class="headerlink" title="三 Intent发现组件的两种方式"></a>三 Intent发现组件的两种方式</h3><p>Intent启动组件有两种方式：显示启动和隐式启动。</p>
+<p>上面Intent的Intent的7个属性中，只有component属于显示启动，action，category，data皆为隐式启动。</p>
+<h5 id="1-显示启动"><a href="#1-显示启动" class="headerlink" title="1.显示启动"></a>1.显示启动</h5><p>代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">button1.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;            </div><div class="line">          <span class="meta">@Override</span></div><div class="line">          <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">              <span class="comment">//创建一个意图对象</span></div><div class="line">              Intent intent = <span class="keyword">new</span> Intent();</div><div class="line">              <span class="comment">//创建组件，通过组件来响应</span></div><div class="line">              ComponentName component = <span class="keyword">new</span> ComponentName(MainActivity.<span class="keyword">this</span>, SecondActivity.class);</div><div class="line">              intent.setComponent(component);                </div><div class="line">              startActivity(intent);                </div><div class="line">         &#125;</div><div class="line">     &#125;);</div></pre></td></tr></table></figure>
+<p>如果写的简单一点，监听事件onClick()方法里可以这样写：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent();</div><div class="line"><span class="comment">//setClass函数的第一个参数是一个Context对象</span></div><div class="line"><span class="comment">//Context是一个类，Activity是Context类的子类，也就是说，所有的Activity对象，都可以向上转型为Context对象</span></div><div class="line"><span class="comment">//setClass函数的第二个参数是一个Class对象，在当前场景下，应该传入需要被启动的Activity类的class对象</span></div><div class="line">intent.setClass(MainActivity.<span class="keyword">this</span>, SecondActivity.class);</div><div class="line">startActivity(intent);</div></pre></td></tr></table></figure>
+<p>再简单一点，可以这样写：（当然，也是最常见的写法）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>,SecondActivity.class);</div><div class="line">startActivity(intent);</div></pre></td></tr></table></figure>
+<h5 id="2-隐式启动"><a href="#2-隐式启动" class="headerlink" title="2.隐式启动"></a>2.隐式启动</h5><ul>
+<li>action</li>
+</ul>
+<p>在Androidmanifest.xml中定义</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;activity </div><div class="line">    android:name=".SecondActivity"&gt;</div><div class="line">    &lt;intent-filter&gt;</div><div class="line">         &lt;action android:name="com.example.smyh006intent01.MY_ACTION"/&gt;</div><div class="line">         &lt;category android:name="android.intent.category.DEFAULT" /&gt;</div><div class="line">    &lt;/intent-filter&gt;            </div><div class="line">&lt;/activity&gt;</div></pre></td></tr></table></figure>
+<p>java代码调用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"> button1.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;            </div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">         <span class="comment">//启动另一个Activity，（通过action属性进行查找）</span></div><div class="line">         Intent intent = <span class="keyword">new</span> Intent();</div><div class="line">         <span class="comment">//设置动作（实际action属性就是一个字符串标记而已）</span></div><div class="line">         intent.setAction(<span class="string">"com.example.smyh006intent01.MY_ACTION"</span>); <span class="comment">//方法：Intent android.content.Intent.setAction(String action)</span></div><div class="line">         startActivity(intent);        </div><div class="line">     &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>上面代码也可简写成</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">button1.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;            </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">        <span class="comment">//启动另一个Activity，（通过action属性进行查找）</span></div><div class="line">        Intent intent = <span class="keyword">new</span> Intent(<span class="string">"com.example.smyh006intent01.MY_ACTION"</span>);<span class="comment">//方法： android.content.Intent.Intent(String action)                </span></div><div class="line">        startActivity(intent);        </div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li>action+categoty</li>
+</ul>
+<p>Androidmanifest.xml文件：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;activity</div><div class="line">    android:name=".SecondActivity"&gt;</div><div class="line">    &lt;intent-filter&gt;</div><div class="line">         &lt;action android:name="com.example.smyh006intent01.MY_ACTION"/&gt;</div><div class="line">         &lt;category android:name="android.intent.category.DEFAULT" /&gt;</div><div class="line">         &lt;category android:name="com.example.smyh006intent01.MY_CATEGORY" /&gt;</div><div class="line">    &lt;/intent-filter&gt;            </div><div class="line">&lt;/activity&gt;</div></pre></td></tr></table></figure>
+<p>java文件中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">button1.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;            </div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">         <span class="comment">//启动另一个Activity，（通过action属性进行查找）</span></div><div class="line">         Intent intent = <span class="keyword">new</span> Intent();</div><div class="line">         <span class="comment">//设置动作（实际action属性就是一个字符串标记而已）</span></div><div class="line">         intent.setAction(<span class="string">"com.example.smyh006intent01.MY_ACTION"</span>); <span class="comment">//方法：Intent android.content.Intent.setAction(String action)</span></div><div class="line">         intent.addCategory(<span class="string">"com.example.smyh006intent01.MY_CATEGORY"</span>);</div><div class="line">         startActivity(intent);        </div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li>action+data</li>
+</ul>
+<p>示例：打开指定网页</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;activity </div><div class="line">    android:name=".SecondActivity"&gt;</div><div class="line">    &lt;intent-filter&gt;</div><div class="line">         &lt;action android:name="android.intent.action.VIEW" /&gt;</div><div class="line">         &lt;category android:name="android.intent.category.DEFAULT" /&gt;</div><div class="line">         &lt;data android:scheme="http" android:host="www.baidu.com"/&gt;                 </div><div class="line">    &lt;/intent-filter&gt;            </div><div class="line">&lt;/activity&gt;</div></pre></td></tr></table></figure>
+<p>java文件中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"> button1.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;            </div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">         Intent intent = <span class="keyword">new</span> Intent();</div><div class="line">         intent.setAction(Intent.ACTION_VIEW);</div><div class="line">         Uri data = Uri.parse(<span class="string">"http://www.baidu.com"</span>);</div><div class="line">         intent.setData(data);                </div><div class="line">         startActivity(intent);        </div><div class="line">     &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>上面代码也可简写成：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">button1.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;            </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">        Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_VIEW);</div><div class="line">        intent.setData(Uri.parse(<span class="string">"http://www.baidu.com"</span>));                </div><div class="line">        startActivity(intent);        </div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="四-IntentFilter"><a href="#四-IntentFilter" class="headerlink" title="四 IntentFilter"></a>四 IntentFilter</h3><p>IntentFilter用于与Intent中的数据对比，来挑选出符合条件的组件。它分为静态注册（推荐）和动态注册两种方式。Intent与IntentFilter比较的步骤如下：</p>
+<ol>
+<li>加载安装所有的IntentFilter到一个列表中</li>
+<li>剔除所有action匹配失败的IntentFilter</li>
+<li>剔除URI数据匹配失败的IntentFilter</li>
+<li>剔除category匹配失败的IntentFilter</li>
+<li>剩下的IntentFilter是否为0。是，查找失败，抛出异常；否将剩下的IntentFilter按优先级排列，返回优先级最高的IntentFilter</li>
+</ol>
+<p>代码示例：</p>
+<p>静态注册</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;receiver android:name=".MyBroadCastReceiver"&gt;  </div><div class="line">            &lt;!-- android:priority属性是设置此接收者的优先级（从-1000到1000） --&gt;</div><div class="line">            &lt;intent-filter android:priority="20"&gt;</div><div class="line">            &lt;actionandroid:name="android.provider.Telephony.SMS_RECEIVED"/&gt;  </div><div class="line">            &lt;/intent-filter&gt;  </div><div class="line">&lt;/receiver&gt;</div></pre></td></tr></table></figure>
+<p>动态注册</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">IntentFilter intentFilter = <span class="keyword">new</span> IntentFilter(<span class="string">"android.provider.Telephony.SMS_RECEIVED"</span>);</div></pre></td></tr></table></figure>
+<h3 id="五-总结"><a href="#五-总结" class="headerlink" title="五 总结"></a>五 总结</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/27/android基础之Intents与Intent-Filters/" data-id="cizs8mlyy000380nzarldtnnn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/27/android基础之Intents与Intent-Filters/" data-id="cizz09ftd0002aonz04754wf9" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Intent/">Intent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IntentFilter/">IntentFilter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
     </footer>
   </div>
   
@@ -231,6 +368,10 @@
   <time datetime="2017-02-27T06:31:31.000Z" itemprop="datePublished">2017-02-27</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">android</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -247,13 +388,110 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="一-概述"><a href="#一-概述" class="headerlink" title="一 概述"></a>一 概述</h3><p>Fragment表现Activity中用户界面的一个行为或者是一部分。你可以在一个单独的activity上把多个fragment组合成为一个多区域的UI，并且可以在多个activity中再使用。你可以认为fragment是activity的一个模块零件，它有自己的生命周期，接收它自己的输入事件，并且可以在activity运行时添加或者删除。</p>
+<p>Fragment必须总是被嵌入到一个activity之中，并且fragment的生命周期直接受其宿主activity的生命周期的影响。例如，一旦activity被暂停，它里面所有的fragment也被暂停，一旦activity被销毁，它里面所有的fragment也被销毁。然而，当activity正在运行时（处于resumed的生命周期状态），你可以单独的操控每个fragment，比如添加或者删除。当你执行这样一项事务时，可以将它添加到后台的一个栈中，这个栈由activity管理着——activity里面的每个后台栈内容实体是fragment发生过的一条事务记录。这个后台栈允许用户通过按BACK键回退一项fragment事务（往后导航）。</p>
+<p>当你添加一个fragment作为某个activity布局的一部分时，它就存在于这个activity视图体系内部的ViewGroup之中，并且定义了它自己的视图布局。你可以通过在activity布局文件中声明fragment，用<fragment>元素把fragment插入到activity的布局中，或者是用应用程序源码将它添加到一个存在的ViewGroup中。然而，fragment并不是一个定要作为activity布局的一部分；fragment也可以为activity隐身工作。   </fragment></p>
+<h3 id="二-Fragment的继承结构"><a href="#二-Fragment的继承结构" class="headerlink" title="二 Fragment的继承结构"></a>二 Fragment的继承结构</h3><p>继承 Object<br>实现 ComponentCallbacks2 View.OnCreateContextMenuListener </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">java.lang.Object</div><div class="line">   ↳ 	android.app.Fragment</div></pre></td></tr></table></figure>
+<p>直接子类：<br>DialogFragment, ListFragment, PreferenceFragment, WebViewFragment      </p>
+<h3 id="三-Fragment设计哲学"><a href="#三-Fragment设计哲学" class="headerlink" title="三 Fragment设计哲学"></a>三 Fragment设计哲学</h3><p>Fragment被设计出来主要为了适应平板等大屏幕移动设备。有了fragment，你可以不必去管理视图体系的复杂变化。通过将activity的布局分割成若干个fragment，可以在运行时编辑activity的呈现，并且那些变化会被保存在由activity管理的后台栈里面。<br>如下图所示，一个Activity中的两个Fragment分别在手机和平板的显示情况：<br><img src="/2017/02/27/android基础之Fragments/Fragment显示图.png" alt="Fragment显示图" title="Fragment显示图">     </p>
+<h3 id="四-Fragment的生命周期"><a href="#四-Fragment的生命周期" class="headerlink" title="四 Fragment的生命周期"></a>四 Fragment的生命周期</h3><p>下面是Activity的生命周期：<br><img src="/2017/02/27/android基础之Fragments/Fragment生命周期图.png" alt="Fragment生命周期图" title="Fragment生命周期图"><br>管理fragment生命周期与管理activity生命周期很相像。像activity一样，fragment也有三种状态：    </p>
+<ul>
+<li>Resumed<br>fragment在运行中的activity可见。    </li>
+<li>Paused<br>另一个activity处于前台且得到焦点，但是这个fragment所在的activity仍然可见（前台activity部分透明，或者没有覆盖全屏）。   </li>
+<li>Stopped<br>fragment不可见。要么宿主activity已经停止，要么fragment已经从activity上移除，但已被添加到后台栈中。一个停止的fragment仍然活着（所有状态和成员信息仍然由系统保留着）。但是，它对用户来讲已经不再可见，并且如果activity被杀掉，它也将被杀掉。<br>同activity类似的还有，你也可以用Bundle保存fragment状态，万一activity的进程被杀掉了，并且在activity被重新创建时，你需要恢复fragment状态。在回调执行fragment的onSaveInstanceState()期间可以保存状态，在onCreate()，onCreateView()，或者onActvityCreate()中可以恢复状态。<br>在生命周期方面,activity与fragment之间一个很重要的不同，就是在各自的后台栈中是如何存储的。当activity停止时，默认情况下，activity被安置在由系统管理的activity后台栈中（因此用户可以按BACK键回退导航，就像在Tasks和后台栈中讨论的那样）。但是，仅当你在一个事务被移除时，通过显式调用addToBackStack()请求保存的实例，该fragment才被置于由宿主activity管理的后台栈。<br>除此之外，管理fragment的生命周期与管理activity的生命周期非常相似。所以，管理activity生命周期的实践同样也适用于fragment。你需要了解的，仅仅是activity的生命周期如何影响fragment的的。    </li>
+</ul>
+<h3 id="五-与Activity生命周期协调合作"><a href="#五-与Activity生命周期协调合作" class="headerlink" title="五 与Activity生命周期协调合作"></a>五 与Activity生命周期协调合作</h3><p>下面是Activity与Fragment生命周期图对比：<br><img src="/2017/02/27/android基础之Fragments/Fragment与Activity生命周期对比.png" alt="Fragment与Activity生命周期对比" title="Fragment与Activity生命周期对比"><br>fragment所生存的activity生命周期直接影响着fragment的生命周期，由此针对activity的每一个生命周期回调都会引发一个fragment类似的回调。例如，当activity接收到onPause()时，这个activity之中的每个fragment都会接收到onPause()。<br>Fragment有一些额外的生命周期回调方法，然而，为了处理像是创建和销毁fragment界面，它与activity进行独特的交互。这些额外的回调方法是：     </p>
+<ul>
+<li>onAttach()<br>当fragment被绑定到activity时调用（Activity会被传入）。 </li>
+<li>onCreateView()<br>创建与fragment相关的视图体系时被调用。     </li>
+<li>onActivityCreated()<br>当activity的onCreate()函数返回时被调用。     </li>
+<li>onDestroyView()<br>当与fragment关联的视图体系正被移除时被调用。     </li>
+<li>onDetach()<br>当fragment正与activity解除关联时被调用。      </li>
+</ul>
+<p>fragment的生命周期流程实际上是受其宿主activity影响，如上图所示。在这张图中，可以看到activity的每个连续状态是如何决定fragment可能接收到哪个回调函数的。例如，当activity接收到它的onCreate()回调时，activity之中的fragment接收到的仅仅是onActivityCreated()回调。</p>
+<p>一旦activity处于resumed状态，则可以在activity中自由的添加或者移除fragment。因此，只有当activity处于resumed状态时，fragment的生命周期才可以独立变化。</p>
+<p>然而，当activity离开恢复状态时，fragment再一次被activity推入它的生命周期中。</p>
+<h3 id="六-向Fragment中添加用户界面"><a href="#六-向Fragment中添加用户界面" class="headerlink" title="六 向Fragment中添加用户界面"></a>六 向Fragment中添加用户界面</h3><p>fragment常被用作activity用户界面的一部分，并且将本身的布局构建到activity中去。<br>为了给fragment提供一个布局，你必须实现onCreateView()回调函数，在绘制fragment布局时Android系统会调用它。实现这个函数时需要返回fragment所属的根View。     </p>
+<blockquote>
+<p>注意：如果你的fragment时ListFragment的子类，默认实现从onCreateView()返回一个ListView，所以你不需要实现它。    </p>
+</blockquote>
+<p>为了从onCreateView()返回一个布局，你可以从layout resource定义的XML文件inflate它。为了便于你这样做，onCreateView()提供一个LayoutInflater对象。<br>例如，下面是一个fragment子类，它的布局从example_fragment.xml载入的：    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>&#123;</div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> View <span class="title">onCreateView</span><span class="params">(LayoutInflater inflater, ViewGroup container,</span></span></div><div class="line">								 Bundle savedInstanceState) &#123;</div><div class="line">			<span class="comment">// Inflate the layout for this fragment</span></div><div class="line">			<span class="keyword">return</span> inflater.inflate(R.layout.example_fragment, container, <span class="keyword">false</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>传入onCreateView()的参数container 是你的frament布局将要被插入的父ViewGroup（来自activity的布局）。如果fragment处于resumed状态（恢复状态在操纵fragment生命周期一节中将作更多讨论），参数savedInstanceState是属于Bundle类，它提供了fragment之前实例的相关数据。     </p>
+<p>inflate()函数需要以下三个参数：     </p>
+<ul>
+<li>要inflate的布局的资源ID。      </li>
+<li>被inflate的布局的父ViewGroup。传入container很重要，这是为了让系统将布局参数应用到被inflate的布局的根view中去，由其将要嵌入的父view指定。    </li>
+<li>一个布尔值，表明在inflate期间被infalte的布局是否应该附上ViewGroup（第二个参数）。（在这个例子中传入的是false，因为系统已经将被inflate的布局插入到容器中（container）——传入true会在最终的布局里创建一个多余的ViewGroup。）       </li>
+</ul>
+<p>现在你已经知道了如何创建一个有布局的fragment。下一步，则需要将fragment添加到activity中。      </p>
+<h3 id="七-将Fragment添加到Activity中"><a href="#七-将Fragment添加到Activity中" class="headerlink" title="七 将Fragment添加到Activity中"></a>七 将Fragment添加到Activity中</h3><p>通常，fragment构建了其宿主activity的部分界面，它被作为activity全部视图层次体系的一部分被嵌入进去。在acitivity布局中添加fragment有两种方法：     </p>
+<h5 id="在activity的布局文件里声明fragment"><a href="#在activity的布局文件里声明fragment" class="headerlink" title="在activity的布局文件里声明fragment"></a>在activity的布局文件里声明fragment</h5><p>像这样，你可以像为view一样为fragment指定布局属性。例如，下面含有两个fragment的布局文件：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line">	&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"</div><div class="line">		android:orientation="horizontal"</div><div class="line">		android:layout_width="match_parent"</div><div class="line">		android:layout_height="match_parent"&gt;</div><div class="line">		&lt;fragment android:name="com.example.news.ArticleListFragment"</div><div class="line">				android:id="@+id/list"</div><div class="line">				android:layout_weight="1"</div><div class="line">				android:layout_width="0dp"</div><div class="line">				android:layout_height="match_parent" /&gt;</div><div class="line">		&lt;fragment android:name="com.example.news.ArticleReaderFragment"</div><div class="line">				android:id="@+id/viewer"</div><div class="line">				android:layout_weight="2"</div><div class="line">				android:layout_width="0dp"</div><div class="line">				android:layout_height="match_parent" /&gt;</div><div class="line">	&lt;/LinearLayout&gt;</div></pre></td></tr></table></figure>
+<p><fragment>中的android:name 属性指定了布局中实例化的Fragment类。</fragment></p>
+<p>当系统创建activity布局时，它实例化了布局文件中指定的每一个fragment，并为它们调用onCreateView()函数，以获取每一个fragment的布局。系统直接在<fragment>元素的位置插入fragment返回的View。</fragment></p>
+<blockquote>
+<p>注意：每个fragment都需要一个唯一的标识，如果重启activity，系统可用来恢复fragment（并且可用来捕捉fragment的事务处理，例如移除）。为fragment提供ID有三种方法：   </p>
+<ul>
+<li>用android:id属性提供一个唯一的标识。   </li>
+<li>用android:tag属性提供一个唯一的字符串。   </li>
+<li>如果上述两个属性都没有，系统会使用其容器视图（view）的ID。 </li>
+</ul>
+</blockquote>
+<h5 id="通过java代码将fragment添加到已存在的ViewGroup中"><a href="#通过java代码将fragment添加到已存在的ViewGroup中" class="headerlink" title="通过java代码将fragment添加到已存在的ViewGroup中"></a>通过java代码将fragment添加到已存在的ViewGroup中</h5><p>在activity运行的任何时候，你都可以将fragment添加到activity布局中。你仅需要简单指定用来放置fragment的ViewGroup。</p>
+<p>你应当使用FragmentTransaction的API来对activity中的fragment进行操作（例如添加，移除，或者替换fragment）。你可以像下面这样从Activity中取得FragmentTransaction的实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">FragmentManager fragmentManager = getFragmentManager()</div><div class="line">	FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();</div></pre></td></tr></table></figure>
+<p>可以用add()函数添加fragment，并指定要添加的fragment以及要将其插入到哪个视图（view）之中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ExampleFragment fragment = <span class="keyword">new</span> ExampleFragment();</div><div class="line">	fragmentTransaction.add(R.id.fragment_container, fragment);</div><div class="line">	fragmentTransaction.commit();</div></pre></td></tr></table></figure>
+<p>传入add()函数的第一个参数是fragment被放置的ViewGroup，它由资源ID（resource ID）指定，第二个参数就是要添加的fragment。一旦通过FragmentTransaction 做了更改，都应当使用commit()使变化生效。</p>
+<h5 id="添加无界面的Fragment"><a href="#添加无界面的Fragment" class="headerlink" title="添加无界面的Fragment"></a>添加无界面的Fragment</h5><p>上面的例子是如何将fragment添加到activity中去，目的是提供一个用户界面。然而，也可以使用fragment为activity提供后台动作，却不呈现多余的用户界面。</p>
+<p>想要添加没有界面的fragment ，可以使用add(Fragment, String)（为fragment提供一个唯一的字符串“tag”，而不是视图（view）ID）。这样添加了fragment，但是，因为还没有关联到activity布局中的视图（view） ，收不到onCreateView()的调用。所以不需要实现这个方法。</p>
+<p>想要添加没有界面的fragment ，可以使用add(Fragment, String)（为fragment提供一个唯一的字符串“tag”，而不是视图（view）ID）。这样添加了fragment，但是，因为还没有关联到activity布局中的视图（view） ，收不到onCreateView()的调用。所以不需要实现这个方法。  </p>
+<h3 id="八-Fragment事务后台栈"><a href="#八-Fragment事务后台栈" class="headerlink" title="八 Fragment事务后台栈"></a>八 Fragment事务后台栈</h3><p>在activity中使用fragment的一大特点是具有添加、删除、替换，和执行其它动作的能力，以响应用户的互动。提交给activity的每一系列变化被称为事务，并且可以用FragmentTransaction 中的APIs处理。你也可以将每一个事务保存在由activity管理的后台栈中，并且允许用户导航回退fragment变更（类似于activity的导航回退）。  </p>
+<p>你可以从FragmentManager中获取FragmentTransaction实例，像这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">FragmentManager fragmentManager = getFragmentManager();</div><div class="line"> FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();</div></pre></td></tr></table></figure>
+<p>每项事务是在同一时间内要执行的一系列的变更。你可以为一个给定的事务用相关方法设置想要执行的所有变化，例如add()，remove()，和replace()。然后，用commit()将事务提交给activity。然而，在调用commit()之前，为了将事务添加到fragment事务后台栈中，你可能会想调用addToBackStatck()。这个后台栈由activity管理，并且允许用户通过按BACK键回退到前一个fragment状态。<br>举个例子，下面的代码是如何使用另一个fragment代替一个fragment，并且将之前的状态保留在后台栈中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Create new fragment and transaction</span></div><div class="line"> Fragment newFragment = <span class="keyword">new</span> ExampleFragment();</div><div class="line"> FragmentTransaction transaction = getFragmentManager().beginTransaction();</div><div class="line"></div><div class="line"> <span class="comment">// Replace whatever is in the fragment_container view with this fragment,</span></div><div class="line"> <span class="comment">// and add the transaction to the back stack</span></div><div class="line"> transaction.replace(R.id.fragment_container, newFragment);</div><div class="line"> transaction.addToBackStack(<span class="keyword">null</span>);</div><div class="line"></div><div class="line"> <span class="comment">// Commit the transaction</span></div><div class="line"> transaction.commit();</div></pre></td></tr></table></figure>
+<p>在这个例子中，newFragment替换了当前在布局容器中用R.id.fragment_container标识的所有的fragment（如果有的话），替代的事务被保存在后台栈中，因此用户可以回退该事务，可通过按BACK键还原之前的fragment。如果添加多个变更事务（例如另一个add()或者remove()）并调用addToBackStack()，那么在调用commit()之前的所有应用的变更被作为一个单独的事务添加到后台栈中，并且BACK键可以将它们一起回退。</p>
+<p>将变更添加到FragmentTransaction中的顺序注意以下两点：     </p>
+<ul>
+<li>必须要在最后调用commit()   </li>
+<li>如果你正将多个fragment添加到同一个容器中，那么添加顺序决定了它们在视图层次（view hierarchy）里显示的顺序。 </li>
+</ul>
+<p>在执行删除fragment事务时，如果没有调用addToBackStack()，那么事务一提交fragment就会被销毁，而且用户也无法回退它。然而，当移除一个fragment时，如果调用了addToBackStack()，那么之后fragment会被停止，如果用户回退，它将被恢复过来。     </p>
+<blockquote>
+<p>提示：对于每一个fragment事务，在提交之前通过调用setTransition()来应用一系列事务动作。     </p>
+</blockquote>
+<p>调用commit()并不立刻执行事务，相反，而是采取预约方式，一旦activity的界面线程（主线程）准备好便可运行起来。然而，如果有必要的话，你可以从界面线程调用executePendingTransations()立即执行由commit()提交的事务。但这样做，通常是没有必要的，除非其它线程的工作依赖与该项事务。</p>
+<blockquote>
+<p>警告：只能在activity保存状态（当用户离开activity时）之前用commit()提交事务。如果你尝试在那时之后提交，会抛出一个异常。这是因为如果activity需要被恢复，提交后的状态会被丢失。对于这类丢失提交的情况，可使用commitAllowingStateLoss() </p>
+</blockquote>
+<h3 id="九-与Activity交互"><a href="#九-与Activity交互" class="headerlink" title="九 与Activity交互"></a>九 与Activity交互</h3><h5 id="1-Fragment可以得到宿主Activity的引用"><a href="#1-Fragment可以得到宿主Activity的引用" class="headerlink" title="1.Fragment可以得到宿主Activity的引用"></a>1.Fragment可以得到宿主Activity的引用</h5><p>尽管Fragment被实现为一个对象，它独立于Activity并可以在多个Activity中使用，一个给定的fragment实例直接被捆绑在包含它的Activity中。特别是，fragment可以通过getActivity()函数访问Activity，并且很容易的执行类似于查找activity布局中的视图的任务：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">View listView = getActivity().findViewById(R.id.list);</div></pre></td></tr></table></figure>
+<h5 id="2-Activity获取Fragment的引用"><a href="#2-Activity获取Fragment的引用" class="headerlink" title="2.Activity获取Fragment的引用"></a>2.Activity获取Fragment的引用</h5><p>同样的，activity能够调用fragment的函数findFragmentById()或者findFragmentByTag()，从FragmentManager中获取Fragment的索引，例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ExampleFragment fragment = (ExampleFragment) getFragmentManager().findFragmentById(R.id.example_fragment);</div></pre></td></tr></table></figure>
+<h5 id="3-创建Activity时间回调函数"><a href="#3-创建Activity时间回调函数" class="headerlink" title="3.创建Activity时间回调函数"></a>3.创建Activity时间回调函数</h5><p>在一些情况下，你可能需要fragment与activity共享事件。这样做的一个好方法是在fragment内部定义一个回调接口，并需要宿主activity实现它。当activity通过接口接收到回调时，可以在必要时与布局中的其它fragment共享信息。<br>举个例子，如果新闻应用的actvity中有两个fragment——一个显示文章列表（fragment A），另一个显示一篇文章（fragment B）——然后fragment A 必须要告诉activity列表项何时被选种，这样，activity可以通知fragment B显示这篇文章。这种情况下，在fragment A内部声明接口OnArticleSelectedListener：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">FragmentA</span> <span class="keyword">extends</span> <span class="title">ListFragment</span> </span>&#123;</div><div class="line">    ...</div><div class="line">    <span class="comment">// Container Activity must implement this interface</span></div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">OnArticleSelectedListener</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onArticleSelected</span><span class="params">(Uri articleUri)</span></span>;</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后fragment的宿主activity实现了OnArticleSelectedListener接口，并且重写onArticleSelected()以通知fragment B来自于fragment A的事件。为了确保宿主activity实现了这个接口，fragment A的onAttach()回调函数（当添加fragment到activity中时系统会调用它）通过作为参数传入onAttach()的activity的类型转换来实例化一个OnArticleSelectedListener实例。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">FragmentA</span> <span class="keyword">extends</span> <span class="title">ListFragment</span> </span>&#123;</div><div class="line">    OnArticleSelectedListener mListener;</div><div class="line">    ...</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAttach</span><span class="params">(Activity activity)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onAttach(activity);</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            mListener = (OnArticleSelectedListener) activity;</div><div class="line">        &#125; <span class="keyword">catch</span> (ClassCastException e) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ClassCastException(activity.toString() + <span class="string">" must implement OnArticleSelectedListener"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果activity没有实现这个接口，那么fragment会抛出一个ClassCaseException异常。一旦成功，mListener成员会保留一个activity的OnArticleSelectedListener实现的引用，由此fragment A可以通过调用由OnArticleSelectedListener接口定义的方法与activity共享事件。例如，如果fragment A是ListFragment的子类，每次用户点击列表项时，系统都会调用fragment的onListItemClick()事件，然后fragment调用onArticleSelected()来与activity共享事件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">FragmentA</span> <span class="keyword">extends</span> <span class="title">ListFragment</span> </span>&#123;</div><div class="line">    OnArticleSelectedListener mListener;</div><div class="line">    ...</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onListItemClick</span><span class="params">(ListView l, View v, <span class="keyword">int</span> position, <span class="keyword">long</span> id)</span> </span>&#123;</div><div class="line">        <span class="comment">// Append the clicked item's row ID with the content provider Uri</span></div><div class="line">        Uri noteUri = ContentUris.withAppendedId(ArticleColumns.CONTENT_URI, id);</div><div class="line">        <span class="comment">// Send the event and Uri to the host activity</span></div><div class="line">        mListener.onArticleSelected(noteUri);</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>传递给onListItemClick()的参数id是点击的列表项行id，activity（或者其它fragment）用以从应用的ContentProvider获取文章。</p>
+<p>#####　添加items到Action Bar</p>
+<p>你的fragments可以通过实现onCreateOptionsMenu()来构建菜单项到activity的Options Menu（因此Action Bar也一样）。为了使用这个方法接收到调用，不管怎样，你必须在onCreate()期间调用setHasOptionsMenu()，来指明想要添加项目到Options Menu的那个fragment（否则，fragment将接收不到onCreateOptionsMenu()的调用）。<br>任何想要在fragment中的Options Menu添加的项目都追加到已有的菜单项后面。当菜单项被选中时，fragment也会接收到对onOptionsItemSelected()的回调。<br>你也可以通过调用registerForContextMenu()在fragment布局中注册一个view以提供一个context menu。当用户打开context menu时，fragment接收到对onCreateContextMenu()的回调。当用户选中一个项目时，fragment接收到对onContextItemSelected()的回调。</p>
+<blockquote>
+<p>注意：尽管你的fragment会接收到为添加到每个菜单项被选择菜单项的回调，但当用户选择一个菜单项时，activity会首先接收到对应的回调。如果activity的选择菜单项回调的实现没有处理被选中的项目，那么该事件被传递给fragment的回调。这同样适用于Options Menu和context menu。</p>
+</blockquote>
+<h3 id="十-总结"><a href="#十-总结" class="headerlink" title="十 总结"></a>十 总结</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/27/android基础之Fragments/" data-id="cizs8mlyu000180nzejirzy0s" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/27/android基础之Fragments/" data-id="cizz0cpnc00004wnz7u9sr090" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fragment/">Fragment</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
     </footer>
   </div>
   
@@ -287,14 +525,198 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="一-Service简介"><a href="#一-Service简介" class="headerlink" title="一 Service简介"></a>一 Service简介</h3><p>Service也是Android的四大组件之一，它并不提供用户界面，主要做一些即使该应用程序被调入后台也需要运行的事务。比如下载，音乐播放，执行文件I/O或者与content provider进行交互等。Service主要做的就是上面这些比较耗时的操作，但是由于Service也是运行在主线程中，因此最好在其中另开一个线程做这些耗时操作，否者可能会引起UI阻塞。       </p>
+<h3 id="二-Service的两种启动方式"><a href="#二-Service的两种启动方式" class="headerlink" title="二 Service的两种启动方式"></a>二 Service的两种启动方式</h3><p>Service有started和bound两种启动方式，当然也可以两种都启用。你可通过startService()启动服务后再通过bindService()将activity于Service绑定。     </p>
+<h5 id="1-startService-启动"><a href="#1-startService-启动" class="headerlink" title="1.startService()启动"></a>1.startService()启动</h5><p>通过startService()启动的Service，Service一旦启动即与它的调用者（通常是某个activity）不再关联，即使调用它的组件被销毁，它也能在后台一直运行下去。通常，该类服务执行单一的操作并且不会向调用者返回结果，比如它可以通过网络下载或上传文件。此类服务应该在其工作完成后通过重写stopSelf()使其自行终止，或者由其他组件调用stopService()来终止。<br>通过startService()启动的服务需要实现它的生命周期中onStartCommand()方法        </p>
+<h5 id="2-bindService-启动"><a href="#2-bindService-启动" class="headerlink" title="2.bindService()启动"></a>2.bindService()启动</h5><p>通过bindService()启动的服务，该服务的生命周期将与启动它的组件相关联，即如果启动它的组件被销毁则该服务也会被销毁，或者通过调用unBindService()与服务解绑，解绑后服务被销毁。多个组件可以同时与一个服务绑定，当所有组件都与服务解绑后，该服务才会被销毁。<br>bind服务提供了一个客户端/服务器接口，允许组件与服务进行交互、发送请求、获取结果，甚至进行进程间通信（IPC）。<br>通过bindService()启动的服务需要实现Service中的onBind()方法。   </p>
+<h3 id="三-Service的生命周期"><a href="#三-Service的生命周期" class="headerlink" title="三 Service的生命周期"></a>三 Service的生命周期</h3><p>两种Service的生命周期如下图：<br><img src="/2017/02/27/android基础之Service/Service生命周期图.png" alt="Service生命周期图" title="Service生命周期图"><br>其回调方法如下：     </p>
+<pre><code class="java"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleService</span> <span class="keyword">extends</span> <span class="title">Service</span> </span>{
+    <span class="keyword">int</span> mStartMode;       <span class="comment">// indicates how to behave if the service is killed</span>
+    IBinder mBinder;      <span class="comment">// interface for clients that bind</span>
+    <span class="keyword">boolean</span> mAllowRebind; <span class="comment">// indicates whether onRebind should be used</span>
+
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>{
+        <span class="comment">// The service is being created</span>
+    }
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent, <span class="keyword">int</span> flags, <span class="keyword">int</span> startId)</span> </span>{
+        <span class="comment">// The service is starting, due to a call to startService()</span>
+        <span class="keyword">return</span> mStartMode;
+    }
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> IBinder <span class="title">onBind</span><span class="params">(Intent intent)</span> </span>{
+        <span class="comment">// A client is binding to the service with bindService()</span>
+        <span class="keyword">return</span> mBinder;
+    }
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onUnbind</span><span class="params">(Intent intent)</span> </span>{
+        <span class="comment">// All clients have unbound with unbindService()</span>
+        <span class="keyword">return</span> mAllowRebind;
+    }
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onRebind</span><span class="params">(Intent intent)</span> </span>{
+        <span class="comment">// A client is binding to the service with bindService(),</span>
+        <span class="comment">// after onUnbind() has already been called</span>
+    }
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>{
+        <span class="comment">// The service is no longer used and is being destroyed</span>
+    }
+}
+</code></pre>
+<h3 id="四-Service与线程的区别"><a href="#四-Service与线程的区别" class="headerlink" title="四 Service与线程的区别"></a>四 Service与线程的区别</h3><ul>
+<li>Thread：Thread 是程序执行的最小单元，它是分配CPU的基本单位。可以用 Thread 来执行一些异步的操作。     </li>
+<li>Service：Service 是android的一种机制，当它运行的时候如果是Local Service，那么对应的 Service 是运行在主进程的 main 线程上的。如：onCreate，onStart 这些函数在被系统调用的时候都是在主进程的 main 线程上运行的。如果是Remote Service，那么对应的 Service 则是运行在独立进程的 main 线程上。<br>其实谈Service和线程的区别毫无意义，它们本来就是毫无关联的两样东西，我觉得应该谈的是在什么情况下，什么地方使用线程更合适。<br>比如：如果你的线程主要用于对UI的更新，那么在Activity中新建即可。但是如果你的线程用于app和服务器之间的消息推送，你需要隔一段时间就要连接服务器做数据同步的话，那么就不能在Activity中新建线程。因为此时的线程在Activity被销毁时，它仍然需要运行。此时将面对一个问题，如果你是Activity中创建得线程，那么当该Activity被销毁时，你将失去该线程的实例。另一方面，你没办法在不同的Activity中对同一线程进行控制。这种情况你就需要在Service中创建它，一方面Service在Activity被销毁时仍然可以运行，另一方面其他的Activity重建后也可以通过与Service进行绑定获得Service的实例，进而控制该线程。</li>
+</ul>
+<h3 id="五-保证Service不被杀死"><a href="#五-保证Service不被杀死" class="headerlink" title="五 保证Service不被杀死"></a>五 保证Service不被杀死</h3><ul>
+<li>onStartCommand方法，返回START_STICKY   </li>
+<li>提升service优先级   </li>
+<li>提升service进程优先级,将其提升为前台服务    </li>
+<li>onDestroy方法里重启service  </li>
+<li>监听系统广播判断Service状态    </li>
+<li>将APK安装到/system/app，变身系统级应用      </li>
+</ul>
+<h3 id="六-IntentService"><a href="#六-IntentService" class="headerlink" title="六 IntentService"></a>六 IntentService</h3><p>因为大多数started服务都不需要同时处理多个请求（这实际上是一个危险的多线程情况），所以最佳方式也许就是用IntentService类来实现你的服务。<br>IntentService将执行以下步骤：    　　</p>
+<ul>
+<li>创建一个缺省的工作（worker）线程，它独立于应用程序主线程来执行所有发送到onStartCommand()的intent。　　　</li>
+<li>创建一个工作队列，每次向你的onHandleIntent()传入一个intent，这样你就永远不必担心多线程问题了。　</li>
+<li>在处理完所有的启动请求后，终止服务，因此你就永远不需调用stopSelf()了。　　</li>
+<li>提供缺省的onBind()实现代码，它返回null。</li>
+<li>提供缺省的onStartCommand()实现代码，它把intent送入工作队列，稍后会再传给你的onHandleIntent()实现代码。　　　</li>
+</ul>
+<p>以上所有步骤将汇成一个结果：你要做的全部工作就是实现onHandleIntent()的代码，来完成客户端提交的任务。（当然你还需要为服务提供一小段构造方法。）       </p>
+<p>以下是个IntentService的实现例程：    </p>
+<pre><code class="java">
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloIntentService</span> <span class="keyword">extends</span> <span class="title">IntentService</span> </span>{
+
+  <span class="comment">/** 
+   * 构造方法是必需的，必须用工作线程名称作为参数
+   * 调用父类的[http://developer.android.com/reference/android/app/IntentService.html#IntentService(java.lang.String) IntentService(String)]构造方法。
+   */</span>
+  <span class="function"><span class="keyword">public</span> <span class="title">HelloIntentService</span><span class="params">()</span> </span>{
+      <span class="keyword">super</span>(<span class="string">"HelloIntentService"</span>);
+  }
+
+  <span class="comment">/**
+   * IntentService从缺省的工作线程中调用本方法，并用启动服务的intent作为参数。 
+   * 本方法返回后，IntentService将适时终止这个服务。
+   */</span>
+  <span class="meta">@Override</span>
+  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onHandleIntent</span><span class="params">(Intent intent)</span> </span>{
+      <span class="comment">// 通常我们会在这里执行一些工作，比如下载文件。</span>
+      <span class="comment">// 作为例子，我们只是睡5秒钟。</span>
+      <span class="keyword">long</span> endTime = System.currentTimeMillis() + <span class="number">5</span>*<span class="number">1000</span>;
+      <span class="keyword">while</span> (System.currentTimeMillis() &lt; endTime) {
+          <span class="keyword">synchronized</span> (<span class="keyword">this</span>) {
+              <span class="keyword">try</span> {
+                  wait(endTime - System.currentTimeMillis());
+              } <span class="keyword">catch</span> (Exception e) {
+              }
+          }
+      }
+  }
+}
+</code></pre>
+<p>所有你需要做的就是：一个构造方法和一个onHandleIntent()方法的实现。</p>
+<p>如果你还决定重写其它的回调方法，比如onCreate()、onStartCommand()、onDestroy()， 请确保调用一下父类的实现代码，以便IntentService能正确处理工作线程的生命周期。</p>
+<p>比如说，onStartCommand()必须返回缺省实现代码的结果（缺省代码实现了如何获取传给onHandleIntent()的intent）：    </p>
+<pre><code class="java"><span class="meta">@Override</span>
+<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent, <span class="keyword">int</span> flags, <span class="keyword">int</span> startId)</span> </span>{
+    Toast.makeText(<span class="keyword">this</span>, <span class="string">"service starting"</span>, Toast.LENGTH_SHORT).show();
+    <span class="keyword">return</span> <span class="keyword">super</span>.onStartCommand(intent,flags,startId);
+}
+</code></pre>
+<p>除了onHandleIntent()以外，唯一不需要调用父类实现代码的方法是onBind()（不过如果你的服务允许绑定，你还是需要实现它）。    </p>
+<h3 id="七-扩展Service"><a href="#七-扩展Service" class="headerlink" title="七 扩展Service"></a>七 扩展Service</h3><p>如上节所述，利用IntentService来实现一个started服务非常简单。 不过，假如你的服务需要多线程运行（而不是通过一个工作队列来处理启动请求），那你可以扩展Service类来完成每个intent的处理。</p>
+<p>作为对照，以下例程实现了 Service 类，它执行的工作与上述使用IntentService的例子相同。确切地说，对于每一个启动请求，它都用一个工作线程来完成处理工作，并且每次只处理一个请求。    </p>
+<pre><code class="java"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloService</span> <span class="keyword">extends</span> <span class="title">Service</span> </span>{
+  <span class="keyword">private</span> Looper mServiceLooper;
+  <span class="keyword">private</span> ServiceHandler mServiceHandler;
+
+  <span class="comment">// 处理从线程接收的消息</span>
+  <span class="keyword">private</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceHandler</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>{
+      <span class="function"><span class="keyword">public</span> <span class="title">ServiceHandler</span><span class="params">(Looper looper)</span> </span>{
+          <span class="keyword">super</span>(looper);
+      }
+      <span class="meta">@Override</span>
+      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>{
+          <span class="comment">// 通常我们在这里执行一些工作，比如下载文件。</span>
+          <span class="comment">// 作为例子，我们只是睡个5秒钟。</span>
+          <span class="keyword">long</span> endTime = System.currentTimeMillis() + <span class="number">5</span>*<span class="number">1000</span>;
+          <span class="keyword">while</span> (System.currentTimeMillis() &lt; endTime) {
+              <span class="keyword">synchronized</span> (<span class="keyword">this</span>) {
+                  <span class="keyword">try</span> {
+                      wait(endTime - System.currentTimeMillis());
+                  } <span class="keyword">catch</span> (Exception e) {
+                  }
+              }
+          }
+          <span class="comment">// 根据startId终止服务，这样我们就不会在处理其它工作的过程中再来终止服务</span>
+          stopSelf(msg.arg1);
+      }
+  }
+
+  <span class="meta">@Override</span>
+  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>{
+    <span class="comment">// 启动运行服务的线程。</span>
+    <span class="comment">// 请记住我们要创建一个单独的线程，因为服务通常运行于进程的主线程中，可我们不想阻塞主线程。</span>
+    <span class="comment">// 我们还要赋予它后台运行的优先级，以便计算密集的工作不会干扰我们的UI。</span>
+    HandlerThread thread = <span class="keyword">new</span> HandlerThread(<span class="string">"ServiceStartArguments"</span>,
+            Process.THREAD_PRIORITY_BACKGROUND);
+    thread.start();
+
+    <span class="comment">// 获得HandlerThread的Looper队列并用于Handler</span>
+    mServiceLooper = thread.getLooper();
+    mServiceHandler = <span class="keyword">new</span> ServiceHandler(mServiceLooper);
+  }
+
+  <span class="meta">@Override</span>
+  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent, <span class="keyword">int</span> flags, <span class="keyword">int</span> startId)</span> </span>{
+      Toast.makeText(<span class="keyword">this</span>, <span class="string">"service starting"</span>, Toast.LENGTH_SHORT).show();
+
+      <span class="comment">// 对于每一个启动请求，都发送一个消息来启动一个处理</span>
+      <span class="comment">// 同时传入启动ID，以便任务完成后我们知道该终止哪一个请求。</span>
+      Message msg = mServiceHandler.obtainMessage();
+      msg.arg1 = startId;
+      mServiceHandler.sendMessage(msg);
+
+      <span class="comment">// 如果我们被杀死了，那从这里返回之后被重启</span>
+      <span class="keyword">return</span> START_STICKY;
+  }
+
+  <span class="meta">@Override</span>
+  <span class="function"><span class="keyword">public</span> IBinder <span class="title">onBind</span><span class="params">(Intent intent)</span> </span>{
+      <span class="comment">// 我们不支持绑定，所以返回null</span>
+      <span class="keyword">return</span> <span class="keyword">null</span>;
+  }
+
+  <span class="meta">@Override</span>
+  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>{
+    Toast.makeText(<span class="keyword">this</span>, <span class="string">"service done"</span>, Toast.LENGTH_SHORT).show(); 
+  }
+}
+</code></pre>
+<p>如你所见，它要干的事情比用IntentService时多了很多。</p>
+<p>不过，因为是自行处理每个onStartCommand()调用，你可以同时处理多个请求。 本例中没有这么去实现，但只要你愿意，你就可以为每个请求创建一个新的线程，并立即运行它们（而不是等待前一个请求处理完毕）。</p>
+<p>请注意onStartCommand()方法必须返回一个整数。这个整数是描述系统在杀死服务之后应该如何继续运行（上一节中缺省的 IntentService 实现代码会替你处理这一点，当然那样你就无法修改这个处理过程）。onStartCommand()的返回值必须是以下常量之一：</p>
+<ul>
+<li>START_NOT_STICKY: 如果系统在onStartCommand()返回后杀死了服务，则不会重建服务了，除非还存在未发送的intent。 当服务不再是必需的，并且应用程序能够简单地重启那些未完成的工作时，这是避免服务运行的最安全的选项。 </li>
+</ul>
+<ul>
+<li>START_STICKY: 如果系统在onStartCommand()返回后杀死了服务，则将重建服务并调用onStartCommand()，但不会再次送入上一个intent， 而是用null intent来调用onStartCommand() 。除非还有启动服务的intent未发送完，那么这些剩下的intent会继续发送。 这适用于媒体播放器（或类似服务），它们不执行命令，但需要一直运行并随时待命。 </li>
+</ul>
+<ul>
+<li>START_REDELIVER_INTENT: 如果系统在onStartCommand()返回后杀死了服务，则将重建服务并用上一个已送过的intent调用onStartCommand()。任何未发送完的intent也都会依次送入。这适用于那些需要立即恢复工作的活跃服务，比如下载文件。    </li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/27/android基础之Service/" data-id="cizs8mlzl000580nz993qcif7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/27/android基础之Service/" data-id="cizz09fte0003aonza5029hwx" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/service/">service</a></li></ul>
 
     </footer>
   </div>
@@ -372,22 +794,15 @@
 <p><strong>警告</strong>： 大多数应用不应该改变 activity 和 task 默认的工作方式。 如果你确定有必要修改默认方式，请保持<br>谨慎，并确保 activity 在启动和从其它 activity 用回退键返回时的可用性。 请确保对可能与用户预期的导航方式<br>相冲突的地方进行测试。      </p>
 </blockquote>
 <h3 id="七-启动Activity"><a href="#七-启动Activity" class="headerlink" title="七 启动Activity"></a>七 启动Activity</h3><p>要启动一个activity需要使用Intent，实际上android中组件之前的通信皆由Intent完成（如果你不了解Intent，请看我之后的博客<a href="android基础之Intents与Intent-Filters.md" title="android基础之Intents与Intent-Filters">android基础之Intents与Intent-Filters.md</a>），而使用Intent启动activity有显示和隐式两种方式。   </p>
-<ol>
-<li>显示启动      </li>
-</ol>
-<pre><code class="java">Intent intent = <span class="keyword">new</span> Intent(<span class="keyword">this</span>, SignInActivity.class);
+<h5 id="显示启动"><a href="#显示启动" class="headerlink" title="显示启动"></a>显示启动</h5><pre><code class="java">Intent intent = <span class="keyword">new</span> Intent(<span class="keyword">this</span>, SignInActivity.class);
 startActivity(intent);<span class="comment">//显示启动一个叫SignInActivity的Activity</span>
 </code></pre>
-<ol>
-<li>隐式启动<br>要想隐式启动一个activity，你需要使用intent-filter来暴露你的activity。使用filter有java代码和xml文件两种方式，推荐使用第二种方式，你只需在Androidmanifest.xml文件中的activit元素中加入intent-filter属性，并声明一个action即可。但是如果你想使你的activity更独立，那么就不要为你的activity设置filter。那么什么时候使用这种方式呢？<br>如果，你的程序可能想要展示某些动作，例如发邮件，短信，微博，或者使用你activity中的数据。 这时候，你就不应该使用自己的activity来做这些工作。你应该调用系统中其他程序提供的响应功能。 这是intent真正体现其价值的地方。你可以创建一个描述了响应动作的intent,然后系统来为你挑选完成任务的程序。 如果有多个选择，系统会提示用户进行选择。例如你想让用户发邮件，你可以创建下面的intent：        </li>
-</ol>
+<h5 id="隐式启动"><a href="#隐式启动" class="headerlink" title="隐式启动"></a>隐式启动</h5><p>要想隐式启动一个activity，你需要使用intent-filter来暴露你的activity。使用filter有java代码和xml文件两种方式，推荐使用第二种方式，你只需在Androidmanifest.xml文件中的activit元素中加入intent-filter属性，并声明一个action即可。但是如果你想使你的activity更独立，那么就不要为你的activity设置filter。那么什么时候使用这种方式呢？<br>如果，你的程序可能想要展示某些动作，例如发邮件，短信，微博，或者使用你activity中的数据。 这时候，你就不应该使用自己的activity来做这些工作。你应该调用系统中其他程序提供的响应功能。 这是intent真正体现其价值的地方。你可以创建一个描述了响应动作的intent,然后系统来为你挑选完成任务的程序。 如果有多个选择，系统会提示用户进行选择。例如你想让用户发邮件，你可以创建下面的intent：        </p>
 <pre><code class="java">Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_SEND);
 intent.putExtra(Intent.EXTRA_EMAIL, recipientArray);<span class="comment">//recipientArray即你想发送过去的联系人信息</span>
 startActivity(intent);
 </code></pre>
-<ol>
-<li>启动一个带返回结果的Activity<br>有时候，你想要启动一个activity,并从这个activty获得一个结果。 这时，要通过 startActivityForResult() (取代startActivity()) 来启动activity。 然后通过实现onActivityResult()回调方法来获得返回后的结果。 当这个后续的activity被关闭，它将发送一个 Intent 给 onActivityResult() 方法。     </li>
-</ol>
+<h5 id="启动一个带返回结果的Activity"><a href="#启动一个带返回结果的Activity" class="headerlink" title="启动一个带返回结果的Activity"></a>启动一个带返回结果的Activity</h5><p>有时候，你想要启动一个activity,并从这个activty获得一个结果。 这时，要通过 startActivityForResult() (取代startActivity()) 来启动activity。 然后通过实现onActivityResult()回调方法来获得返回后的结果。 当这个后续的activity被关闭，它将发送一个 Intent 给 onActivityResult() 方法。     </p>
 <p>例如，你可能想要取一个联系人的信息。下面介绍怎么创建intent并处理结果:         </p>
 <pre><code class="java"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pickContact</span><span class="params">()</span> </span>{
     <span class="comment">// Create an intent to "pick" a contact, as defined by the content provider URI</span>
@@ -412,9 +827,7 @@ startActivity(intent);
 </code></pre>
 <p>这个例子展示了使用onActivityResult() 来获取结果的基本方法。 第一步要判断请求是否被成功响应，通过判断resultCode 是不是RESULT_OK—， 然后判断这个响应是不是针对相应的请求— ，此时只要判断requestCode 和发送时提供的第二个参数 startActivityForResult() 是否相匹配。 最后，查询 Intent中的data信息。 (data 参数)。</p>
 <p>这个过程中，ContentResolver 开启了一个查询而不是content provider, 它返回一个 Cursor ，这将允许数据被读取。更多content provider相关信息，请阅读我之后的博客<a href="android基础之Content-Providers.md" title="android基础之Content-Providers">android基础之Content-Providers.md</a>。     </p>
-<ol>
-<li>关闭activity<br>你可以通过调用finish() 来终止activity。 你也可以调用finishActivity() 来终止你之前启动了的一个独立activity。    </li>
-</ol>
+<h5 id="关闭activity"><a href="#关闭activity" class="headerlink" title="关闭activity"></a>关闭activity</h5><p>你可以通过调用finish() 来终止activity。 你也可以调用finishActivity() 来终止你之前启动了的一个独立activity。    </p>
 <blockquote>
 <p><strong>注意</strong>: 多数情况下，你不应该明确地通过这些方式来关闭acitivity。 就像下面要讨论的activity的生命周期。系统会为你管理。所以你不必关闭他们。 调用这些方法将有悖于用户体验。它们仅用于你绝对不想让用户再返回这个activity的实例。   </p>
 </blockquote>
@@ -425,10 +838,10 @@ startActivity(intent);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/27/android基础之activity/" data-id="cizs8mm00000980nzzpkcvg9b" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/27/android基础之activity/" data-id="cizz09fte0004aonzxdrgabhp" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/activity/">activity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
 
     </footer>
   </div>
@@ -511,7 +924,7 @@ tags:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/18/hexo搭建博客指南（二）-主题配置/" data-id="cizs8mm1a000r80nz3mst9j59" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/18/hexo搭建博客指南（二）-主题配置/" data-id="cizz09fu9000raonz9rp6qshw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
@@ -599,7 +1012,7 @@ deploy:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/16/hexo搭建博客指南（一）-建站/" data-id="cizs8mm29000w80nzzp8i3r7z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/16/hexo搭建博客指南（一）-建站/" data-id="cizz09fu8000paonzr93nn5ng" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>

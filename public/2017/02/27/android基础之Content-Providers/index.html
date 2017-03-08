@@ -3,15 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>android基础之Content Providers | ZHENGRUI&#39;BLOG</title>
+  <title>android基础之Content Provider | ZHENGRUI&#39;BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="android基础之Content Providers">
+  <meta name="description" content="一 概述ContentProvider（内容提供者）是Android的四大组件之一，通过它可以向其他的应用程序共享其数据。虽然使用其他方法也可以对外共享数据，但数据访问方式会因数据存储的方式而不同，如：采用文件方式对外共享数据，需要进行文件操作读写数据；采用sharedpreferences共享数据，需要使用sharedpreferences API读写数据。而使用ContentProvider共">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android基础之Content Provider">
 <meta property="og:url" content="http://yoursite.com/2017/02/27/android基础之Content-Providers/index.html">
 <meta property="og:site_name" content="ZHENGRUI'BLOG">
-<meta property="og:updated_time" content="2017-02-27T06:32:42.736Z">
+<meta property="og:description" content="一 概述ContentProvider（内容提供者）是Android的四大组件之一，通过它可以向其他的应用程序共享其数据。虽然使用其他方法也可以对外共享数据，但数据访问方式会因数据存储的方式而不同，如：采用文件方式对外共享数据，需要进行文件操作读写数据；采用sharedpreferences共享数据，需要使用sharedpreferences API读写数据。而使用ContentProvider共">
+<meta property="og:updated_time" content="2017-03-07T10:26:50.614Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="android基础之Content Providers">
+<meta name="twitter:title" content="android基础之Content Provider">
+<meta name="twitter:description" content="一 概述ContentProvider（内容提供者）是Android的四大组件之一，通过它可以向其他的应用程序共享其数据。虽然使用其他方法也可以对外共享数据，但数据访问方式会因数据存储的方式而不同，如：采用文件方式对外共享数据，需要进行文件操作读写数据；采用sharedpreferences共享数据，需要使用sharedpreferences API读写数据。而使用ContentProvider共">
   
   
     <link rel="icon" href="/favicon.png">
@@ -72,7 +75,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">2</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -121,7 +124,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BroadcastReceiver/">BroadcastReceiver</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Content-Provider/">Content Provider</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fragment/">Fragment</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Intent/">Intent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IntentFilter/">IntentFilter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/activity/">activity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/service/">service</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -130,7 +133,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a>
+      <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/Content-Provider/" style="font-size: 10px;">Content Provider</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/IntentFilter/" style="font-size: 10px;">IntentFilter</a> <a href="/tags/activity/" style="font-size: 10px;">activity</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/service/" style="font-size: 10px;">service</a>
     </div>
   </div>
 
@@ -158,6 +161,10 @@
   <time datetime="2017-02-27T06:32:42.000Z" itemprop="datePublished">2017-02-27</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">android</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -166,7 +173,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      android基础之Content Providers
+      android基础之Content Provider
     </h1>
   
 
@@ -174,13 +181,65 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="一-概述"><a href="#一-概述" class="headerlink" title="一 概述"></a>一 概述</h3><p>ContentProvider（内容提供者）是Android的四大组件之一，通过它可以向其他的应用程序共享其数据。虽然使用其他方法也可以对外共享数据，但数据访问方式会因数据存储的方式而不同，如：采用文件方式对外共享数据，需要进行文件操作读写数据；采用sharedpreferences共享数据，需要使用sharedpreferences API读写数据。而使用ContentProvider共享数据的好处是统一了数据访问方式。而且Android为常见的一些数据提供了默认的ContentProvider（包括音频、视频、图片和通讯录等）。</p>
+<p>但注意ContentProvider它也只是一个中间人，真正操作的数据源可能是数据库，也可以是文件、xml或网络等其他存储方式。</p>
+<h3 id="Uri类简介"><a href="#Uri类简介" class="headerlink" title="Uri类简介"></a>Uri类简介</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Uri uri = Uri.parse(<span class="string">"content://com.changcheng.provider.contactprovider/contact"</span>)</div></pre></td></tr></table></figure>
+<p>在Content Provider中使用的查询字符串有别于标准的SQL查询。很多诸如select, add, delete, modify等操作我们都使用一种特殊的URI来进行，这种URI由3个部分组成， “content://”, 代表数据的路径，和一个可选的标识数据的ID。以下是一些示例URI:    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">content:<span class="comment">//media/internal/images  //这个URI将返回设备上存储的所有图片</span></div><div class="line">content:<span class="comment">//contacts/people/  //这个URI将返回设备上的所有联系人信息</span></div><div class="line">content:<span class="comment">//contacts/people/45  //这个URI返回单个结果（联系人信息中ID为45的联系人记录）</span></div></pre></td></tr></table></figure>
+<p>尽管这种查询字符串格式很常见，但是它看起来还是有点令人迷惑。为此，Android提供一系列的帮助类（在android.provider包下），里面包含了很多以类变量形式给出的查询字符串，这种方式更容易让我们理解一点，因此，如上面content://contacts/people/45这个URI就可以写成如下形式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Uri person = ContentUris.withAppendedId(People.CONTENT_URI,  <span class="number">45</span>);</div></pre></td></tr></table></figure>
+<p>然后执行数据查询:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Cursor cur = managedQuery(person, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div></pre></td></tr></table></figure>
+<p>这个查询返回一个包含所有数据字段的游标，我们可以通过迭代这个游标来获取所有的数据.</p>
+<h3 id="三-ContentProvider类简介"><a href="#三-ContentProvider类简介" class="headerlink" title="三 ContentProvider类简介"></a>三 ContentProvider类简介</h3><h5 id="1-主要方法"><a href="#1-主要方法" class="headerlink" title="1.主要方法"></a>1.主要方法</h5><ul>
+<li>public boolean onCreate()<br>ContentProvider创建后　或　打开系统后其它应用第一次访问该ContentProvider时调用。      </li>
+<li>public Uri insert(Uri uri, ContentValues values)<br>外部应用向ContentProvider中添加数据。    </li>
+<li>public int delete(Uri uri, String selection, String[] selectionArgs)<br>外部应用从ContentProvider删除数据。    </li>
+<li>public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs)<br>外部应用更新ContentProvider中的数据。    </li>
+<li>public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder)　<br>供外部应用从ContentProvider中获取数据。 　    </li>
+<li>public String getType(Uri uri)<br>该方法用于返回当前Url所代表数据的MIME类型  </li>
+</ul>
+<h5 id="2-创建步骤"><a href="#2-创建步骤" class="headerlink" title="2.创建步骤"></a>2.创建步骤</h5><p>要创建我们自己的Content Provider的话，我们需要遵循以下几步：</p>
+<p>1.创建一个继承了ContentProvider父类的类<br>2.定义一个名为CONTENT_URI，并且是public static final的Uri类型的类变量，你必须为其指定一个唯一的字符串值，最好的方案是以类的全名称， 如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Uri CONTENT_URI = Uri.parse( “content:<span class="comment">//com.google.android.MyContentProvider”);</span></div></pre></td></tr></table></figure>
+<p>3.定义你要返回给客户端的数据列名。如果你正在使用Android数据库，必须为其定义一个叫_id的列，它用来表示每条记录的唯一性。<br>4.创建你的数据存储系统。大多数Content Provider使用Android文件系统或SQLite数据库来保持数据，但是你也可以以任何你想要的方式来存储。<br>5.如果你要存储字节型数据，比如位图文件等，数据列其实是一个表示实际保存文件的URI字符串，通过它来读取对应的文件数据。处理这种数据类型的Content Provider需要实现一个名为_data的字段，_data字段列出了该文件在Android文件系统上的精确路径。这个字段不仅是供客户端使用，而且也可以供ContentResolver使用。客户端可以调用ContentResolver.openOutputStream()方法来处理该URI指向的文件资源；如果是ContentResolver本身的话，由于其持有的权限比客户端要高，所以它能直接访问该数据文件。<br>6.声明public static String型的变量，用于指定要从游标处返回的数据列。<br>7.查询返回一个Cursor类型的对象。所有执行写操作的方法如insert(), update() 以及delete()都将被监听。我们可以通过使用ContentResover().notifyChange()方法来通知监听器关于数据更新的信息。<br>8.在AndroidMenifest.xml中使用<provider>标签来设置Content Provider。<br>9.如果你要处理的数据类型是一种比较新的类型，你就必须先定义一个新的MIME类型，以供ContentProvider.geType(url)来返回。MIME类型有两种形式:一种是为指定的单个记录的，还有一种是为多条记录的。这里给出一种常用的格式：   </provider></p>
+<ul>
+<li>vnd.android.cursor.item/vnd.yourcompanyname.contenttype （单个记录的MIME类型）<br>比如, 一个请求列车信息的URI如content://com.example.transportationprovider/trains/122 可能就会返回typevnd.android.cursor.item/vnd.example.rail这样一个MIME类型。   </li>
+<li>vnd.android.cursor.dir/vnd.yourcompanyname.contenttype （多个记录的MIME类型）<br>比如, 一个请求所有列车信息的URI如content://com.example.transportationprovider/trains 可能就会返回vnd.android.cursor.dir/vnd.example.rail这样一个MIME 类型。</li>
+</ul>
+<p>下面是一个Content Provider代码示例：</p>
+<blockquote>
+<p>代码</p>
+</blockquote>
+<p>一个名为MyContentProvider的Content Provider创建完成了，它用于从Sqlite数据库中添加和读取记录。</p>
+<h3 id="四-ContentResolver"><a href="#四-ContentResolver" class="headerlink" title="四 ContentResolver"></a>四 ContentResolver</h3><p>一个ContentProvider新建好了之后，我们需要一个ContentResolver类来获取其共享出的数据。</p>
+<h5 id="1-ContentResolver的主要方法"><a href="#1-ContentResolver的主要方法" class="headerlink" title="1.ContentResolver的主要方法"></a>1.ContentResolver的主要方法</h5><ul>
+<li>public Uri insert(Uri uri, ContentValues values)　//添加</li>
+<li>public int delete(Uri uri, String selection, String[] selectionArgs)　//删除</li>
+<li>public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs)　//更新</li>
+<li>public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder)//获取</li>
+</ul>
+<p>示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">ContentResolver resolver =  getContentResolver();</div><div class="line">Uri uri = Uri.parse(<span class="string">"content://cn.scu.myprovider/user"</span>);</div><div class="line"></div><div class="line"><span class="comment">//插入</span></div><div class="line">ContentValues values = <span class="keyword">new</span> ContentValues();</div><div class="line">values.put(<span class="string">"name"</span>, <span class="string">"fanrunqi"</span>);</div><div class="line">values.put(<span class="string">"age"</span>, <span class="number">24</span>);</div><div class="line">resolver.insert(uri, values);  </div><div class="line"></div><div class="line"><span class="comment">//查询</span></div><div class="line">Cursor cursor = resolver.query(uri, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="string">"userid desc"</span>);</div><div class="line"><span class="keyword">while</span>(cursor.moveToNext())&#123;</div><div class="line">   <span class="comment">//操作</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//更新</span></div><div class="line">ContentValues updateValues = <span class="keyword">new</span> ContentValues();</div><div class="line">updateValues.put(<span class="string">"name"</span>, <span class="string">"finch"</span>);</div><div class="line">Uri updateIdUri = ContentUris.withAppendedId(uri, <span class="number">1</span>);</div><div class="line">resolver.update(updateIdUri, updateValues, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line"></div><div class="line"><span class="comment">//删除</span></div><div class="line">Uri deleteIdUri = ContentUris.withAppendedId(uri, <span class="number">2</span>);</div><div class="line">resolver.delete(deleteIdUri, <span class="keyword">null</span>, <span class="keyword">null</span>);</div></pre></td></tr></table></figure>
+<h5 id="使用ContentResolver获取数据的步骤"><a href="#使用ContentResolver获取数据的步骤" class="headerlink" title="使用ContentResolver获取数据的步骤"></a>使用ContentResolver获取数据的步骤</h5><ol>
+<li>通过getContentResolver()方法得到ContentResol1.ver对象。</li>
+<li>调用ContentResolver类的query()方法查询数据，该方法会返回一个Cursor对象。</li>
+<li>对得到的Cursor对象进行分析，得到需要的数据。</li>
+<li>调用Cursor类的close()方法将Cursor对象关闭。</li>
+</ol>
+<p>示例代码（与上面ContentProvider处的代码相连）：</p>
+<blockquote>
+<p>代码</p>
+</blockquote>
+<h3 id="五-总结"><a href="#五-总结" class="headerlink" title="五 总结"></a>五 总结</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/27/android基础之Content-Providers/" data-id="cizs8mlyx000280nzflcxsu9q" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/27/android基础之Content-Providers/" data-id="cizz09fta0001aonz46fftrf2" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Content-Provider/">Content Provider</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
     </footer>
   </div>
   
