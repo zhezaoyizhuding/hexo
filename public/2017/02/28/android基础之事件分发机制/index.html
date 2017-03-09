@@ -5,13 +5,27 @@
   
   <title>android基础之事件分发机制 | ZHENGRUI&#39;BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="一 概述在android开发中会经常遇到滑动冲突（比如ScrollView或是SliddingMenu与ListView的嵌套）的问题，需要我们深入的了解android事件响应机制才能解决，事件响应机制已经是android开发者必不可少的知识。
+二 涉及到事件响应的常用方法构成用户在手指与屏幕接触过程中通过MotionEvent对象产生一系列事件，它有四种状态： 
+
+MotionEvent.ACT">
+<meta property="og:type" content="article">
 <meta property="og:title" content="android基础之事件分发机制">
 <meta property="og:url" content="http://yoursite.com/2017/02/28/android基础之事件分发机制/index.html">
 <meta property="og:site_name" content="ZHENGRUI'BLOG">
-<meta property="og:updated_time" content="2017-02-28T10:25:28.020Z">
+<meta property="og:description" content="一 概述在android开发中会经常遇到滑动冲突（比如ScrollView或是SliddingMenu与ListView的嵌套）的问题，需要我们深入的了解android事件响应机制才能解决，事件响应机制已经是android开发者必不可少的知识。
+二 涉及到事件响应的常用方法构成用户在手指与屏幕接触过程中通过MotionEvent对象产生一系列事件，它有四种状态： 
+
+MotionEvent.ACT">
+<meta property="og:image" content="http://yoursite.com/2017/02/28/android基础之事件分发机制/Touch事件分发机制流程图.png">
+<meta property="og:updated_time" content="2017-03-09T08:13:01.205Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android基础之事件分发机制">
+<meta name="twitter:description" content="一 概述在android开发中会经常遇到滑动冲突（比如ScrollView或是SliddingMenu与ListView的嵌套）的问题，需要我们深入的了解android事件响应机制才能解决，事件响应机制已经是android开发者必不可少的知识。
+二 涉及到事件响应的常用方法构成用户在手指与屏幕接触过程中通过MotionEvent对象产生一系列事件，它有四种状态： 
+
+MotionEvent.ACT">
+<meta name="twitter:image" content="http://yoursite.com/2017/02/28/android基础之事件分发机制/Touch事件分发机制流程图.png">
   
   
     <link rel="icon" href="/favicon.png">
@@ -72,7 +86,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">2</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -121,7 +135,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BroadcastReceiver/">BroadcastReceiver</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Content-Provider/">Content Provider</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fragment/">Fragment</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Intent/">Intent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IntentFilter/">IntentFilter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/activity/">activity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/service/">service</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AsycTask/">AsycTask</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BroadcastReceiver/">BroadcastReceiver</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Content-Provider/">Content Provider</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fragment/">Fragment</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Intent/">Intent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IntentFilter/">IntentFilter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLite/">SQLite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/View/">View</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/activity/">activity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/loader/">loader</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/service/">service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件分发/">事件分发</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -130,7 +144,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/Content-Provider/" style="font-size: 10px;">Content Provider</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/IntentFilter/" style="font-size: 10px;">IntentFilter</a> <a href="/tags/activity/" style="font-size: 10px;">activity</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/service/" style="font-size: 10px;">service</a>
+      <a href="/tags/AsycTask/" style="font-size: 10px;">AsycTask</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/Content-Provider/" style="font-size: 10px;">Content Provider</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Handler/" style="font-size: 10px;">Handler</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/IntentFilter/" style="font-size: 10px;">IntentFilter</a> <a href="/tags/SQLite/" style="font-size: 10px;">SQLite</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/activity/" style="font-size: 10px;">activity</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/loader/" style="font-size: 10px;">loader</a> <a href="/tags/service/" style="font-size: 10px;">service</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a>
     </div>
   </div>
 
@@ -158,6 +172,10 @@
   <time datetime="2017-02-28T10:25:28.000Z" itemprop="datePublished">2017-02-28</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">android</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -174,13 +192,55 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="一-概述"><a href="#一-概述" class="headerlink" title="一 概述"></a>一 概述</h3><p>在android开发中会经常遇到滑动冲突（比如ScrollView或是SliddingMenu与ListView的嵌套）的问题，需要我们深入的了解android事件响应机制才能解决，事件响应机制已经是android开发者必不可少的知识。</p>
+<h3 id="二-涉及到事件响应的常用方法构成"><a href="#二-涉及到事件响应的常用方法构成" class="headerlink" title="二 涉及到事件响应的常用方法构成"></a>二 涉及到事件响应的常用方法构成</h3><p>用户在手指与屏幕接触过程中通过MotionEvent对象产生一系列事件，它有四种状态： </p>
+<ul>
+<li>MotionEvent.ACTION_DOWN　：手指按下屏幕的瞬间（一切事件的开始）</li>
+<li>MotionEvent.ACTION_MOVE　：手指在屏幕上移动</li>
+<li>MotionEvent.ACTION_UP　：手指离开屏幕瞬间</li>
+<li>MotionEvent.ACTION_CANCEL 　：取消手势，一般由程序产生，不会由用户产生</li>
+</ul>
+<p>Android中的事件onClick, onLongClick，onScroll, onFling等等，都是由许多个Touch事件构成的（一个ACTION_DOWN， n个ACTION_MOVE，1个ACTION_UP）。</p>
+<p>android 事件响应机制是先分发（先由外部的View接收，然后依次传递给其内层的最小View）再处理 （从最小View单元（事件源）开始依次向外层传递。）的形式实现的。</p>
+<p>复杂性表现在：可以控制每层事件是否继续传递（分发和拦截协同实现），以及事件的具体消费（事件分发也具有事件消费能力）。</p>
+<h3 id="三-android事件处理涉及到的三个重要函数"><a href="#三-android事件处理涉及到的三个重要函数" class="headerlink" title="三 android事件处理涉及到的三个重要函数"></a>三 android事件处理涉及到的三个重要函数</h3><h5 id="1-事件分发：public-boolean-dispatchTouchEvent-MotionEvent-ev"><a href="#1-事件分发：public-boolean-dispatchTouchEvent-MotionEvent-ev" class="headerlink" title="1.事件分发：public boolean dispatchTouchEvent(MotionEvent ev)"></a>1.事件分发：public boolean dispatchTouchEvent(MotionEvent ev)</h5><p>当有监听到事件时，首先由Activity进行捕获，进入事件分发处理流程。（因为activity没有事件拦截，View和ViewGroup有）会将事件传递给最外层View的dispatchTouchEvent(MotionEvent ev)方法，该方法对事件进行分发。 </p>
+<ul>
+<li><p>return true ：表示该View内部消化掉了所有事件。</p>
+</li>
+<li><p>return false ：事件在本层不再继续进行分发，并交由上层控件的onTouchEvent方法进行消费（如果本层控件已经是Activity，那么事件将被系统消费或处理）。　</p>
+</li>
+<li><p>如果事件分发返回系统默认的 super.dispatchTouchEvent(ev)，事件将分发给本层的事件拦截onInterceptTouchEvent 方法进行处理</p>
+</li>
+</ul>
+<h5 id="2-事件拦截：public-boolean-onInterceptTouchEvent-MotionEvent-ev"><a href="#2-事件拦截：public-boolean-onInterceptTouchEvent-MotionEvent-ev" class="headerlink" title="2.事件拦截：public boolean onInterceptTouchEvent(MotionEvent ev)"></a>2.事件拦截：public boolean onInterceptTouchEvent(MotionEvent ev)</h5><ul>
+<li><p>return true ：表示将事件进行拦截，并将拦截到的事件交由本层控件 的 onTouchEvent 进行处理；</p>
+</li>
+<li><p>return false ：则表示不对事件进行拦截，事件得以成功分发到子View。并由子View的dispatchTouchEvent进行处理。　</p>
+</li>
+<li><p>如果返回super.onInterceptTouchEvent(ev)，默认表示拦截该事件，并将事件传递给当前View的onTouchEvent方法，和return true一样。</p>
+</li>
+</ul>
+<h5 id="3-事件响应：public-boolean-onTouchEvent-MotionEvent-ev"><a href="#3-事件响应：public-boolean-onTouchEvent-MotionEvent-ev" class="headerlink" title="3.事件响应：public boolean onTouchEvent(MotionEvent ev)"></a>3.事件响应：public boolean onTouchEvent(MotionEvent ev)</h5><p>在dispatchTouchEvent（事件分发）返回super.dispatchTouchEvent(ev)并且onInterceptTouchEvent（事件拦截返回true或super.onInterceptTouchEvent(ev)的情况下，那么事件会传递到onTouchEvent方法，该方法对事件进行响应。</p>
+<ul>
+<li><p>如果return true，表示onTouchEvent处理完事件后消费了此次事件。此时事件终结；</p>
+</li>
+<li><p>如果return fasle，则表示不响应事件，那么该事件将会不断向上层View的onTouchEvent方法传递，直到某个View的onTouchEvent方法返回true，如果到了最顶层View还是返回false，那么认为该事件不消耗，则在同一个事件系列中，当前View无法再次接收到事件，该事件会交由Activity的onTouchEvent进行处理；　　</p>
+</li>
+<li><p>如果return super.dispatchTouchEvent(ev)，则表示不响应事件，结果与return false一样。</p>
+</li>
+</ul>
+<p>从以上过程中可以看出，dispatchTouchEvent无论返回true还是false，事件都不再进行分发，只有当其返回super.dispatchTouchEvent(ev)，才表明其具有向下层分发的愿望，但是是否能够分发成功，则需要经过事件拦截onInterceptTouchEvent的审核。事件是否向上传递处理是由onTouchEvent的返回值决定的。</p>
+<p>下面是Touch事件传递机制流程图：</p>
+<img src="/2017/02/28/android基础之事件分发机制/Touch事件分发机制流程图.png" alt="Touch事件分发机制流程图" title="Touch事件分发机制流程图">
+<h3 id="四-View源码分析"><a href="#四-View源码分析" class="headerlink" title="四 View源码分析"></a>四 View源码分析</h3>
       
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2017/02/28/android基础之事件分发机制/" data-id="cizz09fu0000gaonzr25wl8n1" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/View/">View</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事件分发/">事件分发</a></li></ul>
+
     </footer>
   </div>
   
