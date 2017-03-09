@@ -4,8 +4,32 @@
 
     
   <url>
+    <loc>http://yoursite.com/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E7%BC%93%E5%AD%98/</loc>
+    <lastmod>2017-03-09T12:47:42.085Z</lastmod>
+    <data>
+        <display>
+        <title>android基础之缓存</title>
+        <pubTime>2017-02-28T09:10:22.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>java</tag>
+         
+        <tag>缓存</tag>
+         
+         
+           
+             
+              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E6%9C%BA%E5%88%B6/</loc>
-    <lastmod>2017-03-09T08:13:01.205Z</lastmod>
+    <lastmod>2017-03-09T12:47:42.069Z</lastmod>
     <data>
         <display>
         <title>android基础之事件分发机制</title>
@@ -30,34 +54,8 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BHandler%E4%B8%8EAsycTask/</loc>
-    <lastmod>2017-03-09T07:13:42.472Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之Handler与AsycTask</title>
-        <pubTime>2017-02-27T06:47:53.000Z</pubTime>
-        
-        <tag>android</tag>
-         
-        <tag>java</tag>
-         
-        <tag>Handler</tag>
-         
-        <tag>AsycTask</tag>
-         
-         
-           
-             
-              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8BSQLite/</loc>
-    <lastmod>2017-03-08T08:14:38.891Z</lastmod>
+    <lastmod>2017-03-09T12:47:42.069Z</lastmod>
     <data>
         <display>
         <title>android基础之SQLite</title>
@@ -81,7 +79,7 @@
     
   <url>
     <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8Bloaders/</loc>
-    <lastmod>2017-03-08T06:40:48.863Z</lastmod>
+    <lastmod>2017-03-09T12:47:42.069Z</lastmod>
     <data>
         <display>
         <title>android基础之loaders</title>
@@ -105,7 +103,7 @@
     
   <url>
     <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BIntents%E4%B8%8EIntent-Filters/</loc>
-    <lastmod>2017-03-08T04:03:37.360Z</lastmod>
+    <lastmod>2017-03-09T12:47:42.053Z</lastmod>
     <data>
         <display>
         <title>android基础之Intents与Intent Filters</title>
@@ -130,8 +128,82 @@
 
     
   <url>
+    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BHandler%E4%B8%8EAsycTask/</loc>
+    <lastmod>2017-03-09T12:47:42.022Z</lastmod>
+    <data>
+        <display>
+        <title>android基础之Handler与AsycTask</title>
+        <pubTime>2017-02-27T06:47:53.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>java</tag>
+         
+        <tag>Handler</tag>
+         
+        <tag>AsycTask</tag>
+         
+         
+           
+             
+              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BService/</loc>
+    <lastmod>2017-03-07T13:20:33.443Z</lastmod>
+    <data>
+        <display>
+        <title>android基础之Service</title>
+        <pubTime>2017-02-27T06:06:22.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>java</tag>
+         
+        <tag>service</tag>
+         
+         
+           
+             
+              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BFragments/</loc>
+    <lastmod>2017-03-07T13:20:33.408Z</lastmod>
+    <data>
+        <display>
+        <title>android基础之Fragments</title>
+        <pubTime>2017-02-27T06:31:31.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>java</tag>
+         
+        <tag>Fragment</tag>
+         
+         
+           
+             
+              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BContent-Providers/</loc>
-    <lastmod>2017-03-07T10:26:50.614Z</lastmod>
+    <lastmod>2017-03-07T13:20:33.393Z</lastmod>
     <data>
         <display>
         <title>android基础之Content Provider</title>
@@ -155,7 +227,7 @@
     
   <url>
     <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BBroadcastReceiver/</loc>
-    <lastmod>2017-03-07T10:25:28.582Z</lastmod>
+    <lastmod>2017-03-07T13:20:33.393Z</lastmod>
     <data>
         <display>
         <title>android基础之BroadcastReceiver</title>
@@ -178,155 +250,8 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BFragments/</loc>
-    <lastmod>2017-03-07T04:00:35.804Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之Fragments</title>
-        <pubTime>2017-02-27T06:31:31.000Z</pubTime>
-        
-        <tag>android</tag>
-         
-        <tag>java</tag>
-         
-        <tag>Fragment</tag>
-         
-         
-           
-             
-              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BService/</loc>
-    <lastmod>2017-03-06T09:17:22.399Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之Service</title>
-        <pubTime>2017-02-27T06:06:22.000Z</pubTime>
-        
-        <tag>android</tag>
-         
-        <tag>java</tag>
-         
-        <tag>service</tag>
-         
-         
-           
-             
-              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8Bactivity/</loc>
-    <lastmod>2017-03-03T07:09:28.373Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之activity</title>
-        <pubTime>2017-02-27T02:35:34.000Z</pubTime>
-        
-        <tag>android</tag>
-         
-        <tag>java</tag>
-         
-        <tag>activity</tag>
-         
-         
-           
-             
-              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/03/01/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/</loc>
-    <lastmod>2017-03-01T06:28:10.850Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之消息推送</title>
-        <pubTime>2017-03-01T06:28:10.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/</loc>
-    <lastmod>2017-02-28T10:00:00.191Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之进程间通信</title>
-        <pubTime>2017-02-28T10:00:00.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/</loc>
-    <lastmod>2017-02-28T09:42:52.277Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之数据存储</title>
-        <pubTime>2017-02-28T09:42:52.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E7%BC%93%E5%AD%98/</loc>
-    <lastmod>2017-02-28T09:10:22.046Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之缓存</title>
-        <pubTime>2017-02-28T09:10:22.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%87%AA%E5%AE%9A%E4%B9%89View%E4%B8%8EViewGroup/</loc>
-    <lastmod>2017-02-28T08:02:37.153Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之自定义View与ViewGroup</title>
-        <pubTime>2017-02-28T08:02:37.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/2017/02/18/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E6%8C%87%E5%8D%97%EF%BC%88%E4%BA%8C%EF%BC%89-%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/</loc>
-    <lastmod>2017-02-23T10:55:17.467Z</lastmod>
+    <lastmod>2017-03-04T09:08:24.225Z</lastmod>
     <data>
         <display>
         <title>hexo搭建博客指南（二）--主题配置</title>
@@ -346,7 +271,7 @@
     
   <url>
     <loc>http://yoursite.com/2017/02/16/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E6%8C%87%E5%8D%97%EF%BC%88%E4%B8%80%EF%BC%89-%E5%BB%BA%E7%AB%99/</loc>
-    <lastmod>2017-02-23T08:34:12.388Z</lastmod>
+    <lastmod>2017-03-04T09:08:24.222Z</lastmod>
     <data>
         <display>
         <title>hexo搭建博客指南（一）--建站</title>
@@ -358,6 +283,90 @@
            
              
               <breadCrumb title="hexo" url="http://yoursite.com/categories/hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/</loc>
+    <lastmod>2017-03-04T09:08:24.219Z</lastmod>
+    <data>
+        <display>
+        <title>android基础之进程间通信</title>
+        <pubTime>2017-02-28T10:00:00.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%87%AA%E5%AE%9A%E4%B9%89View%E4%B8%8EViewGroup/</loc>
+    <lastmod>2017-03-04T09:08:24.217Z</lastmod>
+    <data>
+        <display>
+        <title>android基础之自定义View与ViewGroup</title>
+        <pubTime>2017-02-28T08:02:37.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/03/01/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/</loc>
+    <lastmod>2017-03-04T09:08:24.212Z</lastmod>
+    <data>
+        <display>
+        <title>android基础之消息推送</title>
+        <pubTime>2017-03-01T06:28:10.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/</loc>
+    <lastmod>2017-03-04T09:08:24.210Z</lastmod>
+    <data>
+        <display>
+        <title>android基础之数据存储</title>
+        <pubTime>2017-02-28T09:42:52.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8Bactivity/</loc>
+    <lastmod>2017-03-04T09:08:24.198Z</lastmod>
+    <data>
+        <display>
+        <title>android基础之activity</title>
+        <pubTime>2017-02-27T02:35:34.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>java</tag>
+         
+        <tag>activity</tag>
+         
+         
+           
+             
+              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
           
         </display>
     </data>

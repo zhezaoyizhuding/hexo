@@ -10,11 +10,11 @@ tags:
 
 ### 一 概述
 
-移动开发本质上就是手机和服务器之间进行通信，需要从服务端获取数据。反复通过网络获取数据是比较耗时的，特别是访问比较多的时候，会极大影响了性能，Android中可通过缓存机制来减少频繁的网络操作，减少流量、提升性能。android中缓存分为一级缓存，二级缓存和图片的三级缓存。
+移动开发本质上就是手机和服务器之间进行通信，需要从服务端获取数据。反复通过网络获取数据是比较耗时的，特别是访问比较多的时候，会极大影响了性能，Android中可通过缓存机制来减少频繁的网络操作，减少流量、提升性能。android中缓存分为一级缓存，二级缓存和图片的三级缓存(就是网络)。
 
 Android缓存分为内存缓存（一级缓存）和文件缓存（二级缓存）。在早期，各大图片缓存框架流行之前，常用的内存缓存方式是软引用（SoftReference）和弱引用（WeakReference），如大部分的使用方式：HashMap<String url, SoftReference<Drawable>> imageCache;这种形式。从Android 2.3（Level 9）开始，垃圾回收器更倾向于回收SoftReference或WeakReference对象，这使得SoftReference和WeakReference变得不是那么实用有效。同时，到了Android 3.0（Level 11）之后，图片数据Bitmap被放置到了内存的堆区域，而堆区域的内存是由GC管理的，开发者也就不需要进行图片资源的释放工作，但这也使得图片数据的释放无法预知，增加了造成OOM的可能。因此，在Android3.1以后，Android推出了LruCache这个内存缓存类和DiskLruCache这个磁盘缓存类。
 
-当Android端需要获得数据时比如获取网络中的图片，我们首先从内存中查找（按键查找），内存中没有的再从磁盘文件或sqlite中去查找，若磁盘中也没有才通过网络获取；当获得来自网络的数据，就以key-value对的方式先缓存到内存（一级缓存），同时缓存到文件或sqlite中（二级缓存）。注意：内存缓存会造成堆内存泄露，所有一级缓存通常要严格控制缓存的大小，一般控制在系统内存的1/4。
+当Android端需要获得数据时比如获取网络中的图片，我们首先从内存中查找（按键查找），内存中没有的再从磁盘文件或sqlite中去查找，若磁盘中也没有才通过网络获取（图片的3级缓存策略）；当获得来自网络的数据，就以key-value对的方式先缓存到内存（一级缓存），同时缓存到文件或sqlite中（二级缓存）。注意：内存缓存会造成堆内存泄露，所有一级缓存通常要严格控制缓存的大小，一般控制在系统内存的1/4。
 
 ### 二 内存缓存（一级缓存）
 
@@ -44,10 +44,24 @@ LRU，全称Least Rencetly Used，即最近最少使用，是一种非常常用�
 显然，在LruCache中选择的是accessOrder = true；此时，当accessOrder 设置为 true时，每当我们更新（即调用put方法）或访问（即调用get方法）map中的结点时，LinkedHashMap内部都会将这个结点移动到链表的尾部，因此，在链表的尾部是最近刚刚使用的结点，在链表的头部是是最近最少使用的结点，当我们的缓存空间不足时，就应该持续把链表头部结点移除掉，直到有剩余空间放置新结点。
 可以看到，LinkedHashMap完成了LruCache中的核心功能，那LruCache中剩下要做的就是定义缓存空间总容量，当前保存数据已使用的容量，对外提供put、get方法。
 
-##### 3.主要方法
+##### 3.LruCache源码分析
 
-- sizeOf()和safeSizeOf()方法测量数据类型大小
-该方法只是简单的返回了1，需要我们重写这个方法，自己去定义数据的测量方式。因此，我们在使用LruCache的时候，经常会看到这种方式： 
+在了解了LruCache的核心原理之后，就可以开始分析LruCache的源码了。
+
+####### 3.1关键字段
+
+根据上面的分析，首先要有总容量、已使用容量、linkedHashMap这几个关键字段，LruCache中提供了下面三个关键字段：
+
+```java
+    //核心数据结构  
+        private final LinkedHashMap<K, V> map;  
+        // 当前缓存数据所占的大小  
+        private int size;  
+        //缓存空间总容量  
+        private int maxSize;  
+```
+
+要注意的是size字段，因为map中可以存放各种类型的数据，这些数据的大小测量方式也是不一样的，比如Bitmap类型的数据和String类型的数据计算他们的大小方式肯定不同，因此，LruCache中在计算放入数据大小的方法sizeOf中，只是简单的返回了1，需要我们重写这个方法，自己去定义数据的测量方式。因此，我们在使用LruCache的时候，经常会看到这种方式： 
 
 ```java
     private static final int CACHE_SIZE = 4 * 1024 * 1024;//4Mib  
@@ -59,34 +73,250 @@ LRU，全称Least Rencetly Used，即最近最少使用，是一种非常常用�
         };  
 ```
 
-- put方法缓存数据   
-put()方法主要有以下几步：
-1）key和value判空，说明LruCache中不允许key和value为null；
-2）通过safeSizeOf()获取要加入对象数据的大小，并更新当前缓存数据的大小；
-3）将新的对象数据放入到缓存中，即调用LinkedHashMap的put方法，如果原来存在该key时，直接替换掉原来的value值，并返回之前的value值，得到之前value的大小，更新当前缓存数据的size大小；如果原来不存在该key，则直接加入缓存即可；
+####### 3.2 构造方法  
+
+```java
+	public LruCache(int maxSize) {
+	    if (maxSize <= 0) {
+	        throw new IllegalArgumentException("maxSize <= 0");
+	    }
+	    this.maxSize = maxSize;
+	    this.map = new LinkedHashMap<K, V>(0, 0.75f, true);
+	}
+```
+
+LruCache只有一个唯一的构造方法，在构造方法中，给定了缓存空间的总大小，初始化了LinkedHashMap核心数据结构，在LinkedHashMap中的第三个参数指定为true，也就设置了accessOrder=true，表示这个LinkedHashMap将是基于数据的访问顺序进行排序。
+
+
+####### 3.3 sizeOf()和safeSizeOf()方法测量数据类型大小
+
+根据上面的解释，由于各种数据类型大小测量的标准不统一，具体测量的方法应该由使用者来实现，如上面给出的一个在实现LruCache时重写sizeOf的一种常用实现方式。通过多态的性质，再具体调用sizeOf时会调用我们重写的方法进行测量，LruCache对sizeOf()的调用进行一层封装，如下： 
+
+```java
+	private int safeSizeOf(K key, V value) {
+	    int result = sizeOf(key, value);
+	    if (result < 0) {
+	        throw new IllegalStateException("Negative size: " + key + "=" + value);
+	    }
+	    return result;
+	} 
+```
+
+里面其实就是调用sizeOf()方法，返回sizeOf计算的大小。
+上面就是LruCache的基本内容，下面就需要提供LruCache的核心功能了。
+
+####### 3.4 put方法缓存数据   
+
+首先看一下它的源码实现：    
+
+```java
+/**
+   * 给对应key缓存value，并且将该value移动到链表的尾部。
+   */
+public final V put(K key, V value) {
+    if (key == null || value == null) {
+        throw new NullPointerException("key == null || value == null");
+    }
+
+      V previous;
+      synchronized (this) {
+        // 记录 put 的次数
+        putCount++;
+        // 通过键值对，计算出要保存对象value的大小，并更新当前缓存大小
+        size += safeSizeOf(key, value);
+        /*
+         * 如果 之前存在key，用新的value覆盖原来的数据， 并返回 之前key 的value
+         * 记录在 previous
+         */
+        previous = map.put(key, value);
+        // 如果之前存在key，并且之前的value不为null
+        if (previous != null) {
+            // 计算出 之前value的大小，因为前面size已经加上了新的value数据的大小，此时，需要再次更新size，减去原来value的大小
+            size -= safeSizeOf(key, previous);
+        }
+      }
+
+    // 如果之前存在key，并且之前的value不为null
+    if (previous != null) {
+        /*
+         * previous值被剔除了，此次添加的 value 已经作为key的 新值
+         * 告诉 自定义 的 entryRemoved 方法
+         */
+        entryRemoved(false, key, previous, value);
+    }
+    //裁剪缓存容量（在当前缓存数据大小超过了总容量maxSize时，才会真正去执行LRU）
+    trimToSize(maxSize);
+      return previous;
+}
+```
+
+可以看到，put()方法主要有以下几步：   
+1）key和value判空，说明LruCache中不允许key和value为null；   
+2）通过safeSizeOf()获取要加入对象数据的大小，并更新当前缓存数据的大小；   
+3）将新的对象数据放入到缓存中，即调用LinkedHashMap的put方法，如果原来存在该key时，直接替换掉原来的value值，并返回之前的value值，得到之前value的大小，更新当前缓存数据的size大小；如果原来不存在该key，则直接加入缓存即可；   
 4）清理缓存空间
 
-- trimToSize()清理缓存空间    
-当我们加入一个数据时（put），为了保证当前数据的缓存所占大小没有超过我们指定的总大小，通过调用trimToSize()来对缓存空间进行管理控制。trimToSize()方法的作用就是为了保证当前数据的缓存大小不能超过我们指定的缓存总大小，如果超过了，就会开始移除最近最少使用的数据，直到size符合要求。trimToSize()方法在put()的时候一定会调用，在get()的时候有可能会调用。
+####### 3.5 trimToSize()清理缓存空间    
+当我们加入一个数据时（put），为了保证当前数据的缓存所占大小没有超过我们指定的总大小，通过调用trimToSize()来对缓存空间进行管理控制。
+
+```java
+public void trimToSize(int maxSize) {
+    /*
+     * 循环进行LRU，直到当前所占容量大小没有超过指定的总容量大小
+     */
+    while (true) {
+        K key;
+        V value;
+        synchronized (this) {
+            // 一些异常情况的处理
+            if (size < 0 || (map.isEmpty() && size != 0)) {
+                throw new IllegalStateException(
+                        getClass().getName() + ".sizeOf() is reporting inconsistent results!");
+            }
+            // 首先判断当前缓存数据大小是否超过了指定的缓存空间总大小。如果没有超过，即缓存中还可以存入数据，直接跳出循环，清理完毕
+            if (size <= maxSize || map.isEmpty()) {
+                break;
+            }
+            /**
+             * 执行到这，表示当前缓存数据已超过了总容量，需要执行LRU，即将最近最少使用的数据清除掉，直到数据所占缓存空间没有超标;
+             * 根据前面的原理分析，知道，在链表中，链表的头结点是最近最少使用的数据，因此，最先清除掉链表前面的结点
+             */
+            Map.Entry<K, V> toEvict = map.entrySet().iterator().next();
+            key = toEvict.getKey();
+            value = toEvict.getValue();
+            map.remove(key);
+            // 移除掉后，更新当前数据缓存的大小
+            size -= safeSizeOf(key, value);
+            // 更新移除的结点数量
+            evictionCount++;
+        }
+        /*
+         * 通知某个结点被移除，类似于回调
+         */
+        entryRemoved(true, key, value, null);
+    }
+}
+```
+
+trimToSize()方法的作用就是为了保证当前数据的缓存大小不能超过我们指定的缓存总大小，如果超过了，就会开始移除最近最少使用的数据，直到size符合要求。trimToSize()方法在put()的时候一定会调用，在get()的时候有可能会调用。
 
 
-- get方法获取缓存数据   
-get()方法的思路就是：
-   1）先尝试从map缓存中获取value，即mapVaule = map.get(key);如果mapVaule != null，说明缓存中存在该对象，直接返回即可；
-   2）如果mapVaule == null，说明缓存中不存在该对象，大多数情况下会直接返回null；但是如果我们重写了create()方法，在缓存没有该数据的时候自己去创建一个，则会继续往下走，中间可能会出现冲突，看注释；
+####### 3.6 get方法获取缓存数据   
+
+```java
+/**
+ * 根据key查询缓存，如果该key对应的value存在于缓存，直接返回value；
+* 访问到这个结点时，LinkHashMap会将它移动到双向循环链表的的尾部。
+* 如果如果没有缓存的值，则返回null。（如果开发者重写了create()的话，返回创建的value）
+*/
+public final V get(K key) {
+    if (key == null) {
+        throw new NullPointerException("key == null");
+    }
+
+    V mapValue;
+    synchronized (this) {
+        // LinkHashMap 如果设置按照访问顺序的话，这里每次get都会重整数据顺序
+        mapValue = map.get(key);
+        // 计算 命中次数
+        if (mapValue != null) {
+            hitCount++;
+            return mapValue;
+        }
+        // 计算 丢失次数
+        missCount++;
+    }
+
+    /*
+     * 官方解释：
+     * 尝试创建一个值，这可能需要很长时间，并且Map可能在create()返回的值时有所不同。如果在create()执行的时
+     * 候，用这个key执行了put方法，那么此时就发生了冲突，我们在Map中删除这个创建的值，释放被创建的值，保留put进去的值。
+     */
+    V createdValue = create(key);
+    if (createdValue == null) {
+        return null;
+    }
+
+    /***************************
+     * 不覆写create方法走不到下面 *
+     ***************************/
+    /*
+     * 正常情况走不到这里
+     * 走到这里的话 说明 实现了自定义的 create(K key) 逻辑
+     * 因为默认的 create(K key) 逻辑为null
+     */
+    synchronized (this) {
+        // 记录 create 的次数
+        createCount++;
+        // 将自定义create创建的值，放入LinkedHashMap中，如果key已经存在，会返回 之前相同key 的值
+        mapValue = map.put(key, createdValue);
+
+        // 如果之前存在相同key的value，即有冲突。
+        if (mapValue != null) {
+            /*
+             * 有冲突
+             * 所以 撤销 刚才的 操作
+             * 将 之前相同key 的值 重新放回去
+             */
+            map.put(key, mapValue);
+        } else {
+            // 拿到键值对，计算出在容量中的相对长度，然后加上
+            size += safeSizeOf(key, createdValue);
+        }
+    }
+
+    // 如果上面 判断出了 将要放入的值发生冲突
+    if (mapValue != null) {
+        /*
+         * 刚才create的值被删除了，原来的 之前相同key 的值被重新添加回去了
+         * 告诉 自定义 的 entryRemoved 方法
+         */
+        entryRemoved(false, key, createdValue, mapValue);
+        return mapValue;
+    } else {
+        // 上面 进行了 size += 操作 所以这里要重整长度
+        trimToSize(maxSize);
+        return createdValue;
+    }
+}
+```
+
+get()方法的思路就是：   
+   1）先尝试从map缓存中获取value，即mapVaule = map.get(key);如果mapVaule != null，说明缓存中存在该对象，直接返回即可；   
+   2）如果mapVaule == null，说明缓存中不存在该对象，大多数情况下会直接返回null；但是如果我们重写了create()方法，在缓存没有该数据的时候自己去创建一个，则会继续往下走，中间可能会出现冲突，看注释；   
    3）注意：在我们通过LinkedHashMap进行get(key)或put(key,value)时都会对链表进行调整，即将刚刚访问get或加入put的结点放入到链表尾部。
 
-- entryRemoved()     
+####### 3.7 entryRemoved()     
+
+entryRemoved的源码如下：
+
+```java
+/**
+ * 1.当被回收或者删掉时调用。该方法当value被回收释放存储空间时被remove调用
+* 或者替换条目值时put调用，默认实现什么都没做。
+* 2.该方法没用同步调用，如果其他线程访问缓存时，该方法也会执行。
+* 3.evicted=true：如果该条目被删除空间 （表示 进行了trimToSize or remove）  evicted=false：put冲突后 或 get里成功create后
+* 导致
+* 4.newValue!=null，那么则被put()或get()调用。
+*/
+protected void entryRemoved(boolean evicted, K key, V oldValue, V newValue) {
+}
+```
+
 entryRemoved方法是一个空方法，说明这个也是让开发者自己根据需求去重写的。entryRemoved()主要作用就是在结点数据value需要被删除或回收的时候，给开发者的回调。开发者就可以在这个方法里面实现一些自己的逻辑：   
 （1）可以进行资源的回收；     
 （2）可以实现二级内存缓存，可以进一步提高性能，    
 思路如下：重写LruCache的entryRemoved()函数，把删除掉的item，再次存入另外一个LinkedHashMap<String, SoftWeakReference<Bitmap>>中，这个数据结构当做二级缓存，每次获得图片的时候，先判断LruCache中是否缓存，没有的话，再判断这个二级缓存中是否有，如果都没有再从sdcard上获取。sdcard上也没有的话，就从网络服务器上拉取。entryRemoved()在LruCache中有四个地方进行了调用：put()、get()、trimToSize()、remove()中进行了调用。
 
 
+####### 3.8 LruCache的线程安全性 
+
+LruCache是线程安全的，因为在put、get、trimToSize、remove的方法中都加入synchronized进行同步控制。
+
+
 ##### 4.LruCache代码示例
 
 使用步骤：
-
 - 在构造LruCache时提供一个总的缓存大小；
 - 重写sizeOf方法，对存入map的数据大小进行自定义测量；
 - 根据需要，决定是否要重写entryRemoved()方法；
@@ -460,8 +690,6 @@ private Handler handler=new Handler()
    }
 }
 ```
-
-### 五 图片的三级缓存
 
 
   
