@@ -28,30 +28,6 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8Bloaders/</loc>
-    <lastmod>2017-03-09T12:47:42.069Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之loaders</title>
-        <pubTime>2017-02-27T06:39:21.000Z</pubTime>
-        
-        <tag>android</tag>
-         
-        <tag>java</tag>
-         
-        <tag>loader</tag>
-         
-         
-           
-             
-              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8BSQLite/</loc>
     <lastmod>2017-03-09T12:47:42.069Z</lastmod>
     <data>
@@ -64,6 +40,30 @@
         <tag>java</tag>
          
         <tag>SQLite</tag>
+         
+         
+           
+             
+              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8Bloaders/</loc>
+    <lastmod>2017-03-09T12:47:42.069Z</lastmod>
+    <data>
+        <display>
+        <title>android基础之loaders</title>
+        <pubTime>2017-02-27T06:39:21.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>java</tag>
+         
+        <tag>loader</tag>
          
          
            
