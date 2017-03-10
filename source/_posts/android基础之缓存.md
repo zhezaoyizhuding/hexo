@@ -48,7 +48,7 @@ LRU，全称Least Rencetly Used，即最近最少使用，是一种非常常用�
 
 在了解了LruCache的核心原理之后，就可以开始分析LruCache的源码了。
 
-####### 3.1关键字段
+###### 3.1关键字段
 
 根据上面的分析，首先要有总容量、已使用容量、linkedHashMap这几个关键字段，LruCache中提供了下面三个关键字段：
 
@@ -73,7 +73,7 @@ LRU，全称Least Rencetly Used，即最近最少使用，是一种非常常用�
         };  
 ```
 
-####### 3.2 构造方法  
+###### 3.2 构造方法  
 
 ```java
 	public LruCache(int maxSize) {
@@ -88,7 +88,7 @@ LRU，全称Least Rencetly Used，即最近最少使用，是一种非常常用�
 LruCache只有一个唯一的构造方法，在构造方法中，给定了缓存空间的总大小，初始化了LinkedHashMap核心数据结构，在LinkedHashMap中的第三个参数指定为true，也就设置了accessOrder=true，表示这个LinkedHashMap将是基于数据的访问顺序进行排序。
 
 
-####### 3.3 sizeOf()和safeSizeOf()方法测量数据类型大小
+###### 3.3 sizeOf()和safeSizeOf()方法测量数据类型大小
 
 根据上面的解释，由于各种数据类型大小测量的标准不统一，具体测量的方法应该由使用者来实现，如上面给出的一个在实现LruCache时重写sizeOf的一种常用实现方式。通过多态的性质，再具体调用sizeOf时会调用我们重写的方法进行测量，LruCache对sizeOf()的调用进行一层封装，如下： 
 
@@ -105,7 +105,7 @@ LruCache只有一个唯一的构造方法，在构造方法中，给定了缓存
 里面其实就是调用sizeOf()方法，返回sizeOf计算的大小。
 上面就是LruCache的基本内容，下面就需要提供LruCache的核心功能了。
 
-####### 3.4 put方法缓存数据   
+###### 3.4 put方法缓存数据   
 
 首先看一下它的源码实现：    
 
@@ -156,7 +156,7 @@ public final V put(K key, V value) {
 3）将新的对象数据放入到缓存中，即调用LinkedHashMap的put方法，如果原来存在该key时，直接替换掉原来的value值，并返回之前的value值，得到之前value的大小，更新当前缓存数据的size大小；如果原来不存在该key，则直接加入缓存即可；   
 4）清理缓存空间
 
-####### 3.5 trimToSize()清理缓存空间    
+###### 3.5 trimToSize()清理缓存空间    
 当我们加入一个数据时（put），为了保证当前数据的缓存所占大小没有超过我们指定的总大小，通过调用trimToSize()来对缓存空间进行管理控制。
 
 ```java
@@ -201,7 +201,7 @@ public void trimToSize(int maxSize) {
 trimToSize()方法的作用就是为了保证当前数据的缓存大小不能超过我们指定的缓存总大小，如果超过了，就会开始移除最近最少使用的数据，直到size符合要求。trimToSize()方法在put()的时候一定会调用，在get()的时候有可能会调用。
 
 
-####### 3.6 get方法获取缓存数据   
+###### 3.6 get方法获取缓存数据   
 
 ```java
 /**
@@ -286,7 +286,7 @@ get()方法的思路就是：
    2）如果mapVaule == null，说明缓存中不存在该对象，大多数情况下会直接返回null；但是如果我们重写了create()方法，在缓存没有该数据的时候自己去创建一个，则会继续往下走，中间可能会出现冲突，看注释；   
    3）注意：在我们通过LinkedHashMap进行get(key)或put(key,value)时都会对链表进行调整，即将刚刚访问get或加入put的结点放入到链表尾部。
 
-####### 3.7 entryRemoved()     
+###### 3.7 entryRemoved()     
 
 entryRemoved的源码如下：
 
@@ -309,7 +309,7 @@ entryRemoved方法是一个空方法，说明这个也是让开发者自己根�
 思路如下：重写LruCache的entryRemoved()函数，把删除掉的item，再次存入另外一个LinkedHashMap<String, SoftWeakReference<Bitmap>>中，这个数据结构当做二级缓存，每次获得图片的时候，先判断LruCache中是否缓存，没有的话，再判断这个二级缓存中是否有，如果都没有再从sdcard上获取。sdcard上也没有的话，就从网络服务器上拉取。entryRemoved()在LruCache中有四个地方进行了调用：put()、get()、trimToSize()、remove()中进行了调用。
 
 
-####### 3.8 LruCache的线程安全性 
+###### 3.8 LruCache的线程安全性 
 
 LruCache是线程安全的，因为在put、get、trimToSize、remove的方法中都加入synchronized进行同步控制。
 
