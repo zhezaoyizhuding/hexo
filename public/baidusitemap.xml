@@ -4,23 +4,26 @@
 
     
   <url>
+<<<<<<< HEAD
     <loc>http://yoursite.com/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E7%BC%93%E5%AD%98/</loc>
     <lastmod>2017-03-09T13:16:38.164Z</lastmod>
+=======
+    <loc>https://zhezaoyizhuding.github.io/2017/03/16/Java%E5%9F%BA%E7%A1%80%E4%B9%8B%E7%BA%BF%E7%A8%8B/</loc>
+    <lastmod>2017-03-16T01:59:42.269Z</lastmod>
+>>>>>>> 8b940d99b72aba634875cdf4aa9c31eb4ee12190
     <data>
         <display>
-        <title>android基础之缓存</title>
-        <pubTime>2017-02-28T09:10:22.000Z</pubTime>
+        <title>Java基础之线程</title>
+        <pubTime>2017-03-16T01:58:21.000Z</pubTime>
         
-        <tag>android</tag>
+        <tag>Java</tag>
          
-        <tag>java</tag>
-         
-        <tag>缓存</tag>
+        <tag>线程</tag>
          
          
            
              
-              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
+              <breadCrumb title="Java" url="https://zhezaoyizhuding.github.io/categories/Java/"/>
           
         </display>
     </data>
@@ -28,23 +31,97 @@
 
     
   <url>
+    <loc>https://zhezaoyizhuding.github.io/2017/03/13/Java%E5%9F%BA%E7%A1%80%E4%B9%8B%E9%9B%86%E5%90%88/</loc>
+    <lastmod>2017-03-15T08:53:59.090Z</lastmod>
+    <data>
+        <display>
+        <title>Java基础之集合</title>
+        <pubTime>2017-03-13T08:42:33.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>List</tag>
+         
+        <tag>Map</tag>
+         
+        <tag>Set</tag>
+         
+        <tag>集合</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java" url="https://zhezaoyizhuding.github.io/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>https://zhezaoyizhuding.github.io/2017/03/01/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/</loc>
+    <lastmod>2017-03-10T08:04:49.150Z</lastmod>
+    <data>
+        <display>
+        <title>android基础之消息推送</title>
+        <pubTime>2017-03-01T06:28:10.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>java</tag>
+         
+        <tag>长连接</tag>
+         
+        <tag>推送</tag>
+         
+        <tag>push</tag>
+         
+        <tag>pull</tag>
+         
+         
+           
+             
+              <breadCrumb title="android" url="https://zhezaoyizhuding.github.io/categories/android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+<<<<<<< HEAD
     <loc>http://yoursite.com/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8BSQLite/</loc>
     <lastmod>2017-03-09T12:47:42.069Z</lastmod>
     <data>
         <display>
         <title>android基础之SQLite</title>
         <pubTime>2017-02-28T10:03:32.000Z</pubTime>
+=======
+    <loc>https://zhezaoyizhuding.github.io/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%87%AA%E5%AE%9A%E4%B9%89View%E4%B8%8EViewGroup/</loc>
+    <lastmod>2017-03-10T06:31:21.932Z</lastmod>
+    <data>
+        <display>
+        <title>android基础之自定义View与ViewGroup</title>
+        <pubTime>2017-02-28T08:02:37.000Z</pubTime>
+>>>>>>> 8b940d99b72aba634875cdf4aa9c31eb4ee12190
         
         <tag>android</tag>
          
         <tag>java</tag>
          
+<<<<<<< HEAD
         <tag>SQLite</tag>
+=======
+        <tag>view</tag>
+         
+        <tag>ViewGroup</tag>
+>>>>>>> 8b940d99b72aba634875cdf4aa9c31eb4ee12190
          
          
            
              
-              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
+              <breadCrumb title="android" url="https://zhezaoyizhuding.github.io/categories/android/"/>
           
         </display>
     </data>
@@ -52,23 +129,36 @@
 
     
   <url>
+<<<<<<< HEAD
     <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8Bloaders/</loc>
     <lastmod>2017-03-09T12:47:42.069Z</lastmod>
     <data>
         <display>
         <title>android基础之loaders</title>
         <pubTime>2017-02-27T06:39:21.000Z</pubTime>
+=======
+    <loc>https://zhezaoyizhuding.github.io/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/</loc>
+    <lastmod>2017-03-10T04:12:00.785Z</lastmod>
+    <data>
+        <display>
+        <title>android基础之数据存储</title>
+        <pubTime>2017-02-28T09:42:52.000Z</pubTime>
+>>>>>>> 8b940d99b72aba634875cdf4aa9c31eb4ee12190
         
         <tag>android</tag>
          
         <tag>java</tag>
          
+<<<<<<< HEAD
         <tag>loader</tag>
+=======
+        <tag>数据存储</tag>
+>>>>>>> 8b940d99b72aba634875cdf4aa9c31eb4ee12190
          
          
            
              
-              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
+              <breadCrumb title="android" url="https://zhezaoyizhuding.github.io/categories/android/"/>
           
         </display>
     </data>
@@ -76,8 +166,47 @@
 
     
   <url>
+<<<<<<< HEAD
     <loc>http://yoursite.com/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E6%9C%BA%E5%88%B6/</loc>
     <lastmod>2017-03-09T12:47:42.069Z</lastmod>
+    <data>
+        <display>
+        <title>android基础之事件分发机制</title>
+        <pubTime>2017-02-28T10:25:28.000Z</pubTime>
+=======
+    <loc>https://zhezaoyizhuding.github.io/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E7%BC%93%E5%AD%98/</loc>
+    <lastmod>2017-03-10T01:56:13.064Z</lastmod>
+    <data>
+        <display>
+        <title>android基础之缓存</title>
+        <pubTime>2017-02-28T09:10:22.000Z</pubTime>
+>>>>>>> 8b940d99b72aba634875cdf4aa9c31eb4ee12190
+        
+        <tag>android</tag>
+         
+        <tag>java</tag>
+         
+<<<<<<< HEAD
+        <tag>View</tag>
+         
+        <tag>事件分发</tag>
+=======
+        <tag>缓存</tag>
+>>>>>>> 8b940d99b72aba634875cdf4aa9c31eb4ee12190
+         
+         
+           
+             
+              <breadCrumb title="android" url="https://zhezaoyizhuding.github.io/categories/android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://zhezaoyizhuding.github.io/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E6%9C%BA%E5%88%B6/</loc>
+    <lastmod>2017-03-09T09:07:03.016Z</lastmod>
     <data>
         <display>
         <title>android基础之事件分发机制</title>
@@ -94,7 +223,7 @@
          
            
              
-              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
+              <breadCrumb title="android" url="https://zhezaoyizhuding.github.io/categories/android/"/>
           
         </display>
     </data>
@@ -102,34 +231,8 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BIntents%E4%B8%8EIntent-Filters/</loc>
-    <lastmod>2017-03-09T12:47:42.053Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之Intents与Intent Filters</title>
-        <pubTime>2017-02-27T06:32:09.000Z</pubTime>
-        
-        <tag>android</tag>
-         
-        <tag>java</tag>
-         
-        <tag>Intent</tag>
-         
-        <tag>IntentFilter</tag>
-         
-         
-           
-             
-              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BHandler%E4%B8%8EAsycTask/</loc>
-    <lastmod>2017-03-09T12:47:42.022Z</lastmod>
+    <loc>https://zhezaoyizhuding.github.io/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BHandler%E4%B8%8EAsycTask/</loc>
+    <lastmod>2017-03-09T07:13:42.472Z</lastmod>
     <data>
         <display>
         <title>android基础之Handler与AsycTask</title>
@@ -146,7 +249,7 @@
          
            
              
-              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
+              <breadCrumb title="android" url="https://zhezaoyizhuding.github.io/categories/android/"/>
           
         </display>
     </data>
@@ -154,23 +257,23 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BService/</loc>
-    <lastmod>2017-03-07T13:20:33.443Z</lastmod>
+    <loc>https://zhezaoyizhuding.github.io/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8BSQLite/</loc>
+    <lastmod>2017-03-08T08:14:38.891Z</lastmod>
     <data>
         <display>
-        <title>android基础之Service</title>
-        <pubTime>2017-02-27T06:06:22.000Z</pubTime>
+        <title>android基础之SQLite</title>
+        <pubTime>2017-02-28T10:03:32.000Z</pubTime>
         
         <tag>android</tag>
          
         <tag>java</tag>
          
-        <tag>service</tag>
+        <tag>SQLite</tag>
          
          
            
              
-              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
+              <breadCrumb title="android" url="https://zhezaoyizhuding.github.io/categories/android/"/>
           
         </display>
     </data>
@@ -178,23 +281,23 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BFragments/</loc>
-    <lastmod>2017-03-07T13:20:33.408Z</lastmod>
+    <loc>https://zhezaoyizhuding.github.io/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8Bloaders/</loc>
+    <lastmod>2017-03-08T06:40:48.863Z</lastmod>
     <data>
         <display>
-        <title>android基础之Fragments</title>
-        <pubTime>2017-02-27T06:31:31.000Z</pubTime>
+        <title>android基础之loaders</title>
+        <pubTime>2017-02-27T06:39:21.000Z</pubTime>
         
         <tag>android</tag>
          
         <tag>java</tag>
          
-        <tag>Fragment</tag>
+        <tag>loader</tag>
          
          
            
              
-              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
+              <breadCrumb title="android" url="https://zhezaoyizhuding.github.io/categories/android/"/>
           
         </display>
     </data>
@@ -202,8 +305,34 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BContent-Providers/</loc>
-    <lastmod>2017-03-07T13:20:33.393Z</lastmod>
+    <loc>https://zhezaoyizhuding.github.io/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BIntents%E4%B8%8EIntent-Filters/</loc>
+    <lastmod>2017-03-08T04:03:37.360Z</lastmod>
+    <data>
+        <display>
+        <title>android基础之Intents与Intent Filters</title>
+        <pubTime>2017-02-27T06:32:09.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>java</tag>
+         
+        <tag>Intent</tag>
+         
+        <tag>IntentFilter</tag>
+         
+         
+           
+             
+              <breadCrumb title="android" url="https://zhezaoyizhuding.github.io/categories/android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://zhezaoyizhuding.github.io/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BContent-Providers/</loc>
+    <lastmod>2017-03-07T10:26:50.614Z</lastmod>
     <data>
         <display>
         <title>android基础之Content Provider</title>
@@ -218,7 +347,7 @@
          
            
              
-              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
+              <breadCrumb title="android" url="https://zhezaoyizhuding.github.io/categories/android/"/>
           
         </display>
     </data>
@@ -226,8 +355,8 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BBroadcastReceiver/</loc>
-    <lastmod>2017-03-07T13:20:33.393Z</lastmod>
+    <loc>https://zhezaoyizhuding.github.io/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BBroadcastReceiver/</loc>
+    <lastmod>2017-03-07T10:25:28.582Z</lastmod>
     <data>
         <display>
         <title>android基础之BroadcastReceiver</title>
@@ -242,7 +371,7 @@
          
            
              
-              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
+              <breadCrumb title="android" url="https://zhezaoyizhuding.github.io/categories/android/"/>
           
         </display>
     </data>
@@ -250,19 +379,23 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/02/18/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E6%8C%87%E5%8D%97%EF%BC%88%E4%BA%8C%EF%BC%89-%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/</loc>
-    <lastmod>2017-03-04T09:08:24.225Z</lastmod>
+    <loc>https://zhezaoyizhuding.github.io/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BFragments/</loc>
+    <lastmod>2017-03-07T04:00:35.804Z</lastmod>
     <data>
         <display>
-        <title>hexo搭建博客指南（二）--主题配置</title>
-        <pubTime>2017-02-18T07:09:07.000Z</pubTime>
+        <title>android基础之Fragments</title>
+        <pubTime>2017-02-27T06:31:31.000Z</pubTime>
         
-        <tag>hexo</tag>
+        <tag>android</tag>
+         
+        <tag>java</tag>
+         
+        <tag>Fragment</tag>
          
          
            
              
-              <breadCrumb title="hexo" url="http://yoursite.com/categories/hexo/"/>
+              <breadCrumb title="android" url="https://zhezaoyizhuding.github.io/categories/android/"/>
           
         </display>
     </data>
@@ -270,19 +403,23 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/02/16/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E6%8C%87%E5%8D%97%EF%BC%88%E4%B8%80%EF%BC%89-%E5%BB%BA%E7%AB%99/</loc>
-    <lastmod>2017-03-04T09:08:24.222Z</lastmod>
+    <loc>https://zhezaoyizhuding.github.io/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8BService/</loc>
+    <lastmod>2017-03-06T09:17:22.399Z</lastmod>
     <data>
         <display>
-        <title>hexo搭建博客指南（一）--建站</title>
-        <pubTime>2017-02-16T07:08:29.000Z</pubTime>
+        <title>android基础之Service</title>
+        <pubTime>2017-02-27T06:06:22.000Z</pubTime>
         
-        <tag>hexo</tag>
+        <tag>android</tag>
+         
+        <tag>java</tag>
+         
+        <tag>service</tag>
          
          
            
              
-              <breadCrumb title="hexo" url="http://yoursite.com/categories/hexo/"/>
+              <breadCrumb title="android" url="https://zhezaoyizhuding.github.io/categories/android/"/>
           
         </display>
     </data>
@@ -290,68 +427,8 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/</loc>
-    <lastmod>2017-03-04T09:08:24.219Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之进程间通信</title>
-        <pubTime>2017-02-28T10:00:00.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%87%AA%E5%AE%9A%E4%B9%89View%E4%B8%8EViewGroup/</loc>
-    <lastmod>2017-03-04T09:08:24.217Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之自定义View与ViewGroup</title>
-        <pubTime>2017-02-28T08:02:37.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/03/01/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/</loc>
-    <lastmod>2017-03-04T09:08:24.212Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之消息推送</title>
-        <pubTime>2017-03-01T06:28:10.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/</loc>
-    <lastmod>2017-03-04T09:08:24.210Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之数据存储</title>
-        <pubTime>2017-02-28T09:42:52.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8Bactivity/</loc>
-    <lastmod>2017-03-04T09:08:24.198Z</lastmod>
+    <loc>https://zhezaoyizhuding.github.io/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8Bactivity/</loc>
+    <lastmod>2017-03-03T07:09:28.373Z</lastmod>
     <data>
         <display>
         <title>android基础之activity</title>
@@ -366,7 +443,62 @@
          
            
              
-              <breadCrumb title="android" url="http://yoursite.com/categories/android/"/>
+              <breadCrumb title="android" url="https://zhezaoyizhuding.github.io/categories/android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://zhezaoyizhuding.github.io/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/</loc>
+    <lastmod>2017-02-28T10:00:00.191Z</lastmod>
+    <data>
+        <display>
+        <title>android基础之进程间通信</title>
+        <pubTime>2017-02-28T10:00:00.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://zhezaoyizhuding.github.io/2017/02/18/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E6%8C%87%E5%8D%97%EF%BC%88%E4%BA%8C%EF%BC%89-%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/</loc>
+    <lastmod>2017-02-23T10:55:17.467Z</lastmod>
+    <data>
+        <display>
+        <title>hexo搭建博客指南（二）--主题配置</title>
+        <pubTime>2017-02-18T07:09:07.000Z</pubTime>
+        
+        <tag>hexo</tag>
+         
+         
+           
+             
+              <breadCrumb title="hexo" url="https://zhezaoyizhuding.github.io/categories/hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://zhezaoyizhuding.github.io/2017/02/16/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E6%8C%87%E5%8D%97%EF%BC%88%E4%B8%80%EF%BC%89-%E5%BB%BA%E7%AB%99/</loc>
+    <lastmod>2017-02-23T08:34:12.388Z</lastmod>
+    <data>
+        <display>
+        <title>hexo搭建博客指南（一）--建站</title>
+        <pubTime>2017-02-16T07:08:29.000Z</pubTime>
+        
+        <tag>hexo</tag>
+         
+         
+           
+             
+              <breadCrumb title="hexo" url="https://zhezaoyizhuding.github.io/categories/hexo/"/>
           
         </display>
     </data>

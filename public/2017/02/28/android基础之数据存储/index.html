@@ -5,13 +5,40 @@
   
   <title>android基础之数据存储 | ZHENGRUI&#39;BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="一 概述Android提供了5种方式来让用户保存持久化应用程序数据。根据自己的需求来做选择，比如数据是否是应用程序私有的，是否能被其他程序访问，需要多少数据存储空间等。这五种数据存储方式分别是：
+
+使用SharedPreferences存储数据　
+文件存储数据
+SQLite数据库存储数据
+使用ContentProvider存储数据
+网络存储数据
+
+二 五种存储方式介绍1. SharePrefere">
+<meta property="og:type" content="article">
 <meta property="og:title" content="android基础之数据存储">
-<meta property="og:url" content="http://yoursite.com/2017/02/28/android基础之数据存储/index.html">
+<meta property="og:url" content="https://zhezaoyizhuding.github.io/2017/02/28/android基础之数据存储/index.html">
 <meta property="og:site_name" content="ZHENGRUI'BLOG">
-<meta property="og:updated_time" content="2017-03-04T09:08:24.210Z">
+<meta property="og:description" content="一 概述Android提供了5种方式来让用户保存持久化应用程序数据。根据自己的需求来做选择，比如数据是否是应用程序私有的，是否能被其他程序访问，需要多少数据存储空间等。这五种数据存储方式分别是：
+
+使用SharedPreferences存储数据　
+文件存储数据
+SQLite数据库存储数据
+使用ContentProvider存储数据
+网络存储数据
+
+二 五种存储方式介绍1. SharePrefere">
+<meta property="og:updated_time" content="2017-03-10T04:12:00.785Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android基础之数据存储">
+<meta name="twitter:description" content="一 概述Android提供了5种方式来让用户保存持久化应用程序数据。根据自己的需求来做选择，比如数据是否是应用程序私有的，是否能被其他程序访问，需要多少数据存储空间等。这五种数据存储方式分别是：
+
+使用SharedPreferences存储数据　
+文件存储数据
+SQLite数据库存储数据
+使用ContentProvider存储数据
+网络存储数据
+
+二 五种存储方式介绍1. SharePrefere">
   
   
     <link rel="icon" href="/favicon.png">
@@ -43,7 +70,7 @@
       </nav>
       <nav id="sub-nav">
         <div id="search-form-wrap">
-          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://zhezaoyizhuding.github.io"></form>
         </div>
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
         
@@ -61,7 +88,7 @@
     <a href="/about/index.html" class="mobile-nav-link">About</a>
   
   <div id="search-form-wrap-mobile">
-    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://zhezaoyizhuding.github.io"></form>
   </div>
 </nav>
       <div class="outer">
@@ -72,7 +99,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">2</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -81,7 +108,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">16</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">16</span></li></ul>
     </div>
   </div>
 
@@ -91,6 +118,14 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/03/16/Java基础之线程/">Java基础之线程</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/13/Java基础之集合/">Java基础之集合</a>
+          </li>
         
           <li>
             <a href="/2017/03/01/android基础之消息推送/">android基础之消息推送</a>
@@ -104,14 +139,6 @@
             <a href="/2017/02/28/android基础之SQLite/">android基础之SQLite</a>
           </li>
         
-          <li>
-            <a href="/2017/02/28/android基础之进程间通信/">android基础之进程间通信</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/28/android基础之数据存储/">android基础之数据存储</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -121,7 +148,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AsycTask/">AsycTask</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BroadcastReceiver/">BroadcastReceiver</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Content-Provider/">Content Provider</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fragment/">Fragment</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Intent/">Intent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IntentFilter/">IntentFilter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLite/">SQLite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/View/">View</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/activity/">activity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/loader/">loader</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/service/">service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件分发/">事件分发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AsycTask/">AsycTask</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BroadcastReceiver/">BroadcastReceiver</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Content-Provider/">Content Provider</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fragment/">Fragment</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Intent/">Intent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IntentFilter/">IntentFilter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/List/">List</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Map/">Map</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLite/">SQLite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Set/">Set</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/View/">View</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ViewGroup/">ViewGroup</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/activity/">activity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/loader/">loader</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pull/">pull</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/push/">push</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/service/">service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/view/">view</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件分发/">事件分发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/推送/">推送</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据存储/">数据存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程/">线程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/长连接/">长连接</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集合/">集合</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -130,7 +157,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AsycTask/" style="font-size: 10px;">AsycTask</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/Content-Provider/" style="font-size: 10px;">Content Provider</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Handler/" style="font-size: 10px;">Handler</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/IntentFilter/" style="font-size: 10px;">IntentFilter</a> <a href="/tags/SQLite/" style="font-size: 10px;">SQLite</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/activity/" style="font-size: 10px;">activity</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/loader/" style="font-size: 10px;">loader</a> <a href="/tags/service/" style="font-size: 10px;">service</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a>
+      <a href="/tags/AsycTask/" style="font-size: 10px;">AsycTask</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/Content-Provider/" style="font-size: 10px;">Content Provider</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Handler/" style="font-size: 10px;">Handler</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/IntentFilter/" style="font-size: 10px;">IntentFilter</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/List/" style="font-size: 10px;">List</a> <a href="/tags/Map/" style="font-size: 10px;">Map</a> <a href="/tags/SQLite/" style="font-size: 10px;">SQLite</a> <a href="/tags/Set/" style="font-size: 10px;">Set</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/ViewGroup/" style="font-size: 10px;">ViewGroup</a> <a href="/tags/activity/" style="font-size: 10px;">activity</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/loader/" style="font-size: 10px;">loader</a> <a href="/tags/pull/" style="font-size: 10px;">pull</a> <a href="/tags/push/" style="font-size: 10px;">push</a> <a href="/tags/service/" style="font-size: 10px;">service</a> <a href="/tags/view/" style="font-size: 10px;">view</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/推送/" style="font-size: 10px;">推送</a> <a href="/tags/数据存储/" style="font-size: 10px;">数据存储</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/长连接/" style="font-size: 10px;">长连接</a> <a href="/tags/集合/" style="font-size: 10px;">集合</a>
     </div>
   </div>
 
@@ -158,6 +185,10 @@
   <time datetime="2017-02-28T09:42:52.000Z" itemprop="datePublished">2017-02-28</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">android</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -174,13 +205,121 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="一-概述"><a href="#一-概述" class="headerlink" title="一 概述"></a>一 概述</h3><p>Android提供了5种方式来让用户保存持久化应用程序数据。根据自己的需求来做选择，比如数据是否是应用程序私有的，是否能被其他程序访问，需要多少数据存储空间等。这五种数据存储方式分别是：</p>
+<ul>
+<li>使用SharedPreferences存储数据　</li>
+<li>文件存储数据</li>
+<li>SQLite数据库存储数据</li>
+<li>使用ContentProvider存储数据</li>
+<li>网络存储数据</li>
+</ul>
+<h3 id="二-五种存储方式介绍"><a href="#二-五种存储方式介绍" class="headerlink" title="二 五种存储方式介绍"></a>二 五种存储方式介绍</h3><h5 id="1-SharePreferences"><a href="#1-SharePreferences" class="headerlink" title="1. SharePreferences"></a>1. SharePreferences</h5><p>SharedPreference类提供了一个总体框架，使您可以保存和检索任何基本数据类型（ boolean, float, int, long, string）的持久键-值对（基于XML文件存储的“key-value”键值对数据）。将其以XML文件的形式保存起来。通常其存储在“data/data/程序包名/shared_prefs目录下。</p>
+<h6 id="获取SharedPreferences对象（通过Context）"><a href="#获取SharedPreferences对象（通过Context）" class="headerlink" title="获取SharedPreferences对象（通过Context）"></a>获取SharedPreferences对象（通过Context）</h6><ul>
+<li><p>getSharedPreferences (String name, int mode)<br>当我们有多个SharedPreferences的时候，根据第一个参数name获得相应的SharedPreferences对象。    </p>
+</li>
+<li><p>getPreferences (int mode)<br>如果你的Activity中只需要一个SharedPreferences的时候使用。</p>
+</li>
+</ul>
+<p>这里的mode有四个选项：</p>
+<ul>
+<li><p>Context.MODE_PRIVAT<br>该SharedPreferences数据只能被本应用程序读、写。</p>
+</li>
+<li><p>Context.MODE_WORLD_READABLE<br>该SharedPreferences数据能被其他应用程序读，但不能写。</p>
+</li>
+<li><p>Context.MODE_WORLD_WRITEABLE<br>该SharedPreferences数据能被其他应用程序读和写。</p>
+</li>
+<li><p>Context.MODE_MULTI_PROCESS<br>sdk2.3后添加的选项，当多个进程同时读写同一个SharedPreferences时它会检查文件是否修改。</p>
+</li>
+</ul>
+<h6 id="向Shared-Preferences中写入值"><a href="#向Shared-Preferences中写入值" class="headerlink" title="向Shared Preferences中写入值"></a>向Shared Preferences中写入值</h6><p>主要步骤：</p>
+<ul>
+<li>首先要通过 SharedPreferences.Editor获取到Editor对象；</li>
+<li>然后通过Editor的putBoolean() 或 putString()等方法存入值；</li>
+<li>最后调用Editor的commit()方法提交；</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Use 0 or MODE_PRIVATE for the default operation </span></div><div class="line">SharedPreferences settings = getSharedPreferences(<span class="string">"fanrunqi"</span>, <span class="number">0</span>);</div><div class="line">SharedPreferences.Editor editor = settings.edit();</div><div class="line">editor.putBoolean(<span class="string">"isAmazing"</span>, <span class="keyword">true</span>); </div><div class="line"></div><div class="line"><span class="comment">// 提交本次编辑</span></div><div class="line">editor.commit();</div></pre></td></tr></table></figure>
+<p>同时Edit还有两个常用的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">editor.remove(String key) ：下一次commit的时候会移除key对应的键值对</div><div class="line"></div><div class="line">editor.clear()：移除所有键值对</div></pre></td></tr></table></figure>
+<h6 id="从Shared-Preferences中读取值"><a href="#从Shared-Preferences中读取值" class="headerlink" title="从Shared Preferences中读取值"></a>从Shared Preferences中读取值</h6><p>读取值使用 SharedPreference对象的getBoolean()或getString()等方法就行了,如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SharedPreferences settings = getSharedPreferences(<span class="string">"fanrunqi"</span>, <span class="number">0</span>);</div><div class="line"><span class="keyword">boolean</span> isAmazing= settings.getBoolean(<span class="string">"isAmazing"</span>,<span class="keyword">true</span>);</div></pre></td></tr></table></figure>
+<h6 id="Shared-Preferences的优缺点"><a href="#Shared-Preferences的优缺点" class="headerlink" title="Shared Preferences的优缺点"></a>Shared Preferences的优缺点</h6><p>可以看出来Preferences是很轻量级的应用，使用起来也很方便，简洁。但存储数据类型比较单一（只有基本数据类型），无法进行条件查询，只能在不复杂的存储需求下使用，比如保存配置信息等。</p>
+<h5 id="2-文件存储"><a href="#2-文件存储" class="headerlink" title="2.文件存储"></a>2.文件存储</h5><h6 id="文件的内部存储（存储在手机中）"><a href="#文件的内部存储（存储在手机中）" class="headerlink" title="文件的内部存储（存储在手机中）"></a>文件的内部存储（存储在手机中）</h6><p>当文件被保存在内部存储中时，默认情况下，文件是应用程序私有的，其他应用不能访问。当用户卸载应用程序时这些文件也跟着被删除。文件默认存储位置：/data/data/包名/files/文件名。</p>
+<p><strong>a. 创建和写入一个内部存储的私有文件</strong> </p>
+<ul>
+<li>调用Context的openFileOutput()函数，填入文件名和操作模式，它会返回一个FileOutputStream对象。</li>
+<li>通过FileOutputStream对象的write()函数写入数据。</li>
+<li>FileOutputStream对象的close ()函数关闭流</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">String FILENAME = <span class="string">"a.txt"</span>;</div><div class="line">String string = <span class="string">"fanrunqi"</span>;</div><div class="line"></div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);</div><div class="line">    fos.write(string.getBytes());</div><div class="line">    fos.close();</div><div class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在 openFileOutput(String name, int mode)方法中:</p>
+<p>name参数:　用于指定文件名称，不能包含路径分隔符“/” ，如果文件不存在，Android 会自动创建它。<br>mode参数：用于指定操作模式，分为四种：</p>
+<ul>
+<li><p>Context.MODE_PRIVATE = 0<br>为默认操作模式，代表该文件是私有数据，只能被应用本身访问，在该模式下，写入的内容会覆盖原文件的内容。</p>
+</li>
+<li><p>Context.MODE_APPEND = 32768<br>该模式会检查文件是否存在，存在就往文件追加内容，否则就创建新文件。　</p>
+</li>
+<li><p>Context.MODE_WORLD_READABLE = 1<br>表示当前文件可以被其他应用读取。</p>
+</li>
+<li><p>MODE_WORLD_WRITEABLE<br>表示当前文件可以被其他应用写入。</p>
+</li>
+</ul>
+<p><strong>b. 读取一个内部存储的私有文件</strong></p>
+<p>步骤：</p>
+<ul>
+<li>调用openFileInput( )，参数中填入文件名，会返回一个FileInputStream对象。</li>
+<li>使用流对象的 read()方法读取字节</li>
+<li>调用流的close()方法关闭流</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">String FILENAME = <span class="string">"a.txt"</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            FileInputStream inStream = openFileInput(FILENAME);</div><div class="line">            <span class="keyword">int</span> len = <span class="number">0</span>;</div><div class="line">            <span class="keyword">byte</span>[] buf = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</div><div class="line">            StringBuilder sb = <span class="keyword">new</span> StringBuilder();</div><div class="line">            <span class="keyword">while</span> ((len = inStream.read(buf)) != -<span class="number">1</span>) &#123;</div><div class="line">                sb.append(<span class="keyword">new</span> String(buf, <span class="number">0</span>, len));</div><div class="line">            &#125;</div><div class="line">            inStream.close();</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<p>其他一些经常用到的方法：</p>
+<ul>
+<li>getFilesDir()：　得到内存储文件的绝对路径</li>
+<li>getDir()：　在内存储空间中创建或打开一个已经存在的目录</li>
+<li>deleteFile()：　删除保存在内部存储的文件。　 </li>
+<li>fileList()：　返回当前由应用程序保存的文件的数组（内存储目录下的全部文件）。</li>
+</ul>
+<p><strong>c.获取编译时的静态文件</strong></p>
+<p>如果你想在应用编译时保存静态文件，应该把文件保存在项目的　res/raw/　目录下，你可以通过 openRawResource()方法去打开它（传入参数R.raw.filename），这个方法返回一个 InputStream流对象你可以读取文件但是不能修改原始文件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">InputStream is = <span class="keyword">this</span>.getResources().openRawResource(R.raw.filename);</div></pre></td></tr></table></figure>
+<p><strong>d. 获取内存缓存文件</strong></p>
+<p>有时候我们只想缓存一些数据而不是持久化保存，可以使用getCacheDir（）去打开一个文件，文件的存储目录（ /data/data/包名/cache ）是一个应用专门来保存临时缓存文件的内存目录。当设备的内部存储空间比较低的时候，Android可能会删除这些缓存文件来恢复空间，但是你不应该依赖系统来回收，要自己维护这些缓存文件把它们的大小限制在一个合理的范围内，比如1ＭＢ．当你卸载应用的时候这些缓存文件也会被移除。</p>
+<h6 id="文件的外部存储（sdcard）"><a href="#文件的外部存储（sdcard）" class="headerlink" title="文件的外部存储（sdcard）"></a>文件的外部存储（sdcard）</h6><p>因为内部存储容量限制，有时候需要存储数据比较大的时候需要用到外部存储，使用外部存储分为以下几个步骤：</p>
+<p><strong>a. 添加外部存储访问限权</strong></p>
+<p>首先，要在AndroidManifest.xml中加入访问SDCard的权限，如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 在SDCard中创建与删除文件权限 --&gt; </div><div class="line">   &lt;uses-permission android:name=<span class="string">"android.permission.MOUNT_UNMOUNT_FILESYSTEMS"</span>/&gt; </div><div class="line"></div><div class="line">   &lt;!-- 往SDCard写入数据权限 --&gt; </div><div class="line">   &lt;uses-permission android:name=<span class="string">"android.permission.WRITE_EXTERNAL_STORAGE"</span>/&gt;</div></pre></td></tr></table></figure>
+<p><strong>b. 检测外部存储的可用性</strong></p>
+<p>在使用外部存储时我们需要检测其状态，它可能被连接到计算机、丢失或者只读等。下面代码将说明如何检查状态：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取外存储的状态</span></div><div class="line">String state = Environment.getExternalStorageState();</div><div class="line"><span class="keyword">if</span> (Environment.MEDIA_MOUNTED.equals(state)) &#123;</div><div class="line">    <span class="comment">// 可读可写</span></div><div class="line">    mExternalStorageAvailable = mExternalStorageWriteable = <span class="keyword">true</span>;</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) &#123;</div><div class="line">    <span class="comment">// 可读</span></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="comment">// 可能有很多其他的状态，但是我们只需要知道，不能读也不能写  </span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>c. 访问外部存储器中的文件</strong></p>
+<p>1) 如果 API 版本大于或等于８，使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">getExternalFilesDir (String type)</div></pre></td></tr></table></figure>
+<p>该方法打开一个外存储目录，此方法需要一个类型，指定你想要的子目录，如类型参数DIRECTORY_MUSIC和 DIRECTORY_RINGTONES（传null就是你应用程序的文件目录的根目录）。通过指定目录的类型，确保Android的媒体扫描仪将扫描分类系统中的文件（例如，铃声被确定为铃声）。如果用户卸载应用程序，这个目录及其所有内容将被删除。</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">File file = <span class="keyword">new</span> File(getExternalFilesDir(<span class="keyword">null</span>), <span class="string">"fanrunqi.jpg"</span>);</div></pre></td></tr></table></figure>
+<p>2) 如果API 版本小于 8 （7或者更低）,使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">getExternalStorageDirectory ()</div></pre></td></tr></table></figure>
+<p>通过该方法打开外存储的根目录，你应该在以下目录下写入你的应用数据，这样当卸载应用程序时该目录及其所有内容也将被删除。目录：/Android/data/<package_name>/files/</package_name></p>
+<p>代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))&#123;  </div><div class="line">            File sdCardDir = Environment.getExternalStorageDirectory();<span class="comment">//获取SDCard目录  "/sdcard"        </span></div><div class="line"></div><div class="line">               File saveFile = <span class="keyword">new</span> File(sdCardDir,<span class="string">"a.txt"</span>); </div><div class="line"></div><div class="line">               <span class="comment">//写数据</span></div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    FileOutputStream fos= <span class="keyword">new</span> FileOutputStream(saveFile); </div><div class="line">                    fos.write(<span class="string">"fanrunqi"</span>.getBytes()); </div><div class="line">                    fos.close();</div><div class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125; </div><div class="line"></div><div class="line">                <span class="comment">//读数据</span></div><div class="line">                 <span class="keyword">try</span> &#123;</div><div class="line">                    FileInputStream fis= <span class="keyword">new</span> FileInputStream(saveFile); </div><div class="line">                    <span class="keyword">int</span> len =<span class="number">0</span>;</div><div class="line">                    <span class="keyword">byte</span>[] buf = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</div><div class="line">                    StringBuffer sb = <span class="keyword">new</span> StringBuffer();</div><div class="line">                    <span class="keyword">while</span>((len=fis.read(buf))!=-<span class="number">1</span>)&#123;</div><div class="line">                        sb.append(<span class="keyword">new</span> String(buf, <span class="number">0</span>, len));</div><div class="line">                    &#125;</div><div class="line">                    fis.close();</div><div class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;  </div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<p>我们也可以在　/Android/data/package_name/cache/目录下做外部缓存。</p>
+<h5 id="3-网路存储"><a href="#3-网路存储" class="headerlink" title="3. 网路存储"></a>3. 网路存储</h5><p>网路存储即是通过HttpUrlConnection或者HttpClint或者okhttp等http框架从服务器中获取数据。</p>
+<h5 id="4-SQLite存储"><a href="#4-SQLite存储" class="headerlink" title="4.SQLite存储"></a>4.SQLite存储</h5><p>请看我的另一篇博客《android基础之SQLite》</p>
+<h5 id="5-ContentProvider存储"><a href="#5-ContentProvider存储" class="headerlink" title="5.ContentProvider存储"></a>5.ContentProvider存储</h5><p>看我的另一篇博客《android基础之Content Provider》</p>
+<h3 id="三-总结"><a href="#三-总结" class="headerlink" title="三 总结"></a>三 总结</h3>
       
     </div>
     <footer class="article-footer">
+<<<<<<< HEAD
       <a data-url="http://yoursite.com/2017/02/28/android基础之数据存储/" data-id="cj02fns7b000knk02j2vni93r" class="article-share-link">Share</a>
+=======
+      <a data-url="https://zhezaoyizhuding.github.io/2017/02/28/android基础之数据存储/" data-id="cj0bszuna000sf8nzwox3j8a4" class="article-share-link">Share</a>
+>>>>>>> 8b940d99b72aba634875cdf4aa9c31eb4ee12190
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据存储/">数据存储</a></li></ul>
+
     </footer>
   </div>
   
