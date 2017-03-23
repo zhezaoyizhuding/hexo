@@ -4,13 +4,137 @@
 
     
   <url>
-<<<<<<< HEAD
-    <loc>http://yoursite.com/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E7%BC%93%E5%AD%98/</loc>
-    <lastmod>2017-03-09T13:16:38.164Z</lastmod>
-=======
+    <loc>https://zhezaoyizhuding.github.io/2017/03/17/Java%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%B3%A8%E8%A7%A3/</loc>
+    <lastmod>2017-03-23T09:24:43.331Z</lastmod>
+    <data>
+        <display>
+        <title>Java基础之注解</title>
+        <pubTime>2017-03-17T02:26:21.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>注解</tag>
+         
+        <tag>注释</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java" url="https://zhezaoyizhuding.github.io/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://zhezaoyizhuding.github.io/2017/03/17/Java%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%B5%81/</loc>
+    <lastmod>2017-03-23T08:55:50.516Z</lastmod>
+    <data>
+        <display>
+        <title>Java基础之流</title>
+        <pubTime>2017-03-17T08:06:59.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>IO</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java" url="https://zhezaoyizhuding.github.io/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://zhezaoyizhuding.github.io/2017/03/17/Java%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%BC%82%E5%B8%B8/</loc>
+    <lastmod>2017-03-23T03:41:37.393Z</lastmod>
+    <data>
+        <display>
+        <title>Java基础之异常</title>
+        <pubTime>2017-03-17T08:06:28.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>异常</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java" url="https://zhezaoyizhuding.github.io/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://zhezaoyizhuding.github.io/2017/03/19/Java%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</loc>
+    <lastmod>2017-03-21T03:11:52.824Z</lastmod>
+    <data>
+        <display>
+        <title>Java基础之内存管理</title>
+        <pubTime>2017-03-19T14:48:42.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>内存管理</tag>
+         
+        <tag>垃圾回收</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java" url="https://zhezaoyizhuding.github.io/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://zhezaoyizhuding.github.io/2017/03/19/Java%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%8F%8D%E5%B0%84%E4%B8%8E%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/</loc>
+    <lastmod>2017-03-20T02:44:43.005Z</lastmod>
+    <data>
+        <display>
+        <title>Java基础之反射与类加载器</title>
+        <pubTime>2017-03-19T14:48:27.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://zhezaoyizhuding.github.io/2017/03/17/Java%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%B3%9B%E5%9E%8B/</loc>
+    <lastmod>2017-03-17T10:52:38.426Z</lastmod>
+    <data>
+        <display>
+        <title>Java基础之泛型</title>
+        <pubTime>2017-03-17T02:26:13.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>泛型</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java" url="https://zhezaoyizhuding.github.io/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://zhezaoyizhuding.github.io/2017/03/16/Java%E5%9F%BA%E7%A1%80%E4%B9%8B%E7%BA%BF%E7%A8%8B/</loc>
-    <lastmod>2017-03-16T01:59:42.269Z</lastmod>
->>>>>>> 8b940d99b72aba634875cdf4aa9c31eb4ee12190
+    <lastmod>2017-03-17T08:40:06.930Z</lastmod>
     <data>
         <display>
         <title>Java基础之线程</title>
@@ -25,6 +149,21 @@
              
               <breadCrumb title="Java" url="https://zhezaoyizhuding.github.io/categories/Java/"/>
           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://zhezaoyizhuding.github.io/2017/03/17/Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/</loc>
+    <lastmod>2017-03-17T02:27:13.551Z</lastmod>
+    <data>
+        <display>
+        <title>Java基础语法</title>
+        <pubTime>2017-03-17T02:27:13.000Z</pubTime>
+        
+         
+           
         </display>
     </data>
     </url>
@@ -90,33 +229,20 @@
 
     
   <url>
-<<<<<<< HEAD
-    <loc>http://yoursite.com/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8BSQLite/</loc>
-    <lastmod>2017-03-09T12:47:42.069Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之SQLite</title>
-        <pubTime>2017-02-28T10:03:32.000Z</pubTime>
-=======
     <loc>https://zhezaoyizhuding.github.io/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%87%AA%E5%AE%9A%E4%B9%89View%E4%B8%8EViewGroup/</loc>
     <lastmod>2017-03-10T06:31:21.932Z</lastmod>
     <data>
         <display>
         <title>android基础之自定义View与ViewGroup</title>
         <pubTime>2017-02-28T08:02:37.000Z</pubTime>
->>>>>>> 8b940d99b72aba634875cdf4aa9c31eb4ee12190
         
         <tag>android</tag>
          
         <tag>java</tag>
          
-<<<<<<< HEAD
-        <tag>SQLite</tag>
-=======
         <tag>view</tag>
          
         <tag>ViewGroup</tag>
->>>>>>> 8b940d99b72aba634875cdf4aa9c31eb4ee12190
          
          
            
@@ -129,31 +255,18 @@
 
     
   <url>
-<<<<<<< HEAD
-    <loc>http://yoursite.com/2017/02/27/android%E5%9F%BA%E7%A1%80%E4%B9%8Bloaders/</loc>
-    <lastmod>2017-03-09T12:47:42.069Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之loaders</title>
-        <pubTime>2017-02-27T06:39:21.000Z</pubTime>
-=======
     <loc>https://zhezaoyizhuding.github.io/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/</loc>
     <lastmod>2017-03-10T04:12:00.785Z</lastmod>
     <data>
         <display>
         <title>android基础之数据存储</title>
         <pubTime>2017-02-28T09:42:52.000Z</pubTime>
->>>>>>> 8b940d99b72aba634875cdf4aa9c31eb4ee12190
         
         <tag>android</tag>
          
         <tag>java</tag>
          
-<<<<<<< HEAD
-        <tag>loader</tag>
-=======
         <tag>数据存储</tag>
->>>>>>> 8b940d99b72aba634875cdf4aa9c31eb4ee12190
          
          
            
@@ -166,33 +279,18 @@
 
     
   <url>
-<<<<<<< HEAD
-    <loc>http://yoursite.com/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E6%9C%BA%E5%88%B6/</loc>
-    <lastmod>2017-03-09T12:47:42.069Z</lastmod>
-    <data>
-        <display>
-        <title>android基础之事件分发机制</title>
-        <pubTime>2017-02-28T10:25:28.000Z</pubTime>
-=======
     <loc>https://zhezaoyizhuding.github.io/2017/02/28/android%E5%9F%BA%E7%A1%80%E4%B9%8B%E7%BC%93%E5%AD%98/</loc>
     <lastmod>2017-03-10T01:56:13.064Z</lastmod>
     <data>
         <display>
         <title>android基础之缓存</title>
         <pubTime>2017-02-28T09:10:22.000Z</pubTime>
->>>>>>> 8b940d99b72aba634875cdf4aa9c31eb4ee12190
         
         <tag>android</tag>
          
         <tag>java</tag>
          
-<<<<<<< HEAD
-        <tag>View</tag>
-         
-        <tag>事件分发</tag>
-=======
         <tag>缓存</tag>
->>>>>>> 8b940d99b72aba634875cdf4aa9c31eb4ee12190
          
          
            
