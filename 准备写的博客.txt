@@ -4,3 +4,8 @@ Spring与SpringMvc
 Servlet与jsp
 设计模式
 http与https
+ajex与jsonp
+sso
+dubbo
+recketMQ
+diamond
