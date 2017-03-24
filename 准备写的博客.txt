@@ -9,3 +9,7 @@ sso
 dubbo
 recketMQ
 diamond
+hessian
+redis
+nginx
+负载均衡，反向代理，高可用
