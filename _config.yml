@@ -5,9 +5,9 @@
 # Site
 title: ZHENGRUI'BLOG
 subtitle: 今日之果，皆因曾经之因
-description:
+description: 今日之果，皆因曾经之因
 author: zhengrui
-language: zh-CN
+language: en
 timezone:
 
 # URL
@@ -63,11 +63,27 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: hexo-theme-alex
+theme: hexo-theme-next
 sitemap: 
    path: sitemap.xml
 baidusitemap:
    path: baidusitemap.xml
+   
+algolia:
+  applicationID: 'JRBAME0VLD'
+  apiKey: 'b62ed43f602517ec39140c839edfa335'
+  adminApiKey: 'ee9fa7901d10ed38d3c0333e6fb58935'
+  indexName: 'ZHENGRUI'
+  chunkSize: 5000
+
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content: 
+  
+disqus_shortname: zhezaoyizhuding
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
