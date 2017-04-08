@@ -1,0 +1,1025 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java,List,Map,Set,集合," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ZHENGRUI'BLOG" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="一 概述为了保存数量不确定的数据，以及具有映射关心的数据（也被称为关联数组），java从1.2开始提供了集合类。集合与数组不同，数组必须保存有确定数目的数据，且数组即可以保存基本数据也可以保存对象，而集合只能保存对象。集合类主要负责保存，盛装其他数据，因此集合类也被称作容器类。所有的集合都保存在java.util包下，从java1.5开始还在java.util.concurrent下提供了一下线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础之集合">
+<meta property="og:url" content="https://zhezaoyizhuding.github.io/2017/03/13/Java基础之集合/index.html">
+<meta property="og:site_name" content="ZHENGRUI'BLOG">
+<meta property="og:description" content="一 概述为了保存数量不确定的数据，以及具有映射关心的数据（也被称为关联数组），java从1.2开始提供了集合类。集合与数组不同，数组必须保存有确定数目的数据，且数组即可以保存基本数据也可以保存对象，而集合只能保存对象。集合类主要负责保存，盛装其他数据，因此集合类也被称作容器类。所有的集合都保存在java.util包下，从java1.5开始还在java.util.concurrent下提供了一下线程">
+<meta property="og:updated_time" content="2017-03-18T01:43:39.716Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java基础之集合">
+<meta name="twitter:description" content="一 概述为了保存数量不确定的数据，以及具有映射关心的数据（也被称为关联数组），java从1.2开始提供了集合类。集合与数组不同，数组必须保存有确定数目的数据，且数组即可以保存基本数据也可以保存对象，而集合只能保存对象。集合类主要负责保存，盛装其他数据，因此集合类也被称作容器类。所有的集合都保存在java.util包下，从java1.5开始还在java.util.concurrent下提供了一下线程">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: 'JRBAME0VLD',
+      apiKey: 'b62ed43f602517ec39140c839edfa335',
+      indexName: 'ZHENGRUI',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://zhezaoyizhuding.github.io/2017/03/13/Java基础之集合/"/>
+
+
+
+
+
+  <title> Java基础之集合 | ZHENGRUI'BLOG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZHENGRUI'BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">今日之果，皆因曾经之因</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://zhezaoyizhuding.github.io/2017/03/13/Java基础之集合/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhengrui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZHENGRUI'BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java基础之集合
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-13T16:42:33+08:00">
+                2017-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/13/Java基础之集合/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/03/13/Java基础之集合/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/03/13/Java基础之集合/" class="leancloud_visitors" data-flag-title="Java基础之集合">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一-概述"><a href="#一-概述" class="headerlink" title="一 概述"></a>一 概述</h3><p>为了保存数量不确定的数据，以及具有映射关心的数据（也被称为关联数组），java从1.2开始提供了集合类。集合与数组不同，数组必须保存有确定数目的数据，且数组即可以保存基本数据也可以保存对象，而集合只能保存对象。集合类主要负责保存，盛装其他数据，因此集合类也被称作容器类。所有的集合都保存在java.util包下，从java1.5开始还在java.util.concurrent下提供了一下线程安全的集合类。</p>
+<p>java中的集合类主要由两个接口派生而出：Collection和Map，它们是java集合框架的根接口。其继承结构如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Collection</div><div class="line">├List</div><div class="line">│├LinkedList</div><div class="line">│├ArrayList</div><div class="line">│└Vector</div><div class="line">│　└Stack</div><div class="line">├Queue</div><div class="line">└Set</div><div class="line">Map</div><div class="line">├Hashtable</div><div class="line">├HashMap</div><div class="line">└WeakHashMap</div></pre></td></tr></table></figure>
+<h3 id="Collection集合"><a href="#Collection集合" class="headerlink" title="Collection集合"></a>Collection集合</h3><p>Collection是List，Set，Queue的父接口，因此在Collection中定义的接口在List，Set，Queue中均可使用。对集合的操作除了添加和删除之外，还有一个重要的操作就是遍历集合。下面来看一下集合中多种多样的遍历方法：</p>
+<h5 id="1-使用Iterator遍历集合（推荐方法）"><a href="#1-使用Iterator遍历集合（推荐方法）" class="headerlink" title="1.使用Iterator遍历集合（推荐方法）"></a>1.使用Iterator遍历集合（推荐方法）</h5><p>使用Iterator遍历集合是集合遍历的传统方法，也是推荐方法。Iterator也是java集合框架中的一员，但是它不是用来盛装数据，它的作用主要就是用来遍历（迭代访问）Collection中的元素。我们可以通过Collection下的iterator()来获得这个集合的迭代器对象，并使用它的方法对集合进行遍历。Iterator中包含以下方法:</p>
+<ul>
+<li>boolean hasNext()<br>判断集合中的元素是否已遍历完，返回true，则还没遍历完</li>
+<li>E next()<br>获取集合中的下一个元素</li>
+<li>void remove()<br>删除集合中上一次next方法返回的元素</li>
+<li>void forEachRemaining(Consumer action)<br>Java8新增的方法，可使用Lambda表达式遍历集合</li>
+</ul>
+<p>Iterator遍历集合代码示例：</p>
+<h5 id="2-使用foreach循环迭代集合"><a href="#2-使用foreach循环迭代集合" class="headerlink" title="2.使用foreach循环迭代集合"></a>2.使用foreach循环迭代集合</h5><p>这是Java5新增的用于变异集合和数组的循环。</p>
+<p>foreach遍历集合代码示例：</p>
+<h5 id="3-使用Lambda表达式遍历集合"><a href="#3-使用Lambda表达式遍历集合" class="headerlink" title="3.使用Lambda表达式遍历集合"></a>3.使用Lambda表达式遍历集合</h5><p>Java从Java8开始新增Lambda表达式，在很多方面都简化了操作。在遍历集合方面就可以使用Lambda表达式，如：</p>
+<ul>
+<li><p>forEach(Consumer action)<br>Java8在Iterable接口中增加了一个forEach(Consumer action)方法，该方法的参数类型是一个函数式接口。而Iterable接口时Collection接口的父接口，因此可使用该方法遍历集合。</p>
+</li>
+<li><p>forEachRemaining(Consumer action)<br>Java8中为Iterator新增的方法，可用于遍历集合。</p>
+</li>
+</ul>
+<p>同时我们还可以用Lambda表达式对集合进行其他的操作，比如：</p>
+<p>Java8中为Collection新增了一个removeIf（Predicate filter）方法，Predicate也是函数式接口，可用它来过滤集合。</p>
+<p>Java8中新增了Stream，IntStream，LongStream，DoubleStream等流式API，这些API中有大量的聚集函数，如求和，去平均值等。而Collection中亦提供了一个stream()，可返回该集合对应的流，然后再通过这些流式API操作集合。</p>
+<h3 id="二-List"><a href="#二-List" class="headerlink" title="二 List"></a>二 List</h3><p>List是一个有序的，可重复的集合。List默认以元素的添加顺序来设置元素的索引（从0开始），因此可以通过索引来查找元素，也因此List允许重复的元素（不会无法分辨这两个元素）。</p>
+<p>由于存在索引，List可以通过普通的for来迭代，同事List继承于Collection，可以使用Collection中的方法，同事它还有一个额外的方法listIterator用于List的迭代。</p>
+<h5 id="1-ArrayList与Vector"><a href="#1-ArrayList与Vector" class="headerlink" title="1. ArrayList与Vector"></a>1. ArrayList与Vector</h5><p>ArrayList和Vector均是基于数组实现的List集合类，皆继承于List。它们的内部封装了一个动态的，允许再分配的Object[]数组，并使用initialCapacity参数来设置数组的长度（initialCapacity参数可以随着元素的增多而自动增长，默认是10），可通过ensureCapacity（int minCapacity）来一次性设置数组的initialCapacity值，减少重新分配内存的次数，提高性能。</p>
+<p>Vector是一种古老的集合类，里面有一些命名很长的方法，现在已不推荐使用。它与ArrayList不同的是，它是线程安全的，而ArrayList不是。</p>
+<p>Vector还有一个子类Stack，用于模拟栈这种数据结构，它也是线程安全的。但Stack也是一个古老的类，现已不推荐使用，要模拟栈可使用下文中ArrayDeque。</p>
+<ul>
+<li>固定长度的ArrayList<br>Java中有一个操作数组的工具类：Arrays，这个类中有一个方法asList可以将数组转换为一个List集合，但是这个ArrayList与上述介绍的不同，它不是继承于List，而是Arrays的内部类，这个集合只能遍历，而不能插入，删除。因此不推荐使用该方法将一个数组转换为集合。</li>
+</ul>
+<h5 id="2-LinkedList"><a href="#2-LinkedList" class="headerlink" title="2. LinkedList"></a>2. LinkedList</h5><p>LinkedList也是List的实现类，但它同时还实现了Deque接口，提供额外的get，remove，insert方法在LinkedList的尾部和首部操作数据，因此LinkedList也可以被用作队列，双端队列，栈来使用。</p>
+<p>LinkedList底层是用链表实现的，因此的它的访问性能较差，但插入、删除性能较好。一般迭代LinkedList时需要使用迭代器Iterator，而迭代ArrayList使用普通的for循环即可。</p>
+<h3 id="三-Set"><a href="#三-Set" class="headerlink" title="三 Set"></a>三 Set</h3><p>Set集合是无序集合。它就像一个罐子，无法记住元素的添加顺序。通时它也不允许出现重复元素（因为Set是无序的，若出现重复元素，则无法区分），若试图将两个相同的元素添加到一个Set中，则添加操作失败，add()方法返回false，元素不会被加入。常见的Set有HashSet，TreeSet，EnumSet，它们均继承于Set。</p>
+<h5 id="1-HashSet"><a href="#1-HashSet" class="headerlink" title="1. HashSet"></a>1. HashSet</h5><p>HashSet继承于Set，因此它具有Set的所有特点。同时它是通过Hash算法来计算元素的存储位置，具有很好的存取和查找性能。因为集合中只能存放对象，因此它们的存储位置实际上是通过对象的hashCode方法得到的。</p>
+<p>但是HashSet的判重和Set的不同，Set判重是通过equals()方法比较两个元素的值是否相同，HashSet的判重不只用equals比较两个元素的值，还比较这两个对象hashCode方法的返回值是否相等。只有这两者都满足，HashSet才会判断这两个元素重复。如果equals满足二hashCode不满足，则HashSet会在两个不同的hashCode位置存放这两个对象，而不会判定其重复；如果equals不满足而hashCode满足，则两个元素会被计算到同一个存储位置，此时该位置则采取链式结构来存放这两个元素。此时会严重影响HashSet的性能。</p>
+<p>因此，如果我们要重写该对象对应类的equals方法，则也应该重写它的hashCode方法，使得：如果两个对象通过equals方法返回为true，则他们的hashCode返回值也应该相同。</p>
+<h5 id="2-LinkedHashSet"><a href="#2-LinkedHashSet" class="headerlink" title="2. LinkedHashSet"></a>2. LinkedHashSet</h5><p>LinkedHashSet继承于HashSet，它与HashSet的不同之处在于它以链表来维持元素的插入次序。即当遍历LinkedHashSet时，它会按照元素的添加顺序来访问集合里的元素。</p>
+<p>因为LinkedHashSet要维护元素的插入顺序，因此它的性能要低于HashSet,但是当迭代访问集合里的全部元素时它有很好的性能。</p>
+<h5 id="3-TreeSet"><a href="#3-TreeSet" class="headerlink" title="3. TreeSet"></a>3. TreeSet</h5><p>TreeSet是SortedSet的实现类（SortedSet是Set的子接口），它的底层实现是红黑树，可以确保集合中的元素一直处于排序状态。TreeSet中的排序分为自然排序和定制排序。</p>
+<p>自然排序默认是升序，这也是TreeSet默认的排序方式。这种方式TreeSet中的元素要实现Comparable接口，并重写它的compareTo()方法，TreeSet在放入元素时会自动调用该元素中compareTo方法与集合中的元素比较大小。同时TreeSet中亦不允许重复元素，因此当compareTo返回0时，元素不会被放入集合中（返回正整数则说明a大约b，负整数则相反）。<br>应当注意：当把一个对象放入TreeSet中时，应当保证该对象的equals方法与compareTo方法得到的结果一致，即若equals方法返回true，则compareTo方法应当返回0。</p>
+<p>定制排序：要实现定制排序，如降序排列，需要在创建TreeSet时传入一个Comparator对象负责集合元素的排序逻辑，由于Comparator也是函数式接口，因此可以使用Lambda表达式来代替Comparator对象。</p>
+<h5 id="4-EnumSet"><a href="#4-EnumSet" class="headerlink" title="4. EnumSet"></a>4. EnumSet</h5><p>EnumSet是一个专门为枚举类设计的集合，其中的元素必须是指定枚举类型的枚举值。EnumSet集合是有序的，它安枚举类中枚举值的定义顺序来决定集合的元素顺序。EnumSet没有暴露任何构造器（即没有公有的构造器），要创建EnumSet需要调用它的类方法（静态方法）。</p>
+<p>EnumSet在内部以位向量的方式存储，这种存储方式非常紧凑，高效，占用内存小，运行效率高。</p>
+<h5 id="5-各Set实现类的性能分析"><a href="#5-各Set实现类的性能分析" class="headerlink" title="5. 各Set实现类的性能分析"></a>5. 各Set实现类的性能分析</h5><ul>
+<li>HashSet和TreeSet是常用实现，HashSet的性能要比TreeSet好一些，因为TreeSet需要额外的红黑树来维持元素的次序。</li>
+</ul>
+<ul>
+<li><p>LinkedHashSet与HashSet相比，在插入、删除方面，HashSet要快一些；但是在遍历时，LinkedHashSet要更快。</p>
+</li>
+<li><p>EnumSet是所有Set实现类中性能最好的，但它功能有限，只能保存同一个枚举类的枚举值作为集合元素。</p>
+</li>
+</ul>
+<h3 id="四-Queue"><a href="#四-Queue" class="headerlink" title="四 Queue"></a>四 Queue</h3><p>Queue集合用于模拟队列这种数据结构，队列是先进先出（FIFO）的，头部保存存放时间最长的元素，尾部保存存放时间最短的元素，队尾插入，队首出。Queue还有一个子接口Deque，Deque表示一个双端队列，因此既可以模拟队列也可以模拟栈。Deque有ArrayDeque和LinkedList两个实现类。</p>
+<h5 id="1-PriorityQueue"><a href="#1-PriorityQueue" class="headerlink" title="1. PriorityQueue"></a>1. PriorityQueue</h5><p>PriorityQueue并不是严格的队列。它的队列中的元素的顺序并不是按插入队列的顺序，而是按照队列中元素的大小排序。PriorityQueue有两种排序方式：自然排序和定制排序。这点和TreeSet基本一致，可参考上文中TreeSet的简介。</p>
+<h5 id="2-Deque和ArrayDeque"><a href="#2-Deque和ArrayDeque" class="headerlink" title="2. Deque和ArrayDeque"></a>2. Deque和ArrayDeque</h5><p>上文已经介绍了Deque，它是Queue的子接口，是一个双端队列，里面定义一些可以在队尾和队首操作元素的方法，因此它既可以模拟栈，也可以模拟队列。它主要有两个实现类：ArrayDeque和LinkedList。</p>
+<p>ArrayDeque底层结构和ArrayList类似，一般用它来模拟栈，而不用Stack。</p>
+<h3 id="五-Map"><a href="#五-Map" class="headerlink" title="五 Map"></a>五 Map</h3><p>Map是一个key-value键值对。它的每个单元包含key和value两个数据，由key可以找到value。key可以为空但不可重复，其实将它们分开来看，key就是一个Set集合，而value可以看做List，事实上Map中也有相应的方法。可以把Map看做value均为空的Set，事实上要想遍历Map，就需要获取key的Set集合。</p>
+<h5 id="1-HashMap和HashTable"><a href="#1-HashMap和HashTable" class="headerlink" title="1. HashMap和HashTable"></a>1. HashMap和HashTable</h5><p>HashMap和Hashtable均为Map接口的实现类，它们之间的关系类似于ArrayList和Vector的关系。Hashtable是一个古老的实现类，现在已不推荐使用。</p>
+<p>HashMap和Hashtable有两点区别：</p>
+<ul>
+<li>Hashtable是线程安全的，而HashMap不是</li>
+<li>Hashtable中的key和value均不能为空，而HashMap的可以</li>
+</ul>
+<p>同时放入key中的对象需要被hash，所以key中的元素均要实现equals和hashCode方法，且二者结果应当一致，即若equals结果为true，则这两个元素的hashCode值也要相等。（与HashSet相同，Java的要hash类均要实现hashCode方法）。</p>
+<h5 id="2-LinkedHashMap"><a href="#2-LinkedHashMap" class="headerlink" title="2. LinkedHashMap"></a>2. LinkedHashMap</h5><p>LinkedHashMap是HashMap的子类，这俩的关系就像LinkedHashSet和HashSet的关系。使用一个链表来维持key的插入顺序。因此你可以在外部对元素排好序，然后让其顺序进入集合，就可以得到一个有序的HashMap，而不需要再对其进行排序。</p>
+<h5 id="3-Properties"><a href="#3-Properties" class="headerlink" title="3. Properties"></a>3. Properties</h5><p>Properties是Hashtable的子类，也是一个古老的集合类，该类在处理属性文件是特别方便（属性文件即“属性名=属性值”的文件，如Windows上的ini文件）。可以把Properties看做一个key和value均为String的Map。该类可以与XML文件交互。</p>
+<h5 id="4-SortedMap和TreeMap"><a href="#4-SortedMap和TreeMap" class="headerlink" title="4. SortedMap和TreeMap"></a>4. SortedMap和TreeMap</h5><p>TreeMap,SortedMap和Map的关心可以参照Set。TreeMap的实现与TreeSet类似，只是其中的元素换成了键值对，而所有对Set中元素的约束在TreeMap中均换成对key的约束。事实上在Java源码中Set的实现即是通过value均为null的Map完成的，所有Java中的Set和Map有很多相通之处。</p>
+<h5 id="5-WeakHashMap"><a href="#5-WeakHashMap" class="headerlink" title="5. WeakHashMap"></a>5. WeakHashMap</h5><p>WeakHashMap即是key是弱引用的HashMap。若key被回收，则WeakHashMap会自动删除对应的key-value键值对。可使用它来做缓存。</p>
+<h5 id="6-IdentityHashMap"><a href="#6-IdentityHashMap" class="headerlink" title="6. IdentityHashMap"></a>6. IdentityHashMap</h5><p>IdentityHashMap与HashMap不同处在于：IdentityHashMap在处理key相等问题的方式是使用“==”，而不是equals。</p>
+<h5 id="7-EnumMap"><a href="#7-EnumMap" class="headerlink" title="7. EnumMap"></a>7. EnumMap</h5><p>EnumMap是使用枚举类实现的Map，它的key是枚举类中的枚举值，创建它时必须传入一个枚举类（类的class对象）。它有以下几个特点：</p>
+<ul>
+<li>内部以数组形式保存，紧凑，高效。</li>
+<li>以枚举类中枚举值的定义顺序来维持key的顺序</li>
+<li>key不能为空</li>
+</ul>
+<h3 id="六-线程安全的集合类"><a href="#六-线程安全的集合类" class="headerlink" title="六 线程安全的集合类"></a>六 线程安全的集合类</h3><h5 id="1-集合工具类Collections"><a href="#1-集合工具类Collections" class="headerlink" title="1. 集合工具类Collections"></a>1. 集合工具类Collections</h5><p>Java提供了一个操作集合的工具类：Collections，里面提供了大量的类方法用于对集合元素进行排序，查询，修改，同步，设置集合不可变等。（工具类中一般都是类方法，即静态方法）。</p>
+<p>其中就有一种synchronizedXxx()方法，该方法可以将指定集合包装成线程同步的集合，从而解决了多线程并发访问集合时的线程安全问题。读者可以通过查看Collections的源码来了解它的用法。</p>
+<h5 id="2-线程安全的集合类"><a href="#2-线程安全的集合类" class="headerlink" title="2. 线程安全的集合类"></a>2. 线程安全的集合类</h5><p>从Java5开始，Java在java.util.concurrent包下面提供了大量线程安全的集合类，主要可分为以下两类：</p>
+<ul>
+<li><p>以Concurrent开头的集合类<br>如ConcurrentHashMap，ConcurrentSkipListMap，ConcurrentSkipListSet，ConcurrentLinkedQueue，ConcurrentLinkedDeque等</p>
+</li>
+<li><p>以CopyOnWrite开头的集合类<br>如CopyOnWriteArrayList，，CopyOnWriteArraySet等</p>
+</li>
+</ul>
+<h3 id="六-总结"><a href="#六-总结" class="headerlink" title="六 总结"></a>六 总结</h3>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/List/" rel="tag"># List</a>
+          
+            <a href="/tags/Map/" rel="tag"># Map</a>
+          
+            <a href="/tags/Set/" rel="tag"># Set</a>
+          
+            <a href="/tags/集合/" rel="tag"># 集合</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/01/android基础之消息推送/" rel="next" title="android基础之消息推送">
+                <i class="fa fa-chevron-left"></i> android基础之消息推送
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/16/Java基础之线程/" rel="prev" title="Java基础之线程">
+                Java基础之线程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="zhengrui" />
+          <p class="site-author-name" itemprop="name">zhengrui</p>
+           
+              <p class="site-description motion-element" itemprop="description">今日之果，皆因曾经之因</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhezaoyizhuding" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3017970752/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100012335677489" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-概述"><span class="nav-number">1.</span> <span class="nav-text">一 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Collection集合"><span class="nav-number">2.</span> <span class="nav-text">Collection集合</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-使用Iterator遍历集合（推荐方法）"><span class="nav-number">2.0.1.</span> <span class="nav-text">1.使用Iterator遍历集合（推荐方法）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-使用foreach循环迭代集合"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.使用foreach循环迭代集合</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-使用Lambda表达式遍历集合"><span class="nav-number">2.0.3.</span> <span class="nav-text">3.使用Lambda表达式遍历集合</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-List"><span class="nav-number">3.</span> <span class="nav-text">二 List</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-ArrayList与Vector"><span class="nav-number">3.0.1.</span> <span class="nav-text">1. ArrayList与Vector</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-LinkedList"><span class="nav-number">3.0.2.</span> <span class="nav-text">2. LinkedList</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-Set"><span class="nav-number">4.</span> <span class="nav-text">三 Set</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-HashSet"><span class="nav-number">4.0.1.</span> <span class="nav-text">1. HashSet</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-LinkedHashSet"><span class="nav-number">4.0.2.</span> <span class="nav-text">2. LinkedHashSet</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-TreeSet"><span class="nav-number">4.0.3.</span> <span class="nav-text">3. TreeSet</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-EnumSet"><span class="nav-number">4.0.4.</span> <span class="nav-text">4. EnumSet</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-各Set实现类的性能分析"><span class="nav-number">4.0.5.</span> <span class="nav-text">5. 各Set实现类的性能分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-Queue"><span class="nav-number">5.</span> <span class="nav-text">四 Queue</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-PriorityQueue"><span class="nav-number">5.0.1.</span> <span class="nav-text">1. PriorityQueue</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-Deque和ArrayDeque"><span class="nav-number">5.0.2.</span> <span class="nav-text">2. Deque和ArrayDeque</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五-Map"><span class="nav-number">6.</span> <span class="nav-text">五 Map</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-HashMap和HashTable"><span class="nav-number">6.0.1.</span> <span class="nav-text">1. HashMap和HashTable</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-LinkedHashMap"><span class="nav-number">6.0.2.</span> <span class="nav-text">2. LinkedHashMap</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-Properties"><span class="nav-number">6.0.3.</span> <span class="nav-text">3. Properties</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-SortedMap和TreeMap"><span class="nav-number">6.0.4.</span> <span class="nav-text">4. SortedMap和TreeMap</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-WeakHashMap"><span class="nav-number">6.0.5.</span> <span class="nav-text">5. WeakHashMap</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-IdentityHashMap"><span class="nav-number">6.0.6.</span> <span class="nav-text">6. IdentityHashMap</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-EnumMap"><span class="nav-number">6.0.7.</span> <span class="nav-text">7. EnumMap</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六-线程安全的集合类"><span class="nav-number">7.</span> <span class="nav-text">六 线程安全的集合类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-集合工具类Collections"><span class="nav-number">7.0.1.</span> <span class="nav-text">1. 集合工具类Collections</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-线程安全的集合类"><span class="nav-number">7.0.2.</span> <span class="nav-text">2. 线程安全的集合类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六-总结"><span class="nav-number">8.</span> <span class="nav-text">六 总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhengrui</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://zhezaoyizhuding.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://zhezaoyizhuding.github.io/2017/03/13/Java基础之集合/';
+          this.page.identifier = '2017/03/13/Java基础之集合/';
+          this.page.title = 'Java基础之集合';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zhezaoyizhuding.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("GW32OlXJkBeGE31qrywcmn3a-gzGzoHsz", "1fFuhB2mWMfLiuVyDPOv6dll");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

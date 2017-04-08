@@ -1,0 +1,998 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="TCP,UDP," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ZHENGRUI'BLOG" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="一 TCP协议简介（这篇博文之后会修改，现在先打个提纲）TCp协议的特点
+是面向连接的。应用程序在使用TCP协议时，必须进行连接；当然，数据传输结束后，要断开TCP连接。
+TCP连接是点对点的。
+TCP连接时可靠的。也就是说传输的数据时无差错的、不丢失、不重复、有序到达的。
+是全双工的。即TCP连接的两端都设有发送缓存和接收缓存，用来存放双向通信的数据。
+是面向字节流的。也就是说TCP将应用程序交">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP协议与UDP协议">
+<meta property="og:url" content="https://zhezaoyizhuding.github.io/2017/04/01/TCP协议与UDP协议/index.html">
+<meta property="og:site_name" content="ZHENGRUI'BLOG">
+<meta property="og:description" content="一 TCP协议简介（这篇博文之后会修改，现在先打个提纲）TCp协议的特点
+是面向连接的。应用程序在使用TCP协议时，必须进行连接；当然，数据传输结束后，要断开TCP连接。
+TCP连接是点对点的。
+TCP连接时可靠的。也就是说传输的数据时无差错的、不丢失、不重复、有序到达的。
+是全双工的。即TCP连接的两端都设有发送缓存和接收缓存，用来存放双向通信的数据。
+是面向字节流的。也就是说TCP将应用程序交">
+<meta property="og:image" content="https://zhezaoyizhuding.github.io/2017/04/01/TCP协议与UDP协议/TCP报文结构.png">
+<meta property="og:updated_time" content="2017-04-08T01:25:57.925Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TCP协议与UDP协议">
+<meta name="twitter:description" content="一 TCP协议简介（这篇博文之后会修改，现在先打个提纲）TCp协议的特点
+是面向连接的。应用程序在使用TCP协议时，必须进行连接；当然，数据传输结束后，要断开TCP连接。
+TCP连接是点对点的。
+TCP连接时可靠的。也就是说传输的数据时无差错的、不丢失、不重复、有序到达的。
+是全双工的。即TCP连接的两端都设有发送缓存和接收缓存，用来存放双向通信的数据。
+是面向字节流的。也就是说TCP将应用程序交">
+<meta name="twitter:image" content="https://zhezaoyizhuding.github.io/2017/04/01/TCP协议与UDP协议/TCP报文结构.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: 'JRBAME0VLD',
+      apiKey: 'b62ed43f602517ec39140c839edfa335',
+      indexName: 'ZHENGRUI',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://zhezaoyizhuding.github.io/2017/04/01/TCP协议与UDP协议/"/>
+
+
+
+
+
+  <title> TCP协议与UDP协议 | ZHENGRUI'BLOG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZHENGRUI'BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">今日之果，皆因曾经之因</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://zhezaoyizhuding.github.io/2017/04/01/TCP协议与UDP协议/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhengrui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZHENGRUI'BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                TCP协议与UDP协议
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-01T16:27:40+08:00">
+                2017-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络协议/" itemprop="url" rel="index">
+                    <span itemprop="name">网络协议</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/01/TCP协议与UDP协议/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/04/01/TCP协议与UDP协议/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/04/01/TCP协议与UDP协议/" class="leancloud_visitors" data-flag-title="TCP协议与UDP协议">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一-TCP协议简介（这篇博文之后会修改，现在先打个提纲）"><a href="#一-TCP协议简介（这篇博文之后会修改，现在先打个提纲）" class="headerlink" title="一 TCP协议简介（这篇博文之后会修改，现在先打个提纲）"></a>一 TCP协议简介（这篇博文之后会修改，现在先打个提纲）</h3><h5 id="TCp协议的特点"><a href="#TCp协议的特点" class="headerlink" title="TCp协议的特点"></a>TCp协议的特点</h5><ul>
+<li>是面向连接的。应用程序在使用TCP协议时，必须进行连接；当然，数据传输结束后，要断开TCP连接。</li>
+<li>TCP连接是点对点的。</li>
+<li>TCP连接时可靠的。也就是说传输的数据时无差错的、不丢失、不重复、有序到达的。</li>
+<li>是全双工的。即TCP连接的两端都设有发送缓存和接收缓存，用来存放双向通信的数据。</li>
+<li>是面向字节流的。也就是说TCP将应用程序交下来的数据看成仅仅是一连串的无结构的字节流，其不知道这些字节流的具体含义。TCP协议无法保证发送的数据块的具体大小，因为TCP协议的发送的数据大小受到对方给出的窗口值和当前的网络拥塞度的影响。<br>TCP的连接端点是套接字。套接字是IP地址拼接上端口号组成的，即点分方式的十进制后面是端口号，中间用逗号或冒号隔开。如下方式：  </li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">套接字Socket=(IP地址：端口号)</div></pre></td></tr></table></figure>
+<p>TCP报文段的首部<br>TCP协议的首部有20字节的固定长度，以及4N字节的变长段，因此TCP报文段首部最小为20字节。其格式如下：</p>
+<img src="/2017/04/01/TCP协议与UDP协议/TCP报文结构.png" alt="TCP报文结构" title="TCP报文结构"> 
+<ul>
+<li><p>分别占用两个字节的源端口和目的端口。</p>
+</li>
+<li><p>序号。占用4个字节。序号是循环的，当增加到最大值后又回到0。TCP是面向字节流的，这样会个发送的数据按顺序给每个字节编上号。在建立连接时，会指出发送的字节流的起始序号。首部中的序号表示发送的报文段的数据的第一个字节的序号，而报文的给字节的序号是顺序的。如第一个字节为401,报文的数据长度为100，则首部的序号为401，最后一个字节的序号为500，也就是说下一个报文的首部序号为501。</p>
+</li>
+<li><p>确认号。占用4个字节。表示期望收到下一个报文段的第一个数据字节的序号，也是下一个报文段的首部序号。如：B收到了A的200个字节数据的TCP报文段，而这个TCP报文段的首部序号为601，则B希望收到的下一个报文段确认号为801。也可以说如果确认号为N，则前面N-1为止的数据已经收到。</p>
+</li>
+<li><p>数据偏移。占用4位。其表示数据起始位置相对于报文段起始的位置的偏移量，也就是报文段首部的长度。其单位为32位字，也就是说其表示的值应该乘上4个字节。如：该字段的值为4，则其报文段首部长度为16个字节。其最大值只能表示15，也就是说报文段的首部最大只能为60个字节（即变长只能为20个字节）。其最小值为5，因为首部最小值为20。</p>
+</li>
+<li><p>保留。占用6位。其值设为0。</p>
+</li>
+<li><p>紧急URG。其占用1位。如果URG设为1，表示首部中的紧急指针有效。表示其发送的报文段数据有紧急数据，其需要马上发送出去（也就是取得最高优先权），TCP会将紧急数据插入到该报文的最前端，后面任然为普通数据。</p>
+</li>
+<li><p>确认ACK。占用1位。当ACK=1时，表示首部中确认号字段有效，为0时，确认号字段无效。TCP规定，在连接建立后ACK字段必须为1。</p>
+</li>
+<li><p>推送PSH。占用1位。两个应用程序通信，有时应用程序希望键入一个命令马上能够得到对方回应，这是就可以使用这个字段。将PSH设为1，TCP会马上建立一个报文将其发送出去。接收端在收到该报文后，会尽快的将其交给应用程序，不用得到缓冲区满。</p>
+</li>
+<li><p>复位RST。占用1位。当RST=1时，表示连接出现严重错误，需要释放连接，然后重新进行连接。其还用于拒绝打开一个连接或拒绝非法报文。</p>
+</li>
+<li><p>同步SYN。占用1位。用于在连接建立时同步序号。当SYN=而ACK=0时，表示这是一个连接请求报文段。当SYN=1且ACK=1时，表示对方接收建立连接报文段。因此SYN=1，表示这是一个连接请求或连接接受报文段。</p>
+</li>
+<li><p>终止FIN。占用1位。当FIN=1时，表示发送方的数据发送完毕，并要求释放连接。</p>
+</li>
+<li><p>窗口。占用2个字节。表示发送该报文段的一方的接收窗口，表示允许对方发送的数据量。窗口值告诉对方：从报文段首部中的确认好算起，接收方目前允许对方发送的数据量。如：确认为801，窗口值为1000，则表示其还有接收1000个字节数据（801-1800）的接收缓存空间。</p>
+</li>
+<li><p>检验和。占2个字节。其也和UDP一样需要加上伪首部，但是其中的17会变为6。</p>
+</li>
+<li><p>紧急指针。占用2个字节。当URG=1时有效，其指出了紧急数据在报文端中的末尾位置。紧急数据在报文数据段的开始。</p>
+</li>
+<li><p>选项。可选，最大为40个字节。包括MSS、窗口扩大、时间戳、选择确认等。</p>
+</li>
+</ul>
+<h5 id="可靠传输"><a href="#可靠传输" class="headerlink" title="可靠传输"></a>可靠传输</h5><p>停止等待协议，连续ARQ协议，滑动窗口机制（重点）。（每一条数据都必须有确认回复，否则则超时重传）</p>
+<h5 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h5><p>通过流量控制，可以让发送窗口的发送速率不要太快，流量控制是通过滑动窗口来实现的，其需要用来TCP报文中的窗口字段，该字段会用于标识接收端接收窗口的接收能力，用于设定发送窗口的大小。</p>
+<p>解决发送时机的三个机制：</p>
+<ul>
+<li>设置一个变量，它等于最大报文段长度，这要缓存的数据达到MSS字节时，就发送出去。</li>
+<li>由发送方的应用程序指明要求发送报文段，通过报文的PUH字段来实现。</li>
+<li>给发送方设计一个计时器，达到该事件，就将数据发送出去（不能超过MSS）。</li>
+</ul>
+<p>Nagle算法：若应用程序将数据逐个字节传送给TCP发送缓冲区，则TCP将第一个字节数据组装成一个报文发送出去。只有当收到该确认报文后，才将缓冲区的所有数据组装成一个报文发送出去。只有收到前一个报文确认才发送下一个报文。Nage算法还规定：当缓冲区的数据已达到发送缓冲区一般或超过报文最大长度时，就立即发送一个报文段。<br>为了解决糊涂窗口综合症，可以让接受端等待一段时间、或者让接受缓存已有足够空间容纳一个最长报文段，或者等到接收缓冲已有一半空闲的空间，满足其一，就发送确认报文。</p>
+<h5 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h5><p>发送方会有一个拥塞窗口，用于和接收窗口一起控制发送窗口的大小。发送窗口的大小取拥塞窗口和接收窗口中值较小的一个。<br>门阀值。<br>慢开始算法：拥塞窗口的大小从1开始逐渐增加增加到一倍。<br>拥塞避免算法：当执行慢开始算法时，拥塞窗口大于门阀值时，拥塞窗口的大小每次加一。<br>不管是慢开始算法还是拥塞避免算法，当出现拥塞时（即没有按时收到确认），就将门阀值减半，拥塞窗口在变为1执行慢开始算法。<br>快重传算法：是指接收方每收到一个失序的报文时，就发送一次重复确认（确认值为前面按序到达的报文最后一个数据值加1）。当发送方累计收到3次重复确认时，就立即再次发送未被确认的报文，而不必等待计时器到期在发送。<br>快恢复算法：是指到收到上次重复确认时，就立即将门阀值减半，并执行拥塞避免算法，起始值为门阀值或门阀值+3*MSS。</p>
+<h3 id="二-UDP协议简介"><a href="#二-UDP协议简介" class="headerlink" title="二 UDP协议简介"></a>二 UDP协议简介</h3><h3 id="三-TCP与UDP的区别"><a href="#三-TCP与UDP的区别" class="headerlink" title="三 TCP与UDP的区别"></a>三 TCP与UDP的区别</h3>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/TCP/" rel="tag"># TCP</a>
+          
+            <a href="/tags/UDP/" rel="tag"># UDP</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/01/http协议与https/" rel="next" title="http协议与https">
+                <i class="fa fa-chevron-left"></i> http协议与https
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="zhengrui" />
+          <p class="site-author-name" itemprop="name">zhengrui</p>
+           
+              <p class="site-description motion-element" itemprop="description">今日之果，皆因曾经之因</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhezaoyizhuding" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3017970752/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100012335677489" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-TCP协议简介（这篇博文之后会修改，现在先打个提纲）"><span class="nav-number">1.</span> <span class="nav-text">一 TCP协议简介（这篇博文之后会修改，现在先打个提纲）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#TCp协议的特点"><span class="nav-number">1.0.1.</span> <span class="nav-text">TCp协议的特点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#可靠传输"><span class="nav-number">1.0.2.</span> <span class="nav-text">可靠传输</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#流量控制"><span class="nav-number">1.0.3.</span> <span class="nav-text">流量控制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#拥塞控制"><span class="nav-number">1.0.4.</span> <span class="nav-text">拥塞控制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-UDP协议简介"><span class="nav-number">2.</span> <span class="nav-text">二 UDP协议简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-TCP与UDP的区别"><span class="nav-number">3.</span> <span class="nav-text">三 TCP与UDP的区别</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhengrui</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://zhezaoyizhuding.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://zhezaoyizhuding.github.io/2017/04/01/TCP协议与UDP协议/';
+          this.page.identifier = '2017/04/01/TCP协议与UDP协议/';
+          this.page.title = 'TCP协议与UDP协议';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zhezaoyizhuding.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("GW32OlXJkBeGE31qrywcmn3a-gzGzoHsz", "1fFuhB2mWMfLiuVyDPOv6dll");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

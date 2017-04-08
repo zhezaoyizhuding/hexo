@@ -1,0 +1,1083 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="HTTP,HTTPS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ZHENGRUI'BLOG" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="一 HTTP协议HTTP（HyperText Transfer Protocol，超文本传输协议）是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。它于1990年提出，经过几年的使用与发展，得到不断地完善和扩展。HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件, 查询结果等）。
+HTTP协议的特点
+支持客户端/服务器（B/S）模式
+简">
+<meta property="og:type" content="article">
+<meta property="og:title" content="http协议与https">
+<meta property="og:url" content="https://zhezaoyizhuding.github.io/2017/04/01/http协议与https/index.html">
+<meta property="og:site_name" content="ZHENGRUI'BLOG">
+<meta property="og:description" content="一 HTTP协议HTTP（HyperText Transfer Protocol，超文本传输协议）是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。它于1990年提出，经过几年的使用与发展，得到不断地完善和扩展。HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件, 查询结果等）。
+HTTP协议的特点
+支持客户端/服务器（B/S）模式
+简">
+<meta property="og:image" content="https://zhezaoyizhuding.github.io/2017/04/01/http协议与https/474814076.png">
+<meta property="og:image" content="https://zhezaoyizhuding.github.io/2017/04/01/http协议与https/1146631942.png">
+<meta property="og:image" content="https://zhezaoyizhuding.github.io/2017/04/01/http协议与https/HTTPS握手图.jpg">
+<meta property="og:updated_time" content="2017-04-08T01:25:57.933Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="http协议与https">
+<meta name="twitter:description" content="一 HTTP协议HTTP（HyperText Transfer Protocol，超文本传输协议）是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。它于1990年提出，经过几年的使用与发展，得到不断地完善和扩展。HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件, 查询结果等）。
+HTTP协议的特点
+支持客户端/服务器（B/S）模式
+简">
+<meta name="twitter:image" content="https://zhezaoyizhuding.github.io/2017/04/01/http协议与https/474814076.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: 'JRBAME0VLD',
+      apiKey: 'b62ed43f602517ec39140c839edfa335',
+      indexName: 'ZHENGRUI',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://zhezaoyizhuding.github.io/2017/04/01/http协议与https/"/>
+
+
+
+
+
+  <title> http协议与https | ZHENGRUI'BLOG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZHENGRUI'BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">今日之果，皆因曾经之因</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://zhezaoyizhuding.github.io/2017/04/01/http协议与https/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhengrui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZHENGRUI'BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                http协议与https
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-01T10:44:16+08:00">
+                2017-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络协议/" itemprop="url" rel="index">
+                    <span itemprop="name">网络协议</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/01/http协议与https/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/04/01/http协议与https/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/04/01/http协议与https/" class="leancloud_visitors" data-flag-title="http协议与https">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一-HTTP协议"><a href="#一-HTTP协议" class="headerlink" title="一 HTTP协议"></a>一 HTTP协议</h3><p>HTTP（HyperText Transfer Protocol，超文本传输协议）是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。它于1990年提出，经过几年的使用与发展，得到不断地完善和扩展。HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件, 查询结果等）。</p>
+<h5 id="HTTP协议的特点"><a href="#HTTP协议的特点" class="headerlink" title="HTTP协议的特点"></a>HTTP协议的特点</h5><ul>
+<li>支持客户端/服务器（B/S）模式</li>
+<li>简单快速：客户向服务器请求服务时，只需传送请求方法和路径。请求方法常用的有GET、HEAD、POST。每种方法规定了客户与服务器联系的类型不同。由于HTTP协议简单，使得HTTP服务器的程序规模小，因而通信速度很快。</li>
+<li>灵活：HTTP允许传输任意类型的数据对象。正在传输的类型由Content-Type加以标记。</li>
+<li>无连接：无连接的含义是限制每次连接只处理一个请求。服务器处理完客户的请求，并收到客户的应答后，即断开连接。采用这种方式可以节省传输时间。</li>
+<li>无状态：HTTP协议是无状态协议。无状态是指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时它的应答就较快。</li>
+</ul>
+<h5 id="客户端通过HTTP想服务器请求资源的过程"><a href="#客户端通过HTTP想服务器请求资源的过程" class="headerlink" title="客户端通过HTTP想服务器请求资源的过程"></a>客户端通过HTTP想服务器请求资源的过程</h5><ul>
+<li>浏览器分析连接指向的URL，</li>
+<li>浏览器请求DNS服务器解析域名的IP地址。</li>
+<li>根据IP地址浏览器与服务器建立TCP连接，</li>
+<li>浏览器发出请求（GET）</li>
+<li>服务器响应，发送资源。</li>
+<li>释放TCP连接。</li>
+</ul>
+<h5 id="HTTP请求"><a href="#HTTP请求" class="headerlink" title="HTTP请求"></a>HTTP请求</h5><p>客户端通过一个HTTP请求从服务器请求消息。HTTP请求分为请求行，请求头，空行，请求数据。</p>
+<p>1.<strong>请求行</strong>：请求行由三个标记组成–请求方法，请求URI和HTTP版本，它们由空格分隔。</p>
+<p>例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /index.html HTTP/1.1</div></pre></td></tr></table></figure>
+<p>HTTP规范定义了八种可能的请求方法：</p>
+<ul>
+<li>GET：检索URI中标识资源的一个简单请求</li>
+<li>HEAD：与GET方法相同，服务器只返回状态行和头标，并不返回请求文档</li>
+<li>POST：服务器接受被写入客户端输出流中的数据的请求</li>
+<li>PUT：服务器保存请求数据作为指定URI新内容的请求</li>
+<li>DELETE：服务器删除URI中命名的资源的请求</li>
+<li>OPTIONS：关于服务器支持的请求方法信息的请求</li>
+<li>TRACE：Web服务器反馈Http请求和其头标的请求</li>
+<li>CONNECT：已文档化但当前未实现的一个方法，预留做隧道处理</li>
+</ul>
+<p>2.<strong>请求头标</strong>：由关键字/值对组成，每行一对，关键字和值用冒号（:）分隔。<br>请求头标通知服务器有关于客户端的功能和标识（cookie就是放在请求头中），典型的请求头标有：<br>User-Agent        客户端厂家和版本<br>Accept            客户端可识别的内容类型列表<br>Content-Length    附加到请求的数据字节数</p>
+<p>3.<strong>空行</strong>：最后一个请求头标之后是一个空行，发送回车符和退行，通知服务器以下不再有头标。</p>
+<p>4.<strong>请求数据</strong>：使用POST传送数据，最常使用的是Content-Type和Content-Length头标。</p>
+<h5 id="HTTP响应"><a href="#HTTP响应" class="headerlink" title="HTTP响应"></a>HTTP响应</h5><p>Web服务器解析请求，定位指定资源。服务器将资源副本写至套接字（即端口），在此处由客户端读取。<br>一个响应由四个部分组成；状态行、响应头标、空行、响应数据</p>
+<p>1.<strong>状态行</strong>：状态行由三个标记组成：HTTP版本、响应代码和响应描述。<br>HTTP版本：向客户端指明其可理解的最高版本。<br>响应代码：3位的数字代码，指出请求的成功或失败，如果失败则指出原因。<br>响应描述：为响应代码的可读性解释。<br>例如：HTTP/1.1 200 OK</p>
+<p>HTTP响应码：</p>
+<ul>
+<li>1xx：信息，请求收到，继续处理</li>
+<li>2xx：成功，行为被成功地接受、理解和采纳</li>
+<li>3xx：重定向，为了完成请求，必须进一步执行的动作</li>
+<li>4xx：客户端错误，请求包含语法错误或者请求无法实现</li>
+<li>5xx：服务器错误，服务器不能实现一种明显无效的请求</li>
+</ul>
+<p>下表显示每个响应码及其含义：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">100     继续。客户端应继续其请求</div><div class="line">101     切换协议。服务器根据客户端的请求切换协议。只能切换到更高级的协议，例如，切换到HTTP的新版本协议</div><div class="line">200     OK，请求成功。一般用于GET与POST请求</div><div class="line">201     已创建。成功请求并创建了新的资源</div><div class="line">202     已接受。已经接受请求，但未处理完成</div><div class="line">203     非授权信息。请求成功。但返回的meta信息不在原始的服务器，而是一个副本</div><div class="line">204     无内容。服务器成功处理，但未返回内容。在未更新网页的情况下，可确保浏览器继续显示当前文档</div><div class="line">205     重置内容。服务器处理成功，用户终端（例如：浏览器）应重置文档视图。可通过此返回码清除浏览器的表单域</div><div class="line">206     部分内容。服务器成功处理了部分GET请求</div><div class="line">300     多种选择。请求的资源可包括多个位置，相应可返回一个资源特征与地址的列表用于用户终端（例如浏览器）选择</div><div class="line">301     永久移动。请求的资源已被永久的移动到新URI，返回信息会包括新的URI，浏览器会自动定向到新URI。今后任何新的请求都应使用新的URI代替</div><div class="line">302     临时移动。与301类似。但资源只是临时被移动。客户端应继续使用原有URI</div><div class="line">303     查看其它地址。与301类似。使用GET和POST请求查看</div><div class="line">304     未修改。所请求的资源未修改，服务器返回此状态码时，不会返回任何资源。客户端通常会缓存访问过的资源，通过提供一个头信息指出客户端希望只返回在指定日期之后修改的资源</div><div class="line">305     使用代理。所请求的资源必须通过代理访问</div><div class="line">307     临时重定向。与302类似。使用GET请求重定向</div><div class="line">400     客户端请求的语法错误，服务器无法理解</div><div class="line">401     请求要求用户的身份认证</div><div class="line">402     保留，将来使用</div><div class="line">403     服务器理解请求客户端的请求，但是拒绝执行此请求</div><div class="line">404     服务器无法根据客户端的请求找到资源（网页）。通过此代码，网站设计人员可设置<span class="string">"您所请求的资源无法找到"</span>的个性页面</div><div class="line">405     客户端请求中的方法被禁止</div><div class="line">406     服务器无法根据客户端请求的内容特性完成请求</div><div class="line">407     请求要求代理的身份认证，与401类似，但请求者应当使用代理进行授权</div><div class="line">408     服务器等待客户端发送的请求时间过长，超时</div><div class="line">409     服务器完成客户端的PUT请求是可能返回此代码，服务器处理请求时发生了冲突</div><div class="line">410     客户端请求的资源已经不存在。410不同于404，如果资源以前有现在被永久删除了可使用410代码，网站设计人员可通过301代码指定资源的新位置</div><div class="line">411     服务器无法处理客户端发送的不带Content-Length的请求信息</div><div class="line">412     客户端请求信息的先决条件错误</div><div class="line">413     由于请求的实体过大，服务器无法处理，因此拒绝请求。为防止客户端的连续请求，服务器可能会关闭连接。如果只是服务器暂时无法处理，则会包含一个Retry-After的响应信息</div><div class="line">414     请求的URI过长（URI通常为网址），服务器无法处理</div><div class="line">415     服务器无法处理请求附带的媒体格式</div><div class="line">416     客户端请求的范围无效</div><div class="line">417     服务器无法满足Expect的请求头信息</div><div class="line">500     服务器内部错误，无法完成请求</div><div class="line">501     服务器不支持请求的功能，无法完成请求</div><div class="line">502     充当网关或代理的服务器，从远端服务器接收到了一个无效的请求</div><div class="line">503     由于超载或系统维护，服务器暂时的无法处理客户端的请求。延时的长度可包含在服务器的Retry-After头信息中</div><div class="line">504     充当网关或代理的服务器，未及时从远端服务器获取请求</div><div class="line">505     服务器不支持请求的HTTP协议的版本，无法完成处理</div></pre></td></tr></table></figure>
+<p>2.<strong>响应头标</strong>：像请求头标一样，它们指出服务器的功能，标识出响应数据的细节。</p>
+<p>3.<strong>空行</strong>：最后一个响应头标之后是一个空行，发送回车符和退行，表明服务器以下不再有头标。</p>
+<p>4.<strong>响应数据</strong>：HTML文档和图像等，也就是HTML本身。</p>
+<p>浏览器解析HTTp响应显示数据的过程：</p>
+<ul>
+<li>浏览器首先解析状态行，查看表明请求是否成功的状态代码。</li>
+<li>然后解析每一个响应头标，头标告知以下为若干字节的HTML。</li>
+<li>读取响应数据HTML，根据HTML的语法和语义对其进行格式化，并在浏览器窗口中显示它。</li>
+<li>一个HTML文档可能包含其它需要被载入的资源引用，浏览器识别这些引用，对其它的资源再进行额外的请求，此过程循环多次。</li>
+</ul>
+<h5 id="HTTP1-0与HTTP1-1的区别"><a href="#HTTP1-0与HTTP1-1的区别" class="headerlink" title="HTTP1.0与HTTP1.1的区别"></a>HTTP1.0与HTTP1.1的区别</h5><p>一个WEB站点每天可能要接收到上百万的用户请求，为了提高系统的效率，<strong>HTTP 1.0规定浏览器与服务器只保持短暂的连接，浏览器的每次请求都需要与服务器建立一个TCP连接，服务器完成请求处理后立即断开TCP连接，服务器不跟踪每个客户也不记录过去的请求</strong>。但是，这也造成了一些性能上的缺陷，例如，一个包含有许多图像的网页文件中并没有包含真正的图像数据内容，而只是指明了这些图像的URL地址，当WEB浏览器访问这个网页文件时，浏览器首先要发出针对该网页文件的请求，当浏览器解析WEB服务器返回的该网页文档中的HTML内容时，发现其中的<img>图像标签后，浏览器将根据<img>标签中的src属性所指定的URL地址再次向服务器发出下载图像数据的请求，如下图所示。</p>
+<img src="/2017/04/01/http协议与https/474814076.png" alt="474814076.png" title="">
+<p>显 然，访问一个包含有许多图像的网页文件的整个过程包含了多次请求和响应，每次请求和响应都需要建立一个单独的连接，每次连接只是传输一个文档和图像，上一次和下一次请求完全分离。即使图像文件都很小，但是客户端和服务器端每次建立和关闭连接却是一个相对比较费时的过程，并且会严重影响客户机和服务器的性 能。当一个网页文件中包含Applet，JavaScript文件，CSS文件等内容时，也会出现类似上述的情况。</p>
+<p>为了克服HTTP 1.0的这个缺陷，<strong>HTTP 1.1支持持久连接，在一个TCP连接上可以传送多个HTTP请求和响应，减少了建立和关闭连接的消耗和延迟。</strong>一个包含有许多图像的网页文件的多个请求和应答可以在一个连接中传输，但每个单独的网页文件的请求和应答仍然需要使用各自的连接。<strong>HTTP 1.1还允许客户端不用等待上一次请求结果返回，就可以发出下一次请求，但服务器端必须按照接收到客户端请求的先后顺序依次回送响应结果，以保证客户端能够区分出每次请求的响应内容，这样也显著地减少了整个下载过程所需要的时间。</strong>基于HTTP 1.1协议的客户机与服务器的信息交换过程，如下图所示。</p>
+<img src="/2017/04/01/http协议与https/1146631942.png" alt="1146631942.png" title="">
+<p>可见，HTTP 1.1在继承了HTTP 1.0优点的基础上，也克服了HTTP 1.0的性能问题。不仅如此，HTTP 1.1还通过增加更多的请求头和响应头来改进和扩充HTTP 1.0的功能。例如，<strong>由于HTTP 1.0不支持Host请求头字段</strong>，WEB浏览器无法使用主机头名来明确表示要访问服务器上的哪个WEB站点，这样就无法使用WEB服务器在同一个IP地址和端口号上配置多个虚拟WEB站点。在HTTP 1.1中增加Host请求头字段后，WEB浏览器可以使用主机头名来明确表示要访问服务器上的哪个WEB站点，这才实现了在一台WEB服务器上可以在同一个IP地址和端口号上使用不同的主机名来创建多个虚拟WEB站点。<strong>HTTP 1.1的持续连接（长连接），也需要增加新的请求头来帮助实现，例如，Connection请求头的值为Keep-Alive时，客户端通知服务器返回本次请求结果后保持连接；Connection请求头的值为close时，客户端通知服务器返回本次请求结果后关闭连接。</strong>HTTP 1.1还提供了与身份认证、状态管理和Cache缓存等机制相关的请求头和响应头。（具体的可以看HTTP的RFC规范）</p>
+<h5 id="HTTP1-1与HTTP2-0的区别"><a href="#HTTP1-1与HTTP2-0的区别" class="headerlink" title="HTTP1.1与HTTP2.0的区别"></a>HTTP1.1与HTTP2.0的区别</h5><p>HTTP/2（超文本传输协议第2版，最初命名为HTTP 2.0），是HTTP协议的的第二个主要版本，使用于万维网。HTTP/2是HTTP协议自1999年HTTP 1.1发布后的首个更新，主要基于SPDY协议。</p>
+<p>与HTTP/1相比，主要区别包括：</p>
+<ul>
+<li>HTTP/2采用二进制格式而非文本格式</li>
+<li>HTTP/2是完全多路复用的，而非有序并阻塞的——只需一个连接即可实现并行</li>
+<li>使用报头压缩，HTTP/2降低了开销</li>
+<li>HTTP/2让服务器可以将响应主动“推送”到客户端缓存中</li>
+</ul>
+<p>HTTP/2为什么是二进制？</p>
+<p>比起像HTTP/1.x这样的文本协议，二进制协议解析起来更高效、“线上”更紧凑，更重要的是错误更少</p>
+<p>为什么 HTTP/2 需要多路传输?</p>
+<p>HTTP/1.x 有个问题叫线端阻塞(head-of-line blocking), 它是指一个连接(connection)一次只提交一个请求的效率比较高, 多了就会变慢。HTTP/1.1 试过用流水线(pipelining)来解决这个问题, 但是效果并不理想(数据量较大或者速度较慢的响应, 会阻碍排在他后面的请求). 此外, 由于网络媒介(intermediary )和服务器不能很好的支持流水线, 导致部署起来困难重重。而多路传输(Multiplexing)能很好的解决这些问题, 因为它能同时处理多个消息的请求和响应; 甚至可以在传输过程中将一个消息跟另外一个掺杂在一起。所以客户端只需要一个连接就能加载一个页面。</p>
+<p>消息头为什么需要压缩?</p>
+<p>假定一个页面有80个资源需要加载（这个数量对于今天的Web而言还是挺保守的）, 而每一次请求都有1400字节的消息头（着同样也并不少见，因为Cookie和引用等东西的存在）, 至少要7到8个来回去“在线”获得这些消息头。这还不包括响应时间——那只是从客户端那里获取到它们所花的时间而已。这全都由于TCP的慢启动机制，它会基于对已知有多少个包，来确定还要来回去获取哪些包 – 这很明显的限制了最初的几个来回可以发送的数据包的数量。相比之下，即使是头部轻微的压缩也可以是让那些请求只需一个来回就能搞定——有时候甚至一个包就可以了。这种开销是可以被节省下来的，特别是当你考虑移动客户端应用的时候，即使是良好条件下，一般也会看到几百毫秒的来回延迟。</p>
+<p>服务器推送的好处是什么？</p>
+<p>当浏览器请求一个网页时，服务器将会发回HTML，在服务器开始发送JavaScript、图片和CSS前，服务器需要等待浏览器解析HTML和发送所有内嵌资源的请求。服务器推送服务通过“推送”那些它认为客户端将会需要的内容到客户端的缓存中，以此来避免往返的延迟。</p>
+<h3 id="二-HTTPS简介"><a href="#二-HTTPS简介" class="headerlink" title="二 HTTPS简介"></a>二 HTTPS简介</h3><p>由于HTTP通信是明文通信的，这样发送中的数据将受到威胁。如：</p>
+<ul>
+<li>窃听风险（eavesdropping）：第三方可以获知通信内容。</li>
+<li>篡改风险（tampering）：第三方可以修改通信内容。</li>
+<li>冒充风险（pretending）：第三方可以冒充他人身份参与通信。</li>
+</ul>
+<p>因此出现了HTTPS，希望达到：</p>
+<ul>
+<li>所有信息都是加密传播，第三方无法窃听。</li>
+<li>具有校验机制，一旦被篡改，通信双方会立刻发现。</li>
+<li>配备身份证书，防止身份被冒充。</li>
+</ul>
+<h5 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h5><p>HTTPS 可以认为是 HTTP + TLS/SSL,它的发展历史如下：</p>
+<ul>
+<li>1994年，NetScape公司设计了SSL协议（Secure Sockets Layer）的1.0版，但是未发布。</li>
+<li>1995年，NetScape公司发布SSL 2.0版，很快发现有严重漏洞。</li>
+<li>1996年，SSL 3.0版问世，得到大规模应用。</li>
+<li>1999年，互联网标准化组织ISOC接替NetScape公司，发布了SSL的升级版TLS 1.0版。</li>
+<li>2006年和2008年，TLS进行了两次升级，分别为TLS 1.1版和TLS 1.2版。最新的变动是2011年TLS 1.2的修订版。</li>
+</ul>
+<p>目前常用的 HTTP 协议是 HTTP1.1，常用的 TLS 协议版本有如下几个：TLS1.2, TLS1.1, TLS1.0 和 SSL3.0。其中 SSL3.0 由于 POODLE 攻击已经被证明不安全，但统计发现依然有不到 1% 的浏览器使用 SSL3.0。TLS1.0 也存在部分安全漏洞，比如 RC4 和 BEAST 攻击。TLS1.2 和 TLS1.1 暂时没有已知的安全漏洞，比较安全，同时有大量扩展提升速度和性能，推荐大家使用。需要关注一点的就是 TLS1.3 将会是 TLS 协议一个非常重大的改革。不管是安全性还是用户访问速度都会有质的提升。不过目前没有明确的发布时间。同时 HTTP2 也已经正式定稿，这个由 SPDY 协议演化而来的协议相比 HTTP1.1 又是一个非常重大的变动，能够明显提升应用层数据的传输效率。</p>
+<h5 id="HTTPS原理"><a href="#HTTPS原理" class="headerlink" title="HTTPS原理"></a>HTTPS原理</h5><p>HTTPS内容加密的过程可以简述成：用对称加密来加密数据，用公钥加密来加密对称加密的秘钥（这句话其实并不准确，因为通信是传输的并不是秘钥本身，而是用于生成秘钥的随机数）。要实现这个客户端和服务器要通过四次握手。如下图：</p>
+<img src="/2017/04/01/http协议与https/HTTPS握手图.jpg" alt="HTTPS四次握手图" title="HTTPS四次握手图">
+<p>1.客户端发出请求（ClientHello）</p>
+<p>首先，客户端（通常是浏览器）先向服务器发出加密通信的请求，这被叫做ClientHello请求。在这一步，客户端主要向服务器提供以下信息：</p>
+<ul>
+<li>支持的协议版本，比如TLS 1.0版。</li>
+<li>一个客户端生成的随机数，稍后用于生成”对话密钥”。（这是关键）</li>
+<li>支持的加密方法，比如RSA公钥加密。</li>
+<li>支持的压缩方法。</li>
+</ul>
+<p>2.服务器回应（SeverHello）</p>
+<p>服务器收到客户端请求后，向客户端发出回应，这叫做SeverHello。服务器的回应包含以下内容：</p>
+<ul>
+<li>确认使用的加密通信协议版本，比如TLS 1.0版本。如果浏览器与服务器支持的版本不一致，服务器关闭加密通信。</li>
+<li>一个服务器生成的随机数，稍后用于生成”对话密钥”。</li>
+<li>确认使用的加密方法，比如RSA公钥加密。</li>
+<li>服务器证书。（含公钥加密的公钥，用于加密premaster_secrect）</li>
+</ul>
+<p>除了上面这些信息，如果服务器需要确认客户端的身份，就会再包含一项请求，要求客户端提供”客户端证书”。比如，金融机构往往只允许认证客户连入自己的网络，就会向正式客户提供USB密钥，里面就包含了一张客户端证书。</p>
+<p>3.客户端回应</p>
+<p>客户端收到服务器回应以后，首先验证服务器证书。如果证书不是可信机构颁布、或者证书中的域名与实际域名不一致、或者证书已经过期，就会向访问者显示一个警告，由其选择是否还要继续通信。如果证书没有问题，客户端就会从证书中取出服务器的公钥。然后，向服务器发送下面三项信息：</p>
+<ul>
+<li>一个随机数。该随机数用服务器公钥加密，防止被窃听。（这个随机数就是premaster_secrect）</li>
+<li>编码改变通知，表示随后的信息都将用双方商定的加密方法和密钥发送。</li>
+<li>客户端握手结束通知，表示客户端的握手阶段已经结束。这一项同时也是前面发送的所有内容的hash值，用来供服务器校验。</li>
+</ul>
+<p>此时客户端和服务器同时都有了三个随机数，它们将通多相同的秘钥生成器（秘钥生成算法）来获得相同的“会话秘钥”。</p>
+<p>至于为什么使用三个随机数而不是直接随机生成秘钥，大神们回答如下：</p>
+<blockquote>
+<p>“不管是客户端还是服务器，都需要随机数，这样生成的密钥才不会每次都一样。由于SSL协议中证书是静态的，因此十分有必要引入一种随机因素来保证协商出来的密钥的随机性。对于RSA密钥交换算法来说，pre-master-key本身就是一个随机数，再加上hello消息中的随机，三个随机数通过一个密钥导出器最终导出一个对称密钥。pre master的存在在于SSL协议不信任每个主机都能产生完全随机的随机数，如果随机数不随机，那么pre master secret就有可能被猜出来，那么仅适用pre master secret作为密钥就不合适了，因此必须引入新的随机因素，那么客户端和服务器加上pre_master     secret三个随机数一同生成的密钥就不容易被猜出了，一个伪随机可能完全不随机，可是是三个伪随机就十分接近随机了，每增加一个自由度，随机性增加的可不是一。”</p>
+</blockquote>
+<p>此外，如果前一步，服务器要求客户端证书，客户端会在这一步发送证书及相关信息。</p>
+<p>4.服务器的最后回应</p>
+<ul>
+<li>编码改变通知，表示随后的信息都将用双方商定的加密方法和密钥发送。</li>
+<li>服务器握手结束通知，表示服务器的握手阶段已经结束。这一项同时也是前面发送的所有内容的hash值，用来供客户端校验。</li>
+</ul>
+<p>至此，整个握手阶段全部结束。接下来，客户端与服务器进入加密通信，就完全是使用普通的HTTP协议，只不过用”会话密钥”加密内容。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/HTTP/" rel="tag"># HTTP</a>
+          
+            <a href="/tags/HTTPS/" rel="tag"># HTTPS</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/30/SQL优化/" rel="next" title="SQL优化">
+                <i class="fa fa-chevron-left"></i> SQL优化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/01/TCP协议与UDP协议/" rel="prev" title="TCP协议与UDP协议">
+                TCP协议与UDP协议 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="zhengrui" />
+          <p class="site-author-name" itemprop="name">zhengrui</p>
+           
+              <p class="site-description motion-element" itemprop="description">今日之果，皆因曾经之因</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhezaoyizhuding" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3017970752/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100012335677489" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-HTTP协议"><span class="nav-number">1.</span> <span class="nav-text">一 HTTP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#HTTP协议的特点"><span class="nav-number">1.0.1.</span> <span class="nav-text">HTTP协议的特点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#客户端通过HTTP想服务器请求资源的过程"><span class="nav-number">1.0.2.</span> <span class="nav-text">客户端通过HTTP想服务器请求资源的过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HTTP请求"><span class="nav-number">1.0.3.</span> <span class="nav-text">HTTP请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HTTP响应"><span class="nav-number">1.0.4.</span> <span class="nav-text">HTTP响应</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HTTP1-0与HTTP1-1的区别"><span class="nav-number">1.0.5.</span> <span class="nav-text">HTTP1.0与HTTP1.1的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HTTP1-1与HTTP2-0的区别"><span class="nav-number">1.0.6.</span> <span class="nav-text">HTTP1.1与HTTP2.0的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-HTTPS简介"><span class="nav-number">2.</span> <span class="nav-text">二 HTTPS简介</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#概述"><span class="nav-number">2.0.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HTTPS原理"><span class="nav-number">2.0.2.</span> <span class="nav-text">HTTPS原理</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhengrui</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://zhezaoyizhuding.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://zhezaoyizhuding.github.io/2017/04/01/http协议与https/';
+          this.page.identifier = '2017/04/01/http协议与https/';
+          this.page.title = 'http协议与https';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zhezaoyizhuding.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("GW32OlXJkBeGE31qrywcmn3a-gzGzoHsz", "1fFuhB2mWMfLiuVyDPOv6dll");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

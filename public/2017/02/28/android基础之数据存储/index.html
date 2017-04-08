@@ -1,0 +1,1061 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="android,java,数据存储," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ZHENGRUI'BLOG" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="一 概述Android提供了5种方式来让用户保存持久化应用程序数据。根据自己的需求来做选择，比如数据是否是应用程序私有的，是否能被其他程序访问，需要多少数据存储空间等。这五种数据存储方式分别是：
+
+使用SharedPreferences存储数据　
+文件存储数据
+SQLite数据库存储数据
+使用ContentProvider存储数据
+网络存储数据
+
+二 五种存储方式介绍1. SharePrefere">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android基础之数据存储">
+<meta property="og:url" content="https://zhezaoyizhuding.github.io/2017/02/28/android基础之数据存储/index.html">
+<meta property="og:site_name" content="ZHENGRUI'BLOG">
+<meta property="og:description" content="一 概述Android提供了5种方式来让用户保存持久化应用程序数据。根据自己的需求来做选择，比如数据是否是应用程序私有的，是否能被其他程序访问，需要多少数据存储空间等。这五种数据存储方式分别是：
+
+使用SharedPreferences存储数据　
+文件存储数据
+SQLite数据库存储数据
+使用ContentProvider存储数据
+网络存储数据
+
+二 五种存储方式介绍1. SharePrefere">
+<meta property="og:updated_time" content="2017-03-18T01:43:39.722Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android基础之数据存储">
+<meta name="twitter:description" content="一 概述Android提供了5种方式来让用户保存持久化应用程序数据。根据自己的需求来做选择，比如数据是否是应用程序私有的，是否能被其他程序访问，需要多少数据存储空间等。这五种数据存储方式分别是：
+
+使用SharedPreferences存储数据　
+文件存储数据
+SQLite数据库存储数据
+使用ContentProvider存储数据
+网络存储数据
+
+二 五种存储方式介绍1. SharePrefere">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: 'JRBAME0VLD',
+      apiKey: 'b62ed43f602517ec39140c839edfa335',
+      indexName: 'ZHENGRUI',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://zhezaoyizhuding.github.io/2017/02/28/android基础之数据存储/"/>
+
+
+
+
+
+  <title> android基础之数据存储 | ZHENGRUI'BLOG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZHENGRUI'BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">今日之果，皆因曾经之因</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://zhezaoyizhuding.github.io/2017/02/28/android基础之数据存储/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhengrui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZHENGRUI'BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                android基础之数据存储
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-28T17:42:52+08:00">
+                2017-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/28/android基础之数据存储/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/02/28/android基础之数据存储/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/02/28/android基础之数据存储/" class="leancloud_visitors" data-flag-title="android基础之数据存储">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一-概述"><a href="#一-概述" class="headerlink" title="一 概述"></a>一 概述</h3><p>Android提供了5种方式来让用户保存持久化应用程序数据。根据自己的需求来做选择，比如数据是否是应用程序私有的，是否能被其他程序访问，需要多少数据存储空间等。这五种数据存储方式分别是：</p>
+<ul>
+<li>使用SharedPreferences存储数据　</li>
+<li>文件存储数据</li>
+<li>SQLite数据库存储数据</li>
+<li>使用ContentProvider存储数据</li>
+<li>网络存储数据</li>
+</ul>
+<h3 id="二-五种存储方式介绍"><a href="#二-五种存储方式介绍" class="headerlink" title="二 五种存储方式介绍"></a>二 五种存储方式介绍</h3><h5 id="1-SharePreferences"><a href="#1-SharePreferences" class="headerlink" title="1. SharePreferences"></a>1. SharePreferences</h5><p>SharedPreference类提供了一个总体框架，使您可以保存和检索任何基本数据类型（ boolean, float, int, long, string）的持久键-值对（基于XML文件存储的“key-value”键值对数据）。将其以XML文件的形式保存起来。通常其存储在“data/data/程序包名/shared_prefs目录下。</p>
+<h6 id="获取SharedPreferences对象（通过Context）"><a href="#获取SharedPreferences对象（通过Context）" class="headerlink" title="获取SharedPreferences对象（通过Context）"></a>获取SharedPreferences对象（通过Context）</h6><ul>
+<li><p>getSharedPreferences (String name, int mode)<br>当我们有多个SharedPreferences的时候，根据第一个参数name获得相应的SharedPreferences对象。    </p>
+</li>
+<li><p>getPreferences (int mode)<br>如果你的Activity中只需要一个SharedPreferences的时候使用。</p>
+</li>
+</ul>
+<p>这里的mode有四个选项：</p>
+<ul>
+<li><p>Context.MODE_PRIVAT<br>该SharedPreferences数据只能被本应用程序读、写。</p>
+</li>
+<li><p>Context.MODE_WORLD_READABLE<br>该SharedPreferences数据能被其他应用程序读，但不能写。</p>
+</li>
+<li><p>Context.MODE_WORLD_WRITEABLE<br>该SharedPreferences数据能被其他应用程序读和写。</p>
+</li>
+<li><p>Context.MODE_MULTI_PROCESS<br>sdk2.3后添加的选项，当多个进程同时读写同一个SharedPreferences时它会检查文件是否修改。</p>
+</li>
+</ul>
+<h6 id="向Shared-Preferences中写入值"><a href="#向Shared-Preferences中写入值" class="headerlink" title="向Shared Preferences中写入值"></a>向Shared Preferences中写入值</h6><p>主要步骤：</p>
+<ul>
+<li>首先要通过 SharedPreferences.Editor获取到Editor对象；</li>
+<li>然后通过Editor的putBoolean() 或 putString()等方法存入值；</li>
+<li>最后调用Editor的commit()方法提交；</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Use 0 or MODE_PRIVATE for the default operation </span></div><div class="line">SharedPreferences settings = getSharedPreferences(<span class="string">"fanrunqi"</span>, <span class="number">0</span>);</div><div class="line">SharedPreferences.Editor editor = settings.edit();</div><div class="line">editor.putBoolean(<span class="string">"isAmazing"</span>, <span class="keyword">true</span>); </div><div class="line"></div><div class="line"><span class="comment">// 提交本次编辑</span></div><div class="line">editor.commit();</div></pre></td></tr></table></figure>
+<p>同时Edit还有两个常用的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">editor.remove(String key) ：下一次commit的时候会移除key对应的键值对</div><div class="line"></div><div class="line">editor.clear()：移除所有键值对</div></pre></td></tr></table></figure>
+<h6 id="从Shared-Preferences中读取值"><a href="#从Shared-Preferences中读取值" class="headerlink" title="从Shared Preferences中读取值"></a>从Shared Preferences中读取值</h6><p>读取值使用 SharedPreference对象的getBoolean()或getString()等方法就行了,如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SharedPreferences settings = getSharedPreferences(<span class="string">"fanrunqi"</span>, <span class="number">0</span>);</div><div class="line"><span class="keyword">boolean</span> isAmazing= settings.getBoolean(<span class="string">"isAmazing"</span>,<span class="keyword">true</span>);</div></pre></td></tr></table></figure>
+<h6 id="Shared-Preferences的优缺点"><a href="#Shared-Preferences的优缺点" class="headerlink" title="Shared Preferences的优缺点"></a>Shared Preferences的优缺点</h6><p>可以看出来Preferences是很轻量级的应用，使用起来也很方便，简洁。但存储数据类型比较单一（只有基本数据类型），无法进行条件查询，只能在不复杂的存储需求下使用，比如保存配置信息等。</p>
+<h5 id="2-文件存储"><a href="#2-文件存储" class="headerlink" title="2.文件存储"></a>2.文件存储</h5><h6 id="文件的内部存储（存储在手机中）"><a href="#文件的内部存储（存储在手机中）" class="headerlink" title="文件的内部存储（存储在手机中）"></a>文件的内部存储（存储在手机中）</h6><p>当文件被保存在内部存储中时，默认情况下，文件是应用程序私有的，其他应用不能访问。当用户卸载应用程序时这些文件也跟着被删除。文件默认存储位置：/data/data/包名/files/文件名。</p>
+<p><strong>a. 创建和写入一个内部存储的私有文件</strong> </p>
+<ul>
+<li>调用Context的openFileOutput()函数，填入文件名和操作模式，它会返回一个FileOutputStream对象。</li>
+<li>通过FileOutputStream对象的write()函数写入数据。</li>
+<li>FileOutputStream对象的close ()函数关闭流</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">String FILENAME = <span class="string">"a.txt"</span>;</div><div class="line">String string = <span class="string">"fanrunqi"</span>;</div><div class="line"></div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);</div><div class="line">    fos.write(string.getBytes());</div><div class="line">    fos.close();</div><div class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在 openFileOutput(String name, int mode)方法中:</p>
+<p>name参数:　用于指定文件名称，不能包含路径分隔符“/” ，如果文件不存在，Android 会自动创建它。<br>mode参数：用于指定操作模式，分为四种：</p>
+<ul>
+<li><p>Context.MODE_PRIVATE = 0<br>为默认操作模式，代表该文件是私有数据，只能被应用本身访问，在该模式下，写入的内容会覆盖原文件的内容。</p>
+</li>
+<li><p>Context.MODE_APPEND = 32768<br>该模式会检查文件是否存在，存在就往文件追加内容，否则就创建新文件。　</p>
+</li>
+<li><p>Context.MODE_WORLD_READABLE = 1<br>表示当前文件可以被其他应用读取。</p>
+</li>
+<li><p>MODE_WORLD_WRITEABLE<br>表示当前文件可以被其他应用写入。</p>
+</li>
+</ul>
+<p><strong>b. 读取一个内部存储的私有文件</strong></p>
+<p>步骤：</p>
+<ul>
+<li>调用openFileInput( )，参数中填入文件名，会返回一个FileInputStream对象。</li>
+<li>使用流对象的 read()方法读取字节</li>
+<li>调用流的close()方法关闭流</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">String FILENAME = <span class="string">"a.txt"</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            FileInputStream inStream = openFileInput(FILENAME);</div><div class="line">            <span class="keyword">int</span> len = <span class="number">0</span>;</div><div class="line">            <span class="keyword">byte</span>[] buf = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</div><div class="line">            StringBuilder sb = <span class="keyword">new</span> StringBuilder();</div><div class="line">            <span class="keyword">while</span> ((len = inStream.read(buf)) != -<span class="number">1</span>) &#123;</div><div class="line">                sb.append(<span class="keyword">new</span> String(buf, <span class="number">0</span>, len));</div><div class="line">            &#125;</div><div class="line">            inStream.close();</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<p>其他一些经常用到的方法：</p>
+<ul>
+<li>getFilesDir()：　得到内存储文件的绝对路径</li>
+<li>getDir()：　在内存储空间中创建或打开一个已经存在的目录</li>
+<li>deleteFile()：　删除保存在内部存储的文件。　 </li>
+<li>fileList()：　返回当前由应用程序保存的文件的数组（内存储目录下的全部文件）。</li>
+</ul>
+<p><strong>c.获取编译时的静态文件</strong></p>
+<p>如果你想在应用编译时保存静态文件，应该把文件保存在项目的　res/raw/　目录下，你可以通过 openRawResource()方法去打开它（传入参数R.raw.filename），这个方法返回一个 InputStream流对象你可以读取文件但是不能修改原始文件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">InputStream is = <span class="keyword">this</span>.getResources().openRawResource(R.raw.filename);</div></pre></td></tr></table></figure>
+<p><strong>d. 获取内存缓存文件</strong></p>
+<p>有时候我们只想缓存一些数据而不是持久化保存，可以使用getCacheDir（）去打开一个文件，文件的存储目录（ /data/data/包名/cache ）是一个应用专门来保存临时缓存文件的内存目录。当设备的内部存储空间比较低的时候，Android可能会删除这些缓存文件来恢复空间，但是你不应该依赖系统来回收，要自己维护这些缓存文件把它们的大小限制在一个合理的范围内，比如1ＭＢ．当你卸载应用的时候这些缓存文件也会被移除。</p>
+<h6 id="文件的外部存储（sdcard）"><a href="#文件的外部存储（sdcard）" class="headerlink" title="文件的外部存储（sdcard）"></a>文件的外部存储（sdcard）</h6><p>因为内部存储容量限制，有时候需要存储数据比较大的时候需要用到外部存储，使用外部存储分为以下几个步骤：</p>
+<p><strong>a. 添加外部存储访问限权</strong></p>
+<p>首先，要在AndroidManifest.xml中加入访问SDCard的权限，如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 在SDCard中创建与删除文件权限 --&gt; </div><div class="line">   &lt;uses-permission android:name=<span class="string">"android.permission.MOUNT_UNMOUNT_FILESYSTEMS"</span>/&gt; </div><div class="line"></div><div class="line">   &lt;!-- 往SDCard写入数据权限 --&gt; </div><div class="line">   &lt;uses-permission android:name=<span class="string">"android.permission.WRITE_EXTERNAL_STORAGE"</span>/&gt;</div></pre></td></tr></table></figure>
+<p><strong>b. 检测外部存储的可用性</strong></p>
+<p>在使用外部存储时我们需要检测其状态，它可能被连接到计算机、丢失或者只读等。下面代码将说明如何检查状态：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取外存储的状态</span></div><div class="line">String state = Environment.getExternalStorageState();</div><div class="line"><span class="keyword">if</span> (Environment.MEDIA_MOUNTED.equals(state)) &#123;</div><div class="line">    <span class="comment">// 可读可写</span></div><div class="line">    mExternalStorageAvailable = mExternalStorageWriteable = <span class="keyword">true</span>;</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) &#123;</div><div class="line">    <span class="comment">// 可读</span></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="comment">// 可能有很多其他的状态，但是我们只需要知道，不能读也不能写  </span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>c. 访问外部存储器中的文件</strong></p>
+<p>1) 如果 API 版本大于或等于８，使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">getExternalFilesDir (String type)</div></pre></td></tr></table></figure>
+<p>该方法打开一个外存储目录，此方法需要一个类型，指定你想要的子目录，如类型参数DIRECTORY_MUSIC和 DIRECTORY_RINGTONES（传null就是你应用程序的文件目录的根目录）。通过指定目录的类型，确保Android的媒体扫描仪将扫描分类系统中的文件（例如，铃声被确定为铃声）。如果用户卸载应用程序，这个目录及其所有内容将被删除。</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">File file = <span class="keyword">new</span> File(getExternalFilesDir(<span class="keyword">null</span>), <span class="string">"fanrunqi.jpg"</span>);</div></pre></td></tr></table></figure>
+<p>2) 如果API 版本小于 8 （7或者更低）,使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">getExternalStorageDirectory ()</div></pre></td></tr></table></figure>
+<p>通过该方法打开外存储的根目录，你应该在以下目录下写入你的应用数据，这样当卸载应用程序时该目录及其所有内容也将被删除。目录：/Android/data/<package_name>/files/</package_name></p>
+<p>代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))&#123;  </div><div class="line">            File sdCardDir = Environment.getExternalStorageDirectory();<span class="comment">//获取SDCard目录  "/sdcard"        </span></div><div class="line"></div><div class="line">               File saveFile = <span class="keyword">new</span> File(sdCardDir,<span class="string">"a.txt"</span>); </div><div class="line"></div><div class="line">               <span class="comment">//写数据</span></div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    FileOutputStream fos= <span class="keyword">new</span> FileOutputStream(saveFile); </div><div class="line">                    fos.write(<span class="string">"fanrunqi"</span>.getBytes()); </div><div class="line">                    fos.close();</div><div class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125; </div><div class="line"></div><div class="line">                <span class="comment">//读数据</span></div><div class="line">                 <span class="keyword">try</span> &#123;</div><div class="line">                    FileInputStream fis= <span class="keyword">new</span> FileInputStream(saveFile); </div><div class="line">                    <span class="keyword">int</span> len =<span class="number">0</span>;</div><div class="line">                    <span class="keyword">byte</span>[] buf = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</div><div class="line">                    StringBuffer sb = <span class="keyword">new</span> StringBuffer();</div><div class="line">                    <span class="keyword">while</span>((len=fis.read(buf))!=-<span class="number">1</span>)&#123;</div><div class="line">                        sb.append(<span class="keyword">new</span> String(buf, <span class="number">0</span>, len));</div><div class="line">                    &#125;</div><div class="line">                    fis.close();</div><div class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;  </div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<p>我们也可以在　/Android/data/package_name/cache/目录下做外部缓存。</p>
+<h5 id="3-网路存储"><a href="#3-网路存储" class="headerlink" title="3. 网路存储"></a>3. 网路存储</h5><p>网路存储即是通过HttpUrlConnection或者HttpClint或者okhttp等http框架从服务器中获取数据。</p>
+<h5 id="4-SQLite存储"><a href="#4-SQLite存储" class="headerlink" title="4.SQLite存储"></a>4.SQLite存储</h5><p>请看我的另一篇博客《android基础之SQLite》</p>
+<h5 id="5-ContentProvider存储"><a href="#5-ContentProvider存储" class="headerlink" title="5.ContentProvider存储"></a>5.ContentProvider存储</h5><p>看我的另一篇博客《android基础之Content Provider》</p>
+<h3 id="三-总结"><a href="#三-总结" class="headerlink" title="三 总结"></a>三 总结</h3>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/数据存储/" rel="tag"># 数据存储</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/28/android基础之缓存/" rel="next" title="android基础之缓存">
+                <i class="fa fa-chevron-left"></i> android基础之缓存
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/28/android基础之进程间通信/" rel="prev" title="android基础之进程间通信">
+                android基础之进程间通信 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="zhengrui" />
+          <p class="site-author-name" itemprop="name">zhengrui</p>
+           
+              <p class="site-description motion-element" itemprop="description">今日之果，皆因曾经之因</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhezaoyizhuding" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3017970752/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100012335677489" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-概述"><span class="nav-number">1.</span> <span class="nav-text">一 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-五种存储方式介绍"><span class="nav-number">2.</span> <span class="nav-text">二 五种存储方式介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-SharePreferences"><span class="nav-number">2.0.1.</span> <span class="nav-text">1. SharePreferences</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#获取SharedPreferences对象（通过Context）"><span class="nav-number">2.0.1.1.</span> <span class="nav-text">获取SharedPreferences对象（通过Context）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#向Shared-Preferences中写入值"><span class="nav-number">2.0.1.2.</span> <span class="nav-text">向Shared Preferences中写入值</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#从Shared-Preferences中读取值"><span class="nav-number">2.0.1.3.</span> <span class="nav-text">从Shared Preferences中读取值</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Shared-Preferences的优缺点"><span class="nav-number">2.0.1.4.</span> <span class="nav-text">Shared Preferences的优缺点</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-文件存储"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.文件存储</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#文件的内部存储（存储在手机中）"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">文件的内部存储（存储在手机中）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#文件的外部存储（sdcard）"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">文件的外部存储（sdcard）</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-网路存储"><span class="nav-number">2.0.3.</span> <span class="nav-text">3. 网路存储</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-SQLite存储"><span class="nav-number">2.0.4.</span> <span class="nav-text">4.SQLite存储</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-ContentProvider存储"><span class="nav-number">2.0.5.</span> <span class="nav-text">5.ContentProvider存储</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-总结"><span class="nav-number">3.</span> <span class="nav-text">三 总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhengrui</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://zhezaoyizhuding.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://zhezaoyizhuding.github.io/2017/02/28/android基础之数据存储/';
+          this.page.identifier = '2017/02/28/android基础之数据存储/';
+          this.page.title = 'android基础之数据存储';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zhezaoyizhuding.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("GW32OlXJkBeGE31qrywcmn3a-gzGzoHsz", "1fFuhB2mWMfLiuVyDPOv6dll");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

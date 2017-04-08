@@ -1,0 +1,1121 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="android,java,service," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ZHENGRUI'BLOG" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="一 Service简介Service也是Android的四大组件之一，它并不提供用户界面，主要做一些即使该应用程序被调入后台也需要运行的事务。比如下载，音乐播放，执行文件I/O或者与content provider进行交互等。Service主要做的就是上面这些比较耗时的操作，但是由于Service也是运行在主线程中，因此最好在其中另开一个线程做这些耗时操作，否者可能会引起UI阻塞。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android基础之Service">
+<meta property="og:url" content="https://zhezaoyizhuding.github.io/2017/02/27/android基础之Service/index.html">
+<meta property="og:site_name" content="ZHENGRUI'BLOG">
+<meta property="og:description" content="一 Service简介Service也是Android的四大组件之一，它并不提供用户界面，主要做一些即使该应用程序被调入后台也需要运行的事务。比如下载，音乐播放，执行文件I/O或者与content provider进行交互等。Service主要做的就是上面这些比较耗时的操作，但是由于Service也是运行在主线程中，因此最好在其中另开一个线程做这些耗时操作，否者可能会引起UI阻塞。">
+<meta property="og:image" content="https://zhezaoyizhuding.github.io/2017/02/27/android基础之Service/Service生命周期图.png">
+<meta property="og:updated_time" content="2017-03-07T13:20:33.443Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android基础之Service">
+<meta name="twitter:description" content="一 Service简介Service也是Android的四大组件之一，它并不提供用户界面，主要做一些即使该应用程序被调入后台也需要运行的事务。比如下载，音乐播放，执行文件I/O或者与content provider进行交互等。Service主要做的就是上面这些比较耗时的操作，但是由于Service也是运行在主线程中，因此最好在其中另开一个线程做这些耗时操作，否者可能会引起UI阻塞。">
+<meta name="twitter:image" content="https://zhezaoyizhuding.github.io/2017/02/27/android基础之Service/Service生命周期图.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: 'JRBAME0VLD',
+      apiKey: 'b62ed43f602517ec39140c839edfa335',
+      indexName: 'ZHENGRUI',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://zhezaoyizhuding.github.io/2017/02/27/android基础之Service/"/>
+
+
+
+
+
+  <title> android基础之Service | ZHENGRUI'BLOG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZHENGRUI'BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">今日之果，皆因曾经之因</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://zhezaoyizhuding.github.io/2017/02/27/android基础之Service/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhengrui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZHENGRUI'BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                android基础之Service
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-27T14:06:22+08:00">
+                2017-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/27/android基础之Service/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/02/27/android基础之Service/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/02/27/android基础之Service/" class="leancloud_visitors" data-flag-title="android基础之Service">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一-Service简介"><a href="#一-Service简介" class="headerlink" title="一 Service简介"></a>一 Service简介</h3><p>Service也是Android的四大组件之一，它并不提供用户界面，主要做一些即使该应用程序被调入后台也需要运行的事务。比如下载，音乐播放，执行文件I/O或者与content provider进行交互等。Service主要做的就是上面这些比较耗时的操作，但是由于Service也是运行在主线程中，因此最好在其中另开一个线程做这些耗时操作，否者可能会引起UI阻塞。       </p>
+<h3 id="二-Service的两种启动方式"><a href="#二-Service的两种启动方式" class="headerlink" title="二 Service的两种启动方式"></a>二 Service的两种启动方式</h3><p>Service有started和bound两种启动方式，当然也可以两种都启用。你可通过startService()启动服务后再通过bindService()将activity于Service绑定。     </p>
+<h5 id="1-startService-启动"><a href="#1-startService-启动" class="headerlink" title="1.startService()启动"></a>1.startService()启动</h5><p>通过startService()启动的Service，Service一旦启动即与它的调用者（通常是某个activity）不再关联，即使调用它的组件被销毁，它也能在后台一直运行下去。通常，该类服务执行单一的操作并且不会向调用者返回结果，比如它可以通过网络下载或上传文件。此类服务应该在其工作完成后通过重写stopSelf()使其自行终止，或者由其他组件调用stopService()来终止。<br>通过startService()启动的服务需要实现它的生命周期中onStartCommand()方法        </p>
+<h5 id="2-bindService-启动"><a href="#2-bindService-启动" class="headerlink" title="2.bindService()启动"></a>2.bindService()启动</h5><p>通过bindService()启动的服务，该服务的生命周期将与启动它的组件相关联，即如果启动它的组件被销毁则该服务也会被销毁，或者通过调用unBindService()与服务解绑，解绑后服务被销毁。多个组件可以同时与一个服务绑定，当所有组件都与服务解绑后，该服务才会被销毁。<br>bind服务提供了一个客户端/服务器接口，允许组件与服务进行交互、发送请求、获取结果，甚至进行进程间通信（IPC）。<br>通过bindService()启动的服务需要实现Service中的onBind()方法。   </p>
+<h3 id="三-Service的生命周期"><a href="#三-Service的生命周期" class="headerlink" title="三 Service的生命周期"></a>三 Service的生命周期</h3><p>两种Service的生命周期如下图：<br><img src="/2017/02/27/android基础之Service/Service生命周期图.png" alt="Service生命周期图" title="Service生命周期图"><br>其回调方法如下：     </p>
+<pre><code class="java"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleService</span> <span class="keyword">extends</span> <span class="title">Service</span> </span>{
+    <span class="keyword">int</span> mStartMode;       <span class="comment">// indicates how to behave if the service is killed</span>
+    IBinder mBinder;      <span class="comment">// interface for clients that bind</span>
+    <span class="keyword">boolean</span> mAllowRebind; <span class="comment">// indicates whether onRebind should be used</span>
+
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>{
+        <span class="comment">// The service is being created</span>
+    }
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent, <span class="keyword">int</span> flags, <span class="keyword">int</span> startId)</span> </span>{
+        <span class="comment">// The service is starting, due to a call to startService()</span>
+        <span class="keyword">return</span> mStartMode;
+    }
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> IBinder <span class="title">onBind</span><span class="params">(Intent intent)</span> </span>{
+        <span class="comment">// A client is binding to the service with bindService()</span>
+        <span class="keyword">return</span> mBinder;
+    }
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onUnbind</span><span class="params">(Intent intent)</span> </span>{
+        <span class="comment">// All clients have unbound with unbindService()</span>
+        <span class="keyword">return</span> mAllowRebind;
+    }
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onRebind</span><span class="params">(Intent intent)</span> </span>{
+        <span class="comment">// A client is binding to the service with bindService(),</span>
+        <span class="comment">// after onUnbind() has already been called</span>
+    }
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>{
+        <span class="comment">// The service is no longer used and is being destroyed</span>
+    }
+}
+</code></pre>
+<h3 id="四-Service与线程的区别"><a href="#四-Service与线程的区别" class="headerlink" title="四 Service与线程的区别"></a>四 Service与线程的区别</h3><ul>
+<li>Thread：Thread 是程序执行的最小单元，它是分配CPU的基本单位。可以用 Thread 来执行一些异步的操作。     </li>
+<li>Service：Service 是android的一种机制，当它运行的时候如果是Local Service，那么对应的 Service 是运行在主进程的 main 线程上的。如：onCreate，onStart 这些函数在被系统调用的时候都是在主进程的 main 线程上运行的。如果是Remote Service，那么对应的 Service 则是运行在独立进程的 main 线程上。<br>其实谈Service和线程的区别毫无意义，它们本来就是毫无关联的两样东西，我觉得应该谈的是在什么情况下，什么地方使用线程更合适。<br>比如：如果你的线程主要用于对UI的更新，那么在Activity中新建即可。但是如果你的线程用于app和服务器之间的消息推送，你需要隔一段时间就要连接服务器做数据同步的话，那么就不能在Activity中新建线程。因为此时的线程在Activity被销毁时，它仍然需要运行。此时将面对一个问题，如果你是Activity中创建得线程，那么当该Activity被销毁时，你将失去该线程的实例。另一方面，你没办法在不同的Activity中对同一线程进行控制。这种情况你就需要在Service中创建它，一方面Service在Activity被销毁时仍然可以运行，另一方面其他的Activity重建后也可以通过与Service进行绑定获得Service的实例，进而控制该线程。</li>
+</ul>
+<h3 id="五-保证Service不被杀死"><a href="#五-保证Service不被杀死" class="headerlink" title="五 保证Service不被杀死"></a>五 保证Service不被杀死</h3><ul>
+<li>onStartCommand方法，返回START_STICKY   </li>
+<li>提升service优先级   </li>
+<li>提升service进程优先级,将其提升为前台服务    </li>
+<li>onDestroy方法里重启service  </li>
+<li>监听系统广播判断Service状态    </li>
+<li>将APK安装到/system/app，变身系统级应用      </li>
+</ul>
+<h3 id="六-IntentService"><a href="#六-IntentService" class="headerlink" title="六 IntentService"></a>六 IntentService</h3><p>因为大多数started服务都不需要同时处理多个请求（这实际上是一个危险的多线程情况），所以最佳方式也许就是用IntentService类来实现你的服务。<br>IntentService将执行以下步骤：    　　</p>
+<ul>
+<li>创建一个缺省的工作（worker）线程，它独立于应用程序主线程来执行所有发送到onStartCommand()的intent。　　　</li>
+<li>创建一个工作队列，每次向你的onHandleIntent()传入一个intent，这样你就永远不必担心多线程问题了。　</li>
+<li>在处理完所有的启动请求后，终止服务，因此你就永远不需调用stopSelf()了。　　</li>
+<li>提供缺省的onBind()实现代码，它返回null。</li>
+<li>提供缺省的onStartCommand()实现代码，它把intent送入工作队列，稍后会再传给你的onHandleIntent()实现代码。　　　</li>
+</ul>
+<p>以上所有步骤将汇成一个结果：你要做的全部工作就是实现onHandleIntent()的代码，来完成客户端提交的任务。（当然你还需要为服务提供一小段构造方法。）       </p>
+<p>以下是个IntentService的实现例程：    </p>
+<pre><code class="java">
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloIntentService</span> <span class="keyword">extends</span> <span class="title">IntentService</span> </span>{
+
+  <span class="comment">/** 
+   * 构造方法是必需的，必须用工作线程名称作为参数
+   * 调用父类的[http://developer.android.com/reference/android/app/IntentService.html#IntentService(java.lang.String) IntentService(String)]构造方法。
+   */</span>
+  <span class="function"><span class="keyword">public</span> <span class="title">HelloIntentService</span><span class="params">()</span> </span>{
+      <span class="keyword">super</span>(<span class="string">"HelloIntentService"</span>);
+  }
+
+  <span class="comment">/**
+   * IntentService从缺省的工作线程中调用本方法，并用启动服务的intent作为参数。 
+   * 本方法返回后，IntentService将适时终止这个服务。
+   */</span>
+  <span class="meta">@Override</span>
+  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onHandleIntent</span><span class="params">(Intent intent)</span> </span>{
+      <span class="comment">// 通常我们会在这里执行一些工作，比如下载文件。</span>
+      <span class="comment">// 作为例子，我们只是睡5秒钟。</span>
+      <span class="keyword">long</span> endTime = System.currentTimeMillis() + <span class="number">5</span>*<span class="number">1000</span>;
+      <span class="keyword">while</span> (System.currentTimeMillis() &lt; endTime) {
+          <span class="keyword">synchronized</span> (<span class="keyword">this</span>) {
+              <span class="keyword">try</span> {
+                  wait(endTime - System.currentTimeMillis());
+              } <span class="keyword">catch</span> (Exception e) {
+              }
+          }
+      }
+  }
+}
+</code></pre>
+<p>所有你需要做的就是：一个构造方法和一个onHandleIntent()方法的实现。</p>
+<p>如果你还决定重写其它的回调方法，比如onCreate()、onStartCommand()、onDestroy()， 请确保调用一下父类的实现代码，以便IntentService能正确处理工作线程的生命周期。</p>
+<p>比如说，onStartCommand()必须返回缺省实现代码的结果（缺省代码实现了如何获取传给onHandleIntent()的intent）：    </p>
+<pre><code class="java"><span class="meta">@Override</span>
+<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent, <span class="keyword">int</span> flags, <span class="keyword">int</span> startId)</span> </span>{
+    Toast.makeText(<span class="keyword">this</span>, <span class="string">"service starting"</span>, Toast.LENGTH_SHORT).show();
+    <span class="keyword">return</span> <span class="keyword">super</span>.onStartCommand(intent,flags,startId);
+}
+</code></pre>
+<p>除了onHandleIntent()以外，唯一不需要调用父类实现代码的方法是onBind()（不过如果你的服务允许绑定，你还是需要实现它）。    </p>
+<h3 id="七-扩展Service"><a href="#七-扩展Service" class="headerlink" title="七 扩展Service"></a>七 扩展Service</h3><p>如上节所述，利用IntentService来实现一个started服务非常简单。 不过，假如你的服务需要多线程运行（而不是通过一个工作队列来处理启动请求），那你可以扩展Service类来完成每个intent的处理。</p>
+<p>作为对照，以下例程实现了 Service 类，它执行的工作与上述使用IntentService的例子相同。确切地说，对于每一个启动请求，它都用一个工作线程来完成处理工作，并且每次只处理一个请求。    </p>
+<pre><code class="java"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloService</span> <span class="keyword">extends</span> <span class="title">Service</span> </span>{
+  <span class="keyword">private</span> Looper mServiceLooper;
+  <span class="keyword">private</span> ServiceHandler mServiceHandler;
+
+  <span class="comment">// 处理从线程接收的消息</span>
+  <span class="keyword">private</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceHandler</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>{
+      <span class="function"><span class="keyword">public</span> <span class="title">ServiceHandler</span><span class="params">(Looper looper)</span> </span>{
+          <span class="keyword">super</span>(looper);
+      }
+      <span class="meta">@Override</span>
+      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>{
+          <span class="comment">// 通常我们在这里执行一些工作，比如下载文件。</span>
+          <span class="comment">// 作为例子，我们只是睡个5秒钟。</span>
+          <span class="keyword">long</span> endTime = System.currentTimeMillis() + <span class="number">5</span>*<span class="number">1000</span>;
+          <span class="keyword">while</span> (System.currentTimeMillis() &lt; endTime) {
+              <span class="keyword">synchronized</span> (<span class="keyword">this</span>) {
+                  <span class="keyword">try</span> {
+                      wait(endTime - System.currentTimeMillis());
+                  } <span class="keyword">catch</span> (Exception e) {
+                  }
+              }
+          }
+          <span class="comment">// 根据startId终止服务，这样我们就不会在处理其它工作的过程中再来终止服务</span>
+          stopSelf(msg.arg1);
+      }
+  }
+
+  <span class="meta">@Override</span>
+  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>{
+    <span class="comment">// 启动运行服务的线程。</span>
+    <span class="comment">// 请记住我们要创建一个单独的线程，因为服务通常运行于进程的主线程中，可我们不想阻塞主线程。</span>
+    <span class="comment">// 我们还要赋予它后台运行的优先级，以便计算密集的工作不会干扰我们的UI。</span>
+    HandlerThread thread = <span class="keyword">new</span> HandlerThread(<span class="string">"ServiceStartArguments"</span>,
+            Process.THREAD_PRIORITY_BACKGROUND);
+    thread.start();
+
+    <span class="comment">// 获得HandlerThread的Looper队列并用于Handler</span>
+    mServiceLooper = thread.getLooper();
+    mServiceHandler = <span class="keyword">new</span> ServiceHandler(mServiceLooper);
+  }
+
+  <span class="meta">@Override</span>
+  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent, <span class="keyword">int</span> flags, <span class="keyword">int</span> startId)</span> </span>{
+      Toast.makeText(<span class="keyword">this</span>, <span class="string">"service starting"</span>, Toast.LENGTH_SHORT).show();
+
+      <span class="comment">// 对于每一个启动请求，都发送一个消息来启动一个处理</span>
+      <span class="comment">// 同时传入启动ID，以便任务完成后我们知道该终止哪一个请求。</span>
+      Message msg = mServiceHandler.obtainMessage();
+      msg.arg1 = startId;
+      mServiceHandler.sendMessage(msg);
+
+      <span class="comment">// 如果我们被杀死了，那从这里返回之后被重启</span>
+      <span class="keyword">return</span> START_STICKY;
+  }
+
+  <span class="meta">@Override</span>
+  <span class="function"><span class="keyword">public</span> IBinder <span class="title">onBind</span><span class="params">(Intent intent)</span> </span>{
+      <span class="comment">// 我们不支持绑定，所以返回null</span>
+      <span class="keyword">return</span> <span class="keyword">null</span>;
+  }
+
+  <span class="meta">@Override</span>
+  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>{
+    Toast.makeText(<span class="keyword">this</span>, <span class="string">"service done"</span>, Toast.LENGTH_SHORT).show(); 
+  }
+}
+</code></pre>
+<p>如你所见，它要干的事情比用IntentService时多了很多。</p>
+<p>不过，因为是自行处理每个onStartCommand()调用，你可以同时处理多个请求。 本例中没有这么去实现，但只要你愿意，你就可以为每个请求创建一个新的线程，并立即运行它们（而不是等待前一个请求处理完毕）。</p>
+<p>请注意onStartCommand()方法必须返回一个整数。这个整数是描述系统在杀死服务之后应该如何继续运行（上一节中缺省的 IntentService 实现代码会替你处理这一点，当然那样你就无法修改这个处理过程）。onStartCommand()的返回值必须是以下常量之一：</p>
+<ul>
+<li>START_NOT_STICKY: 如果系统在onStartCommand()返回后杀死了服务，则不会重建服务了，除非还存在未发送的intent。 当服务不再是必需的，并且应用程序能够简单地重启那些未完成的工作时，这是避免服务运行的最安全的选项。 </li>
+</ul>
+<ul>
+<li>START_STICKY: 如果系统在onStartCommand()返回后杀死了服务，则将重建服务并调用onStartCommand()，但不会再次送入上一个intent， 而是用null intent来调用onStartCommand() 。除非还有启动服务的intent未发送完，那么这些剩下的intent会继续发送。 这适用于媒体播放器（或类似服务），它们不执行命令，但需要一直运行并随时待命。 </li>
+</ul>
+<ul>
+<li>START_REDELIVER_INTENT: 如果系统在onStartCommand()返回后杀死了服务，则将重建服务并用上一个已送过的intent调用onStartCommand()。任何未发送完的intent也都会依次送入。这适用于那些需要立即恢复工作的活跃服务，比如下载文件。    </li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/service/" rel="tag"># service</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/27/android基础之activity/" rel="next" title="android基础之activity">
+                <i class="fa fa-chevron-left"></i> android基础之activity
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/27/android基础之Fragments/" rel="prev" title="android基础之Fragments">
+                android基础之Fragments <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="zhengrui" />
+          <p class="site-author-name" itemprop="name">zhengrui</p>
+           
+              <p class="site-description motion-element" itemprop="description">今日之果，皆因曾经之因</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhezaoyizhuding" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3017970752/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100012335677489" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-Service简介"><span class="nav-number">1.</span> <span class="nav-text">一 Service简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-Service的两种启动方式"><span class="nav-number">2.</span> <span class="nav-text">二 Service的两种启动方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-startService-启动"><span class="nav-number">2.0.1.</span> <span class="nav-text">1.startService()启动</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-bindService-启动"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.bindService()启动</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-Service的生命周期"><span class="nav-number">3.</span> <span class="nav-text">三 Service的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-Service与线程的区别"><span class="nav-number">4.</span> <span class="nav-text">四 Service与线程的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五-保证Service不被杀死"><span class="nav-number">5.</span> <span class="nav-text">五 保证Service不被杀死</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六-IntentService"><span class="nav-number">6.</span> <span class="nav-text">六 IntentService</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七-扩展Service"><span class="nav-number">7.</span> <span class="nav-text">七 扩展Service</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhengrui</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://zhezaoyizhuding.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://zhezaoyizhuding.github.io/2017/02/27/android基础之Service/';
+          this.page.identifier = '2017/02/27/android基础之Service/';
+          this.page.title = 'android基础之Service';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zhezaoyizhuding.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("GW32OlXJkBeGE31qrywcmn3a-gzGzoHsz", "1fFuhB2mWMfLiuVyDPOv6dll");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
