@@ -175,8 +175,8 @@ toc:
 
 sidebar:
   # Sidebar Position, available value: left | right
-  position: left
-  #position: right
+  #position: left
+  position: right
 
   # Sidebar Display, available value:
   #  - post    expand on posts automatically. Default.
@@ -200,11 +200,12 @@ sidebar:
 
 
 # Blog rolls
-#links_title: Links
+links_title: Links
 #links_layout: block
 #links_layout: inline
-#links:
-  #Title: http://example.com/
+links:
+  我康军的博客: https://yk1062008412.github.io
+  我的简历: https://zhezaoyizhuding.github.io/about/%E6%88%91%E7%9A%84%E7%AE%80%E5%8E%862.0.pdf
 
 
 # ---------------------------------------------------------------
@@ -221,7 +222,7 @@ excerpt_description: true
 # Please use <!-- more --> in the post to control excerpt accurately.
 auto_excerpt:
   enable: true
-  length: 150
+  length: 300
 
 # Post meta display settings
 post_meta:
