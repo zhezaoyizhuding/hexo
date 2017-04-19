@@ -12,7 +12,7 @@ comments: false
 
 - 邮箱：zhengrui2012013343@gmail.com/2351857948@qq.com
 
-- 简历：[我的简历2.0.pdf](我的简历2.0.pdf)
+- 简历：[我的简历2.1.pdf](我的简历2.1.pdf)
 
 #### 分享链接
 
