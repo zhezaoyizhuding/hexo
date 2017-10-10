@@ -41,7 +41,7 @@ show tables;
 ```
 
 ##### 删除数据库
- 
+
 删除数据库
 
 ```bash
@@ -93,13 +93,13 @@ alter table emp modify ename varchar(20);
 
 ```bash
 alter table emp add columu age int(3);
-``` 
+```
 
 删除表字段
 
 ```bash
 alter table emp drop columu age;
-``` 
+```
 
 字段改名(mysql在标准SQL上的扩展)
 
@@ -203,6 +203,7 @@ select * from emp order by deptno limit 3;
 
 ```bash
 select count(1) from emp;
+//count统计表中或者某一列中非null的的记录数目，常用有count(1),count(*),count(column)
 ```
 
 统计各部门人数
@@ -233,22 +234,22 @@ select deptno,count(1) from emp group by deptno having count(1)>1;
 内连接（有一个特例自然连接，自动去除重复的记录）
 
 ```bash
-select ename,deptname from emp,dept where emp.deptno=dept.deptno;
+select ename,deptname from emp,dept on emp.deptno=dept.deptno;
 //ename是emp中的字段，deptname是dept中的字段
 ```
 
 自然连接
 
 ```bash
-select ename,deptname from emp join dept where emp.deptno=dept.deptno;
+select ename,deptname from emp join dept on emp.deptno=dept.deptno;
 ```
 
 外连接
 
 外连接又分为左连接和右连接
 
-- 左连接：包含两表相匹配的列和左边表中不匹配的记录
-- 右连接：包含两表中相匹配的列和右边表中不匹配的记录
+- 左连接：显示两表相匹配的列和左边表中不匹配的记录
+- 右连接：显示两表中相匹配的列和右边表中不匹配的记录
 - 全连接：返回两表中的所有记录
 - 交叉连接：生成两表的笛卡尔积
 
@@ -389,8 +390,3 @@ drop view staff_list_view;
 SQL注入。
 
 ### 十三 SQL Model及其相关问题
-
-
-
-
-
