@@ -1,7 +1,7 @@
 ---
 title: 索引及sql语句的优化
 date: 2017-10-09 19:39:33
-categories:
+categories: 数据库
 tags:
 - sql
 - 索引
