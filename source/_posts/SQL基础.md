@@ -231,17 +231,17 @@ select deptno,count(1) from emp group by deptno having count(1)>1;
 - 内连接：显示两张表中相匹配的数据
 - 外连接：显示两张表中不匹配的数据
 
-内连接（有一个特例自然连接，自动去除重复的记录）
+内连接
 
 ```bash
-select ename,deptname from emp,dept on emp.deptno=dept.deptno;
-//ename是emp中的字段，deptname是dept中的字段
+select ename,deptname from emp inner join dept on emp.deptno=dept.deptno;
+//ename是emp中的字段，deptname是dept中的字段，inner可以省略
 ```
 
-自然连接
+自然连接（自动去除重复的记录，要求两表中相比较的列名要相同）
 
 ```bash
-select ename,deptname from emp join dept on emp.deptno=dept.deptno;
+select ename,deptname from emp nutaral join dept on emp.deptno=dept.deptno;
 ```
 
 外连接
