@@ -149,3 +149,13 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 - STOP：不再接受新的任务，并且会清除任务队列中任务和尝试中断当前正在运行的任务。在线程池处于 RUNNING 或 SHUTDOWN 状态时，调用 shutdownNow() 方法会使线程池进入到该状态。
 - TIDYING：如果所有的任务都已终止了，工作线程为0，任务队列为空，线程池进入该状态，并且之后会调用 terminated() 方法进入TERMINATED 状态。
 - TERMINATED：在terminated() 方法执行完后进入该状态，默认terminated()方法中什么也没有做。
+
+###### Future
+
+用于获取线程返回的结果。自从JDK1.5之后，java增加了一个Callable接口，该接口与Runnbale一样，都可用来封装任务，但不同的是Callable有返回值并且可以抛出异常。Future便是被设计出来接收Callable的返回结果的。它有一个实现类FutureTask，该类同时又实现了Runnable。因此它可以作为一个任务传入池中。
+
+###### CompletionService
+
+这是一个批处理任务接口，它有一个实现类ExecutorCompletionService，该类中内置了一个BlockingQueue，用于存放任务执行结果返回的所有Future（实际类型是FutureTask）。可以通过队列的take或者poll方法获取完成的任务。
+
+### 并发集合框架
