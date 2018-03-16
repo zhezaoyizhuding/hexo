@@ -159,3 +159,40 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 这是一个批处理任务接口，它有一个实现类ExecutorCompletionService，该类中内置了一个BlockingQueue，用于存放任务执行结果返回的所有Future（实际类型是FutureTask）。可以通过队列的take或者poll方法获取完成的任务。
 
 ### 并发集合框架
+
+为了提高在多线程环境下的吞吐率，java从JDK1.5开始增加了很多并发集合框架。下面简单介绍一下这些并发集合类，感兴趣的同学要想进一步了解它们的底层实现机制，可以查看相关资料或者研究一下源码。
+
+###### Map
+
+- ConcurrentHashMap：为了在并发环境下替换HashMap而设计的一个类，在JDK1.8之前采用的是分段锁的机制来实现线程安全性，并保证很好的伸缩性；JDK1.8中对它进行了较大的改变，摒弃了原先的Segment（分段锁）的 概念，利用了CAS算法，采用了一种全新的方式实现。
+
+- ConcrrentSkipListMap：为了在并发环境下替换TreeMap而设计的一个类，底层采用跳表（SkipList）的机制实现而来数据的有序性。
+
+###### Collection
+
+- ConcurrentSkipListSet：用于在并发环境中替换TreeSet。
+- CopyOnWriteArrayList：用于在并发环境下替换List，在以遍历为主的情况下具有很好的性能。
+- CopyOnWriteArraySet：用于在并发环境下替换Set，底层是通过CopyOnWriteArrayList实现的。
+
+###### Queue
+
+- ArrayBlockingQueue：是一个用数组实现的有界阻塞队列。此队列按照先进先出（FIFO）的原则对元素进行排序。默认情况下不保证访问者公平的访问队列，所谓公平访问队列是指阻塞的所有生产者线程或消费者线程，当队列可用时，可以按照阻塞的先后顺序访问队列，即先阻塞的生产者线程，可以先往队列里插入元素，先阻塞的消费者线程，可以先从队列里获取元素。通常情况下为了保证公平性会降低吞吐量。
+- DelayQueue：是一个支持延时获取元素的无界阻塞队列。队列使用PriorityQueue来实现。队列中的元素必须实现Delayed接口，在创建元素时可以指定多久才能从队列中获取当前元素。只有在延迟期满时才能从队列中提取元素。
+- LinkedBlockingQueue：是一个用链表实现的有界阻塞队列。此队列的默认和最大长度为Integer.MAX_VALUE。此队列按照先进先出的原则对元素进行排序。
+- LinkedTransferQueue：是一个由链表结构组成的无界阻塞TransferQueue队列。相对于其他阻塞队列LinkedTransferQueue多了tryTransfer和transfer方法。
+- PriorityBlockingQueue：是一个支持优先级的无界队列。默认情况下元素采取自然顺序排列，也可以通过比较器comparator来指定元素的排序规则。元素按照升序排列。
+- SynchronousQueue：是一个不存储元素的阻塞队列。每一个put操作必须等待一个take操作，否则不能继续添加元素。SynchronousQueue可以看成是一个传球手，负责把生产者线程处理的数据直接传递给消费者线程。队列本身并不存储任何元素。
+- LinkedBlockingDeque：是一个由链表结构组成的双向阻塞队列。所谓双向队列指的你可以从队列的两端插入和移出元素。
+- ConcurrentLinkedQueue：并发无界队列
+- ConcurrentLinkedDeque：并发无界双端队列
+
+### Fork/Join
+
+### 其他框架
+
+###### CountDownLatch
+###### CyclicBarrier
+###### Exchanger
+###### Phaser
+###### Semaphore
+###### ThreadLocalRandom
