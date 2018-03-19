@@ -1,7 +1,7 @@
 ---
 title: Java基础之集合
 date: 2017-03-13 16:42:33
-categories: Java
+categories: Java基础知识
 tags:
 - Java
 - List
@@ -217,4 +217,3 @@ Java提供了一个操作集合的工具类：Collections，里面提供了大�
 如CopyOnWriteArrayList，，CopyOnWriteArraySet等
 
 ### 六 总结
-

@@ -1,7 +1,7 @@
 ---
 title: java并发框架浅析
 date: 2018-03-12 17:25:57
-categories: Java
+categories: Java基础知识
 tags:
 - 并发框架
 - 多线程

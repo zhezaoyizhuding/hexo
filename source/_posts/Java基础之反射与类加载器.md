@@ -1,7 +1,7 @@
 ---
 title: Java基础之反射与类加载器
 date: 2017-03-19 22:48:27
-categories: Java
+categories: Java基础知识
 tags:
 - 类加载器
 - 反射
@@ -106,14 +106,14 @@ public class GetMysql {
         return conn;
     }
     public static method1 getConn() throws MalformedURLException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
-        
+
             URL[]urls={new URL("file:com.em")};
             URLClassLoader myClassLoader=new URLClassLoader(urls);
             method1 driver=(method1) myClassLoader.loadClass("com.em.method1").newInstance();
-        
+
         return driver;
     }
-    
+
     public static void main(String[] args) throws MalformedURLException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
         System.out.println(getConn("jdbc:mysql://10.10.16.11:3306/auto?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true", "jiji", "jiji"));
         System.out.println(getConn());
@@ -425,7 +425,7 @@ Proxy是所有动态代理类的父类，它可以用于动态代理类和动态
 public interface Subject
 {
     public void rent();
-    
+
     public void hello(String str);
 }
 
@@ -436,7 +436,7 @@ public class RealSubject implements Subject
     {
         System.out.println("I want to rent my house");
     }
-    
+
     @Override
     public void hello(String str)
     {
@@ -452,28 +452,28 @@ public class DynamicProxy implements InvocationHandler
 {
     //　这个就是我们要代理的真实对象
     private Object subject;
-    
+
     //    构造方法，给我们要代理的真实对象赋初值
     public DynamicProxy(Object subject)
     {
         this.subject = subject;
     }
-    
+
     @Override
     public Object invoke(Object object, Method method, Object[] args)
             throws Throwable
     {
         //　　在代理真实对象前我们可以添加一些自己的操作
         System.out.println("before rent house");
-        
+
         System.out.println("Method:" + method);
-        
+
         //    当代理对象调用真实对象的方法时，其会自动的跳转到代理对象关联的handler对象的invoke方法来进行调用
         method.invoke(subject, args);
-        
+
         //　　在代理真实对象后我们也可以添加一些自己的操作
         System.out.println("after rent house");
-        
+
         return null;
     }
 
@@ -499,7 +499,7 @@ public static void main(String[] args)
          */
         Subject subject = (Subject)Proxy.newProxyInstance(handler.getClass().getClassLoader(), realSubject
                 .getClass().getInterfaces(), handler);
-        
+
         System.out.println(subject.getClass().getName());
         subject.rent();
         subject.hello("world");
@@ -509,8 +509,3 @@ public static void main(String[] args)
 ##### CGLIB代理
 
 JDK的动态代理只能是面向接口的，要想面向类可以使用CGLIB代理。
-
-
-
-
-  

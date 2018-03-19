@@ -1,7 +1,7 @@
 ---
 title: Java基础之线程
 date: 2017-03-16 09:58:21
-categories: Java
+categories: Java基础知识
 tags:
 - Java
 - 线程
@@ -121,7 +121,7 @@ Java中的线程总结起来可以划分为5个生命周期：
 
 ```java
 synchronized（obj）{
-   
+
    //TODO
    ...
 }

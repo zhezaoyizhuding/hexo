@@ -1,7 +1,7 @@
 ---
 title: Java基础之流
 date: 2017-03-17 16:06:59
-categories: Java
+categories: Java基础知识
 tags:
 - Java
 - IO

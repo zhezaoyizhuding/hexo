@@ -1,7 +1,7 @@
 ---
 title: Java基础之异常
 date: 2017-03-17 16:06:28
-categories: Java
+categories: Java基础知识
 tags:
 - Java
 - 异常
@@ -105,7 +105,7 @@ throw抛出的是一个异常实例，可单独成句，自行抛出异常，但
 			new FileOutputStream("a.txt"))
 	){
 		System.out.println(br.readLine());
-		ps.println("我若成佛，天下无魔；我若成魔，佛奈我何");	
+		ps.println("我若成佛，天下无魔；我若成魔，佛奈我何");
 	}
 ```
 
@@ -124,7 +124,7 @@ throw抛出的是一个异常实例，可单独成句，自行抛出异常，但
 
 ```java
 	public class CustomException extends Exception{
-		
+
 		public CustomException(){}
 		puvlic CustomException(String msg){
 			super(msg);

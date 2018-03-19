@@ -1,7 +1,7 @@
 ---
 title: Java基础之内存管理
 date: 2017-03-19 22:48:42
-categories: Java
+categories: Java基础知识
 tags:
 - Java
 - 内存管理

@@ -1,7 +1,7 @@
 ---
 title: Java基础之注解
 date: 2017-03-17 10:26:21
-categories: Java
+categories: Java基础知识
 tags:
 - Java
 - 注解
@@ -67,7 +67,7 @@ Java7新增的注解，它的效果类似于@SuppressWarning（“unchecked”�
 ```java
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.TYPE)
-	
+
 	public @interface MyAnnotation {
 	  public String name();
 	  public String value();
@@ -79,7 +79,7 @@ Java7新增的注解，它的效果类似于@SuppressWarning（“unchecked”�
 ```java
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.TYPE)
-	
+
 	public @interface MyAnnotation {
 	  public String name() default "Tom";
 	  public String value() default "jeri";
@@ -183,14 +183,3 @@ public void example(int i)  throws @NotNull FlieNotFoundException{}
 ```
 
 ### 八 注解处理工具APT
-
-
-
-
- 
-
-
-
-
-
-

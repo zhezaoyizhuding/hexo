@@ -1,7 +1,7 @@
 ---
 title: Java基础之泛型
 date: 2017-03-17 10:26:13
-categories: Java
+categories: Java基础知识
 tags:
 - Java
 - 泛型
@@ -22,9 +22,9 @@ Java泛型（generics）是JDK 5中引入的一个新特性，允许在定义类
 很多泛型的奇怪特性都与这个类型擦除的存在有关，包括：
 
 - 泛型类并没有自己独有的Class类对象。比如并不存在List<String>.class或是List<Integer>.class，而只有List.class。
-    
+
 - 静态变量是被泛型类的所有实例所共享的。对于声明为MyClass<T>的类，访问其中的静态变量的方法仍然是 MyClass.myStaticVar。不管是通过new MyClass<String>还是new MyClass<Integer>创建的对象，都是共享一个静态变量。
-    
+
 - 泛型的类型参数不能用在Java异常处理的catch语句中。因为异常处理是由JVM在运行时刻来进行的。由于类型信息被擦除，JVM是无法区分两个异常类型MyException<String>和MyException<Integer>的。对于JVM来说，它们都是 MyException类型的。也就无法执行与异常对应的catch语句。
 
 类型擦除的基本过程也比较简单，首先是找到用来替换类型参数的具体类。这个具体类一般是Object。如果指定了类型参数的上界的话，则使用这个上界。把代码中的类型参数都替换成具体的类。同时去掉出现的类型声明，即去掉<>的内容。比如T get()方法声明就变成了Object get()；List<String>就变成了List。接下来就可能需要生成一些桥接方法（bridge method）。这是由于擦除了类型之后的类可能缺少某些必须的方法。比如考虑下面的代码：
@@ -34,7 +34,7 @@ class MyString implements Comparable<String> {
     public int compareTo(String str) {        
         return 0;    
     }
-} 
+}
 ```
 
 当类型信息被擦除之后，上述类的声明变成了class MyString implements Comparable。但是这样的话，类MyString就会有编译错误，因为没有实现接口Comparable声明的int compareTo(Object)方法。这个时候就由编译器来动态生成这个方法。
@@ -122,22 +122,22 @@ Java中泛型可使用通配符“？”来代替任意类型，如：
 ```java
 
 public class GenericTest {
-     
+
     public static void main(String[] args) {
         List<String> name = new ArrayList<String>();
         List<Integer> age = new ArrayList<Integer>();
         List<Number> number = new ArrayList<Number>();
-        
+
         name.add("icon");
         age.add(18);
         number.add(314);
- 
+
         getData(name);
         getData(age);
         getData(number);
-       
+
    }
- 
+
    public static void getData(List<?> data) {
       System.out.println("data :" + data.get(0));
    }
@@ -145,7 +145,6 @@ public class GenericTest {
 
 ```
 
-java中亦可以使用<? extends T>和<? super T>来设置传入类型的上下界（Java中泛型传入的类型都是对象，因此这些其实就是子类和父类的限制） 
+java中亦可以使用<? extends T>和<? super T>来设置传入类型的上下界（Java中泛型传入的类型都是对象，因此这些其实就是子类和父类的限制）
 
 代码示例：
-
