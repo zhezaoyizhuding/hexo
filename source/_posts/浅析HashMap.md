@@ -145,7 +145,7 @@ void resize(int newCapacity) {
    }
 ```
 
-同时我们要知道上面的addEntry方法是在put方法中调用的，HashMap在初始化时并没有创建table数组（只是创建一些基本的属性值，比如capacity），而是在真正放入数据才开始创建，并在这里判断是否需要扩容。
+同时我们要知道上面的addEntry方法是在put方法中调用的，HashMap在初始化时并没有创建table数组（只是初始化一些基本的属性），而是在真正放入数据才开始创建，并在这里判断是否需要扩容。
 
 #### HashMap的一些常用方法
 
