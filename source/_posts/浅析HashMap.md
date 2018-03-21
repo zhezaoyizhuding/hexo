@@ -410,7 +410,7 @@ JDK1.8中get和put方法的逻辑和1.7中的变化也不大。
 
 ###### get方法
 
-过了个逻辑，当索引到的bucket类型为TreeNode时，查找红黑树。get方法源码如下：
+get方法在1.7和1.8中改变不大，多了个逻辑，当索引到的bucket类型为TreeNode时，查找红黑树。get方法源码如下：
 
 ```java
 public V get(Object key) {
