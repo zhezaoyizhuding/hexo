@@ -70,3 +70,25 @@ public boolean add(E e) {
 我们看见add方法只有一行，就是对HashMap的put方法的返回做了个判空操作。那put方法返回什么呢？map的put方法返回的是在put操作时，value中已经存在的旧值，如果是之前没有值，那就是null。所以我们想象一下这样的场景，当HashSet第一次add时。因为这个key之前没有值，就是null，所以add方法返回true；但是当不是首次add时，此时key已经存在了一个值PRESENT，后面的所有add操作都是在PRESENT的值之间的替换，永远返回一个Object。所以add的返回值一直是false。但事实上它的操作和true时没有区别。
 
 HashSet这里只介绍一些add方法，其他的一些方法也都是委托给HashMap的相应方法来操作的，笔者这里就不赘述了，想了解的同学可以去看看笔者的另一篇关于HashMap的博客。
+
+### LinkedHashSet
+
+LinkedHashSet继承与HashSet，它的底层操作是委托给LinkedHashMap运作的。我们再看LinkedHashSet的源码时可能只能看到几个构造函数，而所有的构造函数都调用了一个父类的构造函数。这个构造函数的源码如下：
+
+```java
+HashSet(int initialCapacity, float loadFactor, boolean dummy) {
+    map = new LinkedHashMap<>(initialCapacity, loadFactor);
+}
+```
+
+这个构造函数虽然是放在HashSet中，但它是包级权限的，而且在HashSet的几个公有的构造方法中并没有调用它，它应该是专门提供给LinkedHashSet使用的。从源码种我们看到这里给map引用指定了一个LinkedHashMap的实体，后面所有使用map的操作都是在LinkedHashMap中操作。
+
+LinkedHashSet的基本操作方法都是继承自HashSet，只是替换了里面的map实体。这里就不介绍了，感兴趣的同学可以看下笔者的一篇关于LinkedHashMap的博客。
+
+### TreeSet
+
+与前面两个Set类似，TreeSet的操作也是委托给Map来做的。相信大家已经猜到了，那就是TreeMap，它所有的增删改查都是在TreeMap，也即是在红黑树上的操作。这里笔者就不做具体介绍了，感兴趣的同学可以看下笔者的一篇关于TreeMap的博客。
+
+### 结束语
+
+本文对一些常见的Set进行了简单的介绍，其实还有一个EnumSet。但笔者还打算写一篇关于Enum的博客，到时打算将EnumSet和EnumMap一起介绍，这里暂且按下。最后，还是那句话，由于笔者水平有限且JDk仍在持续迭代，对于博客内容，读者不可全信，应当翻看自己所用版本的JDK或者多查询相关资料相互验证。

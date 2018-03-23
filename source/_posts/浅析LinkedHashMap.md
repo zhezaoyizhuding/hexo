@@ -23,6 +23,8 @@ static class Entry<K,V> extends HashMap.Node<K,V> {
 }
 ```
 
+可见于HashMap相比，LinkedHashMap的Node结构多了两个指针，分别指向它的前一个节点和后一个节点。要注意的是，这里的前后并不是table数组中索引位置的前后，而是一种逻辑上的先后，因为table数组中的索引是hash得到。所以上面的存储结构图其实并不准确（这里请读者见谅，图确实很难画），两个用指针相连的节点在table数组可能并不是挨着的。
+
 LinkedHashMap的迭代顺序可以有两种，它使用了一个booblean类型的变量accessOrder来定义，源码种定义如下：
 
 ```java
