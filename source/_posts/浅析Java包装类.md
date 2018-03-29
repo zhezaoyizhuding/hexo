@@ -232,7 +232,7 @@ public double doubleValue() {
 
 可见它的装箱拆箱与float类似。
 
-##### Booleann
+##### Boolean
 
 Boolean是boolean的包装类，boolean数据类型表示一位的信息，只有两个取值：true 和 false。它的装箱拆箱算法如下：
 
