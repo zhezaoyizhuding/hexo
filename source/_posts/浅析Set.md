@@ -14,7 +14,7 @@ Set是java集合框架的重要成员之一，常见的有HashSet，LinkedHashSe
 
 Set是一个不允许重复的集合框架，很多书籍会把它形容成一个罐子。你可以把数据放入罐中，但是当你再想把它取出来时，你就无从下手；只能将所有数据倒出，一个个分辨。也就说你无法随机访问Set中的数据，那么相同的重复数据便没有意义，因为你无法分辨他们，对Set而言他们是完全相同的。下面看一下Set家族的继承结构：
 
-{% asset_img Set继承体系.png Set继承体系 %}
+{% asset_img Set继承结构.png Set继承体系 %}
 
 可以看到主要的几个实现类都实现了set接口，并且继承了AbstractSet抽象类。AbstractSet这个抽象类中除了实现了基本的equals，hashCode方法，还有一个removeAll方法，它的源码如下：
 
