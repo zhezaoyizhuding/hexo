@@ -1,7 +1,7 @@
 ---
 title: 浅析java线程安全和加锁机制
 date: 2018-03-01 15:15:40
-categories: Java
+categories: Java源码浅析
 tags:
 - 并发
 - 线程安全性
