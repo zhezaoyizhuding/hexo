@@ -145,9 +145,9 @@ static class Entry extends WeakReference<ThreadLocal<?>> {
 }
 ```
 
-Entry是ThreadLocalMap的静态内部类，其实就是一个用来封装数据的结构体，类似于map中的桶的概念。这里需要注意的一点是，在这里ThreadLocalMap的key被包裹成了一个弱引用。我们再回到上面的构造方法，可以看到它new了一个数组后，然后对这个key进行了一顿操作，又是hash又是位运算的，但我们只需要知道它最终得到一个索引值作为上面数组的下标，通过这个我们可以索引到具体数据的位置，读者可以想想HashMap，java中的map都是这样干的。下面就是new一个Entry方法上面的数据中并初始化size和threshold。这里面size表示数组中entry的数目，threshold表示ThreadLocalMap扩容的阈值，这里面与HashMap不同的是这个map的负载因子是2/3。
+Entry是ThreadLocalMap的静态内部类，其实就是一个用来封装数据的结构体，类似于map中的桶的概念。这里需要注意的一点是，在这里ThreadLocalMap的key被包裹成了一个弱引用。我们再回到上面的构造方法，可以看到它new了一个数组后，然后对这个key进行了一顿操作，又是hash又是位运算的，但我们只需要知道它最终得到一个索引值作为上面数组的下标，通过这个我们可以索引到具体数据的位置，读者可以想想HashMap，java中的map好像都是这样干的。下面就是new一个Entry方法上面的数据中并初始化size和threshold。这里面size表示数组中entry的数目，threshold表示ThreadLocalMap扩容的阈值，这里面与HashMap不同的是这个map的负载因子是2/3。
 
-上面这个初始化的问题说完了，下面看看具体的set方法。通过上面的set方法我们知道如果这个ThreadLocalMap没有初始化，调用set方法会初始化它；如果已经初始化了，再调用set方法会委托给ThreadLocalMap的set方法处理。这个set方法的源码如下：
+上面这个初始化的问题说完了，下面看看具体的set方法。通过上面的set方法我们知道如果这个ThreadLocalMap没有初始化，调用set方法会先初始化它；如果已经初始化了，再调用set方法会委托给ThreadLocalMap的set方法处理。这个set方法的源码如下：
 
 ```java
 private void set(ThreadLocal<?> key, Object value) {
