@@ -6,7 +6,7 @@ tags:
 - ThreadLocal
 ---
 
-在一次面试被问到了ThreadLocal，其间被问到了一个问题：ThreadLocal有什么缺陷。笔者不缺定的回答：内存泄漏？面试官随即问道了：为什么会造成内存泄漏？笔者懵逼了，不知道该如何回答。下面在这片博客中通过源码（JDK1.8）来简单了解一下ThreadLocal的内部实现，好好看一下它为什么会造成内存泄露，以及在什么情况下会造成内存泄露。
+在一次面试被问到了ThreadLocal，其间被问到了一个问题：ThreadLocal有什么缺陷。笔者不确定的回答：内存泄漏？面试官随即问道了：为什么会造成内存泄漏？笔者懵逼了，不知道该如何回答。下面在这片博客中通过源码（JDK1.8）来简单了解一下ThreadLocal的内部实现，好好看一下它为什么会造成内存泄露，以及在什么情况下会造成内存泄露。
 
 ### 概要
 
@@ -57,7 +57,7 @@ tags:
  */
 ```
 
-上面注释对ThreadLocal介绍的还是比较详细的，与我们了解的也差不多。我们主要看下最后一句，它说每个线程都会持有一个它的ThreadLocal变量副本的引用，如果这个线程一直存活，那么这个ThreadLocal实例就是可达的。这句话其实就透露了ThreadLocal内存泄露的原因，这里我们先按下不表，先来看看ThreadLocal的内部实现。
+上面注释对ThreadLocal介绍的还是比较详细的，与我们了解的也差不多。我们主要看下最后一句，它说每个线程都会持有一个它的ThreadLocal变量副本的引用，如果这个线程一直存活，那么这个ThreadLocal实例就是可达的。这句话其实就透露了ThreadLocal内存泄露的其中一个原因，这里我们先按下不表，先来看看ThreadLocal的内部实现。
 
 ### 源码分析
 
@@ -72,7 +72,7 @@ public ThreadLocal() {
 }
 ```
 
-可以看到这个构造方法是个空方法，只是用于new一个ThreadLocal对象，并没有进行数据的装配和底层存储结构的构造，这点上和HashMap差不多，采用了一种懒加载的方式，只有在真正在使用的时候才进行相关结构的构造。我么都知道ThreadLocal核心的额有三个方法set，get，和remove方法，那么它底层结构的初始化应该是在调用这些方法时进行的。我们来看看这些方法的源码。
+可以看到这个构造方法是个空方法，只是用于new一个ThreadLocal对象，并没有进行数据的装配和底层存储结构的构造，这点上和HashMap差不多，采用了一种懒加载的方式，只有在真正在使用的时候才进行相关结构的构造。我么都知道ThreadLocal核心的有三个方法set，get，和remove方法，那么它底层结构的初始化应该是在调用这些方法时进行的。我们来看看这些方法的源码。
 
 ##### set方法
 
@@ -145,7 +145,7 @@ static class Entry extends WeakReference<ThreadLocal<?>> {
 }
 ```
 
-Entry是ThreadLocalMap的静态内部类，其实就是一个用来封装数据的结构体，类似于map中的桶的概念。这里需要注意的一点是，在这里ThreadLocalMap的key被包裹成了一个弱引用。我们再回到上面的构造方法，可以看到它new了一个数组后，然后对这个key进行了一顿操作，又是hash又是位运算的，但我们只需要知道它最终得到一个索引值作为上面数组的下标，通过这个我们可以索引到具体数据的位置，读者可以想想HashMap，java中的map好像都是这样干的。下面就是new一个Entry方法上面的数据中并初始化size和threshold。这里面size表示数组中entry的数目，threshold表示ThreadLocalMap扩容的阈值，这里面与HashMap不同的是这个map的负载因子是2/3。
+Entry是ThreadLocalMap的静态内部类，其实就是一个用来封装数据的结构体，类似于map中的桶的概念。这里需要注意的一点是，在这里ThreadLocalMap的key被包裹成了一个弱引用。我们再回到上面的构造方法，可以看到它new了一个数组后，然后对这个key进行了一顿操作，又是hash又是位运算的，这个具体我们下文再说，这里我们只需要知道它最终得到一个索引值作为上面数组的下标，通过这个我们可以索引到具体数据的位置。下面就是new一个Entry方法上面的数据中并初始化size和threshold。这里面size表示数组中entry的数目，threshold表示ThreadLocalMap扩容的阈值，这里面与HashMap不同的是这个阈值并不是table的length，而是length的三分之二，扩容时倒是和HashMap相同，充满在阈值的四分之三时扩容。
 
 上面这个初始化的问题说完了，下面看看具体的set方法。通过上面的set方法我们知道如果这个ThreadLocalMap没有初始化，调用set方法会先初始化它；如果已经初始化了，再调用set方法会委托给ThreadLocalMap的set方法处理。这个set方法的源码如下：
 
@@ -183,3 +183,32 @@ private void set(ThreadLocal<?> key, Object value) {
                 rehash();
         }
 ```
+
+我们看到它是通过key的threadLocalHashCode找到具体的slot的，我们就来看看这个threadLocalHashCode。它的相关代码如下：
+
+```java
+private final int threadLocalHashCode = nextHashCode();
+
+    /**
+     * The next hash code to be given out. Updated atomically. Starts at
+     * zero.
+     */
+    private static AtomicInteger nextHashCode =
+        new AtomicInteger();
+
+    /**
+     * The difference between successively generated hash codes - turns
+     * implicit sequential thread-local IDs into near-optimally spread
+     * multiplicative hash values for power-of-two-sized tables.
+     */
+    private static final int HASH_INCREMENT = 0x61c88647;
+
+    /**
+     * Returns the next hash code.
+     */
+    private static int nextHashCode() {
+        return nextHashCode.getAndAdd(HASH_INCREMENT);
+    }
+```
+
+我们看到它其实是通过AtomicInteger实现一个原子的递增（其实再底层熟悉AtomicInteger源码的同学应该会知道它其实就是一个CAS操作，至于CAS操作是什么，感兴趣的同学可以看看相关的书籍和博客，我们这里可以把它理解成一个粒度非常小的锁，小到只能保证单个元素），递增的间隔是一个常数0x61c88647，这个数是多少呢？换算成十进制是1640531527。那为什么是这个数呢？笔者为此查了很多博客，并且最终锁定了一篇文章[Why 0x61c88647?](https://www.javaspecialists.eu/archive/Issue164.html)。这是个老外写的文章，笔者读了之后得出了结论---英语真他妈的难读。言归正传，期间说到了这个数，作者把它称作golden number，这翻译叫黄金数是吧？看到这笔者当时就发散了思维，黄金分割点、黄金比例身材、章子怡....汪峰那个老王八蛋。好吧，又扯远了。在这篇文章中作者说道了选这个数的原因，为了保证数据的跳跃分布。因为用hash就会存在冲突，这个数保证在冲突时它的下一个槽位存在数据的可能性更低（下文我们会看到这个map处理冲突的方法是一种线性检测的方式）。
