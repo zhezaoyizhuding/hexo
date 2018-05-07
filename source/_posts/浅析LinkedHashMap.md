@@ -77,6 +77,8 @@ public LinkedHashMap(Map<? extends K, ? extends V> m) {
 }
 ```
 
+引入accessOrder其实是为了LRU算法作支持，LinkedHashMap中有一个removeEldestEntry方法，在LinkedHashMap的默认实现中它是返回恒定false的，但是它给予了我们重写的权限。因此我们可以继承LInkedHashMap并重写上面这个方法来实现一个最近最少使用的缓存（比如我们可以指定LinkedHashMap的节点数量，即缓存大小，当达到这个界限时每有新的数据进来，我们就处理掉最老的节点）
+
 ### LinkedHashMap内部操作逻辑
 
 这里通过分析get，put和remove方法来介绍下LinkedHashMap内部的操作逻辑。
@@ -201,7 +203,7 @@ void afterNodeInsertion(boolean evict) { // possibly remove eldest
 }
 ```
 
-可见该方法中又回调了removeNode方法，而这个方法继承自HashMap。但是通过翻看removeEldestEntry方法的源码，可以发现事实上if中的代码更不不会执行，因为该方法永远返回false。源码如下：
+可见该方法中又回调了removeNode方法，而这个方法继承自HashMap。但是通过翻看removeEldestEntry方法的源码，可以发现事实上if中的代码根本不会执行，因为该方法永远返回false（上面提过这个方法是为了实现LRU算法的）。源码如下：
 
 ```java
 protected boolean removeEldestEntry(Map.Entry<K,V> eldest) {
