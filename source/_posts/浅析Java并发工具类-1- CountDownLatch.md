@@ -1,14 +1,9 @@
 ---
-title: 浅析Java并发工具类
+title: 浅析Java并发工具类(1) - CountDownLatch
 date: 2018-03-30 10:59:06
 categories: Java源码浅析
 tags:
 - CountDownLatch
-- CyclicBarrier
-- Exchanger
-- Phaser
-- Semaphore
-- ThreadLocalRandom
 ---
 
 在java.util.concurrent包下面有一些并发工具类，本博客通过源码简单介绍下这些并发工具类。
@@ -62,9 +57,9 @@ private static final class Sync extends AbstractQueuedSynchronizer {
 }
 ```
 
-这个是CountDownLatch的静态内部类，从代码中可以看出它继承于AbstractQueuedSynchronizer，也就是我们常说的AQS。事实上，下面笔者要介绍的一些同步工具很多都是基于AQS实现的。至于AQS的底层实现原理，这里先按下不表，笔者打算之后还写一篇介绍AQS的博客。读者可以先查些其他资料，了解下AQS。否则，这些同步工具类很难理解透彻。
+这个是CountDownLatch的静态内部类，从代码中可以看出它继承于AbstractQueuedSynchronizer，也就是我们常说的AQS。所以这个构造函数最终调用AQS的setState方法设置了state的初始状态，state是AQS中用于表示同步状态的成员变量，对于它的一切操作都采用CAS保证了原子性。这里是表示到底有多少个线程同时持有了这把锁。
 
-下面我们来看一下CountDownLatch中主要的两个方法await和countDown。await方法用于阻塞当前方法，知道其他所有线程执行完毕。它有两种实现，源码如下：
+下面我们来看一下CountDownLatch中主要的两个方法await和countDown。await方法用于阻塞当前方法，直到其他所有线程执行完毕。它有两种实现，源码如下：
 
 ```java
 public void await() throws InterruptedException {
@@ -81,7 +76,9 @@ public boolean await(long timeout, TimeUnit unit)
 
 第一个方式会一直阻塞直到所有的线程都执行完毕。第二个方法可以指定一个时间，当超出这个时间，还有线程没有执行完毕时，当前线程将不再等待，继续执行。如果这个时间小于或者等于0，则当前线程不会等待。
 
-下面是countDown方法的源码，这个方法在其他线程中调用，用于在线程执行完毕时，使count减一。
+其实它所有的工作都是委托给了AQS来操作，上面两个方法都是尝试去获取锁，即将state状态由0设置为1，如果state的状态不是0，那么这个方法就是一直自旋，直到state的状态为0 为止。当然上面这两个方法都是变种，支持中断。所以所谓的等待其他线程执行完毕，其实就是等待其他线程调用countDown方法，将state减一，模拟的就是释放锁。
+
+下面是countDown方法的源码，这个方法在其他线程中调用，用于在线程执行完毕时，使count减一。到AQS就是使state减一。
 
 ```java
 public void countDown() {
@@ -127,8 +124,8 @@ class Worker implements Runnable {
 }
 ```
 
-我们来分析一下上面这段代码的执行，这里面有两个CountDownLatch，其中startSignal用于阻塞其他子线程的运行，直到主线程调用doSomethingElse()完毕，此时startSignal调用countDown使count为0。此时闸门放开，其他子线程继续执行，与此同时主线程也同时执行doSomethingElse()，并在执行完毕后，等待其他所有子线程执行完毕。CountDownLatch还有一个典型用法是将一个问题，划分成若干个子问题，然后这些子问题分别运行，直到所有子问题处理完毕，才重新运行当前线程。
+我们来分析一下上面这段代码的执行，这里面有两个CountDownLatch，其中startSignal用于阻塞其他子线程的运行，直到主线程调用doSomethingElse()完毕，此时startSignal调用countDown使count为0。此时闸门放开，其他子线程继续执行，与此同时主线程也同时执行doSomethingElse2()，并在执行完毕后，等待其他所有子线程执行完毕。CountDownLatch还有一个典型用法是将一个问题，划分成若干个子问题，然后这些子问题分别运行，直到所有子问题处理完毕，才重新运行当前线程。
 
-### CyclicBarrier
+### 总结
 
-CyclicBarrier的字面意思是可循环使用（Cyclic）的屏障（Barrier）,它的功能是让一组线程到达一个屏障（也就叫同步点）时被阻塞，直到最后一个线程到达屏障时，屏障才会打开，所有被屏障拦截的线程继续运行。值得一提的是，所谓的循环是指CyclicBarrier中的parties（相当于CountDownLatch的count）是可以重置的，因此它可以被循环调用。
+CountDownLatch就介绍到这里，事实上在java相关的框架越来越成熟后，CountDownLatch很少有场景需要遇到，在实际需求中，笔者就重来没有遇到过这个东西，但是大神的设计思路我们还是需要学习。笔者下篇博客将介绍另一个和它很像的工具类CyclicBarrier。
