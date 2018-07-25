@@ -1,5 +1,7 @@
 *.html
 *.css
-.DS_Store
+
+.DS_Store/
+source/.DS_Store/
 .deploy_git/
 public/
