@@ -210,6 +210,57 @@ CyclicBarrier主要有上面这些成员变量，我们通过注释和猜测大�
 
 继续往下看，下面是一个死循环，所有屏障前的线程都在此等待，直到broken, interrupted, timed out（抛出对应异常）。或者barrierCommand执行完成，新建generation后，即成功运行。进一步保证了CyclicBarrier的all-or-none特性。
 
+### 用法示例
+
+下面抠了CyclicBarrier中的用法示例，代码如下：
+
+```java
+class Solver {
+    final int N;
+    final float[][] data;
+    final CyclicBarrier barrier;
+ 
+    class Worker implements Runnable {
+      int myRow;
+      Worker(int row) { myRow = row; }
+      public void run() {
+        while (!done()) {
+          processRow(myRow);
+ 
+          try {
+            barrier.await();
+          } catch (InterruptedException ex) {
+            return;
+          } catch (BrokenBarrierException ex) {
+            return;
+          }
+        }
+      }
+    }
+ 
+    public Solver(float[][] matrix) {
+      data = matrix;
+      N = matrix.length;
+      Runnable barrierAction =
+        new Runnable() { public void run() { mergeRows(...); }};
+      barrier = new CyclicBarrier(N, barrierAction);
+ 
+      List<Thread> threads = new ArrayList<Thread>(N);
+      for (int i = 0; i < N; i++) {
+        Thread thread = new Thread(new Worker(i));
+        threads.add(thread);
+        thread.start();
+      }
+ 
+      // wait until done
+      for (Thread thread : threads)
+        thread.join();
+    }
+  }}
+```
+
+在这个示例里，每一个线程处理一个row，并且在处理完后等待，直到所有的rows被处理完成，然后调用barrierAction合并这些结果，如果合并完成，则通知子线程结束。
+
 ### 总结
 
 CyclicBarrier就介绍到这了，当然它还有一些公有的辅助方法，这里就不在一一介绍，有兴趣的同学的可以看看它的源码，这些辅助方法逻辑都比较简单，它的最主要的方法就是上面介绍的dowait方法。本文是笔者一边看源码一边书写，难免有些疏漏，望读者斧正。
