@@ -88,5 +88,6 @@ disqus_shortname: zhezaoyizhuding
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:zhezaoyizhuding/zhezaoyizhuding.github.io.git
+#  repo: git@github.com:zhezaoyizhuding/zhezaoyizhuding.github.io.git
+  repo: git@git.coding.net:ThatBoy/ThatBoy.git
   branch: master
