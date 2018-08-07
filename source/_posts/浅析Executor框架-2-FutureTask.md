@@ -329,7 +329,7 @@ public void run() {
     protected void done() { }
 ```
 
-可以看到这个方法什么都没干，只是用于给开发者自定义使用的。如果FutureTask的finishCompletion满足不了我们的要求，那么我们就可以继承FutureTask，并实现done方法，做一些我们希望的处理。
+可以看到这个方法什么都没干，这其实就是FutureTask提供的一个hooks，只是用于给开发者自定义使用的。如果FutureTask的finishCompletion满足不了我们的要求，那么我们就可以继承FutureTask，并实现done方法，做一些我们希望的处理。
 
 下面看一下run方法中set方法，这是任务正常结束会调用的方法。下面看一下set方法的源码，如下：
 
