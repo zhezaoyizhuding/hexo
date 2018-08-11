@@ -469,6 +469,7 @@ final void runWorker(Worker w) {
         w.unlock(); // allow interrupts
         boolean completedAbruptly = true;
         try {
+            // 如果task，调用getTask从队列中获取
             while (task != null || (task = getTask()) != null) {
                 w.lock();
                 // If pool is stopping, ensure thread is interrupted;
@@ -507,7 +508,7 @@ final void runWorker(Worker w) {
     }
 ```
 
-这个方法中最终调用到了FutureTask的run方法，而在FutureTask的run方法中，最终会执行Callable的call方法，任务就这样被执行起来了。FutureTask的run方法笔者在之前的博客中介绍过了，这里不再赘述。
+这个方法中最终调用到了FutureTask的run方法，而在FutureTask的run方法中，最终会执行Callable的call方法，任务就这样被执行起来了。这里需要注意的是Worker并不是每次都持有FutureTask，如果没有持有，它会调用getTask从队列中获取。FutureTask的run方法笔者在之前的博客中介绍过了，这里不再赘述。
 
 ### 总结
 
