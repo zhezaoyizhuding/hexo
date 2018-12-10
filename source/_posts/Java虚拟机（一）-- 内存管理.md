@@ -1,7 +1,7 @@
 ---
-title: Java基础之内存管理
+title: Java虚拟机（一）-- 内存管理
 date: 2017-03-19 22:48:42
-categories: Java基础知识
+categories: Java虚拟机
 tags:
 - Java
 - 内存管理
