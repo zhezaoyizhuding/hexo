@@ -119,7 +119,9 @@ void createMap(Thread t, T firstValue) {
 }
 ```
 
-这里面new了一个ThreadLocalMap对象，并把它付给了当前线程持有的一个threadLocals。那么这个ThreadLocalMap是什么呢？它其实是ThreadLocal的静态内部类，ThreadLocal的数据存储和核心操作都是委托给它来实现的。我们来看一下上面这个ThreadLocalMap的构造方法里做了些什么。
+这里面new了一个ThreadLocalMap对象，并把它付给了当前线程持有的一个threadLocals。那么这个ThreadLocalMap是什么呢？它其实是ThreadLocal的静态内部类，ThreadLocal的数据存储和核心操作都是委托给它来实现的。看到这里或许有些同学会疑惑，既然只是存储变量副本，Set好像也能实现，为什么不用Set而用Map呢？毕竟Map要比Set复杂的多。这里我们就需要明白，这个Map是属于Thread而不是ThreadLocal的（虽然它是ThreadLocal的内部类），一个Thread可以有很多个ThreadLocal来存储多个变量，但它只会有一个ThreadLocalMap。
+
+好了，下面我们来看一下上面这个ThreadLocalMap的构造方法里做了些什么。
 
 ```java
 ThreadLocalMap(ThreadLocal<?> firstKey, Object firstValue) {
@@ -459,7 +461,7 @@ private void remove(ThreadLocal<?> key) {
 
 ### 内存泄露的原因
 
-ThreadLocal为什么会在使用不当的情况下会造成内存泄露呢？看了上面的分析我们很容易能想到的一个原因是ThreadLocal自身对entry的回收是启发式的，只有在我们手动调用set活get方法，并且在遭遇一个无效的entry时才会调用，所以如果不手动调用remove方法还是会造成一定的内存泄露。但这还不是最大的问题，最大的问题是ThreadLocal是和线程对象绑定的，它具有和线程对象一样的生命周期。下面是我在网上找的Thread和ThreadLocal之间的引用链图：
+ThreadLocal为什么会在使用不当的情况下会造成内存泄露呢？看了上面的分析我们很容易能想到的一个原因是ThreadLocal自身对entry的回收是启发式的，只有在我们手动调用set或者get方法，并且在遭遇一个无效的entry时才会调用，所以如果不手动调用remove方法还是会造成一定的内存泄露。但这还不是最大的问题，最大的问题是ThreadLocal是和线程对象绑定的，它具有和线程对象一样的生命周期。下面是我在网上找的Thread和ThreadLocal之间的引用链图：
 
 {% asset_img threadlocal.jpg ThreadLocal引用链图 %}
 

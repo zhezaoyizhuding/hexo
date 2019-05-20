@@ -10,7 +10,7 @@ tags:
 
 ### ThreadPoolExecutor
 
-我们首先看一下如何创建一个线程池，ThreadPoolExecutor有四个发布的构造函数，其中三个会调用第四个，只是指定不懂的默认实现。因此我们这里只看下第四个构造函数的实现，来了解一下构建一个线程池所需要的参数。它的源码如下：
+我们首先看一下如何创建一个线程池，ThreadPoolExecutor有四个发布的构造函数，其中三个会调用第四个，只是指定不同的默认实现。因此我们这里只看下第四个构造函数的实现，来了解一下构建一个线程池所需要的参数。它的源码如下：
 
 ```java
 public ThreadPoolExecutor(int corePoolSize,
@@ -287,7 +287,7 @@ public void execute(Runnable command) {
          * thread.  If it fails, we know we are shut down or saturated
          * and so reject the task.
          */
-        // 得到ctl中的值，改值是一个32位数，前三位表示线程状态，后29位表示线程数目。初始值为0
+        // 得到ctl中的值，该值是一个32位数，前三位表示线程状态，后29位表示线程数目。初始值为0
         int c = ctl.get();
        // workerCountOf(c)获取c的后29位，即比较池中的线程是否达到了corePoolSize
         if (workerCountOf(c) < corePoolSize) {
