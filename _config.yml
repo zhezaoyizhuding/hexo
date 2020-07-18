@@ -89,6 +89,6 @@ disqus_shortname: zhezaoyizhuding
 deploy:
   type: git
   repo: 
-#    github: git@github.com:zhezaoyizhuding/zhezaoyizhuding.github.io.git
+    github: git@github.com:zhezaoyizhuding/zhezaoyizhuding.github.io.git
     coding: git@git.coding.net:ThatBoy/ThatBoy.git
   branch: master
